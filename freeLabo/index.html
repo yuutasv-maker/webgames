@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>フリーライブ(+ラボ) | Studio OWL LABORATORY</title>
+    <meta name="description" content="いつものフリーライブに、ちょっとした「実験」をプラス。みんなで遊んで、みんなで作る新しいStudio OWLの楽しみ方。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 32'><path fill='%23e8875b' d='M9 0h6v2h-1v10l7.5 13c.8 1.4-.1 3-1.7 3H4.2c-1.6 0-2.5-1.6-1.7-3L10 12V2H9V0z'/></svg>">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ========== HEADER / NAV ========== -->
+    <header id="main-header">
+        <nav class="container">
+            <a href="#hero" class="nav-logo">
+                <svg class="nav-flask" viewBox="0 0 24 32" width="20" height="26" fill="currentColor">
+                    <path d="M9 0h6v2h-1v10l7.5 13c.8 1.4-.1 3-1.7 3H4.2c-1.6 0-2.5-1.6-1.7-3L10 12V2H9V0z"/>
+                </svg>
+                <span>(+ラボ)</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#concept">Concept</a></li>
+                <li><a href="#details">Details</a></li>
+                <li><a href="#experiment">Experiment</a></li>
+                <li><a href="#log">Log</a></li>
+                <li><a href="#request">Request</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" aria-label="メニュー">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- ========== HERO ========== -->
+        <section id="hero">
+            <div class="hero-overlay"></div>
+            <div class="hero-particles" id="particles"></div>
+            <div class="container hero-content">
+                <div class="hero-badge">
+                    <span class="badge-dot"></span>
+                    <span>Studio OWL presents</span>
+                </div>
+                <!-- Logo Image -->
+                <div class="hero-logo" aria-label="フリーライブ(+ラボ) LABORATORY">
+                    <img src="logo.jpg" alt="フリーライブ(+ラボ) LABORATORY" class="logo-image">
+                </div>
+                <p class="hero-tagline">いつものフリーライブに、ちょっとした<em>「実験」</em>をプラス。</p>
+                <div class="hero-cta">
+                    <a href="#concept" class="btn btn-outline">Concept</a>
+                    <a href="#details" class="btn btn-primary">
+                        <span class="btn-icon">🧪</span>
+                        今回の実験を見る
+                    </a>
+                </div>
+            </div>
+            <div class="scroll-cue">
+                <span>Scroll</span>
+                <div class="scroll-line"></div>
+            </div>
+        </section>
+
+        <!-- ========== CONCEPT (01) ========== -->
+        <section id="concept">
+            <div class="container">
+                <div class="section-label">
+                    <span class="label-number">01</span>
+                    <span class="label-line"></span>
+                    <span class="label-text">CONCEPT</span>
+                </div>
+                <h2 class="section-title reveal">「<span class="highlight">+ラボ</span>」とは？</h2>
+
+                <div class="concept-grid">
+                    <div class="concept-main reveal">
+                        <p class="concept-lead">（+ラボ）の括弧には、「メインはあくまでいつものフリーライブ」という意味を込めています。</p>
+                        <p>アコギの弾き語りやバンドセッションなど、いつものパフォーマンスはそのままに、毎月変わる<strong>「実験企画」</strong>をオプションとして追加します。</p>
+                    </div>
+
+                    <div class="concept-cards">
+                        <div class="concept-card reveal" style="--delay: 0.1s">
+                            <div class="card-icon">β</div>
+                            <h3>β版（ベータ版）精神</h3>
+                            <p>未完成な部分も含めて、新しい試みを一緒に面白がって検証してくれる方を募集しています。完璧を求めず、実験を楽しむ精神で。</p>
+                        </div>
+                        <div class="concept-card reveal" style="--delay: 0.25s">
+                            <div class="card-icon">⚗️</div>
+                            <h3>開発プロセスを共有</h3>
+                            <p>成功した実験は、将来的にOWLの<strong>レギュラーメニュー</strong>として正式実装されるかもしれません。あなたの参加が未来を変えます。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="concept-flow reveal">
+                    <div class="flow-step">
+                        <div class="flow-num">01</div>
+                        <div class="flow-label">実験を企画</div>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">
+                        <div class="flow-num">02</div>
+                        <div class="flow-label">フリーライブで検証</div>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">
+                        <div class="flow-num">03</div>
+                        <div class="flow-label">フィードバック</div>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step active">
+                        <div class="flow-num">04</div>
+                        <div class="flow-label">正式メニュー化？</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== MAIN VISUAL DIVIDER ========== -->
+        <section id="visual-break" class="visual-section">
+            <div class="visual-overlay"></div>
+            <div class="container visual-content reveal">
+                <p class="visual-quote" style="font-family: var(--font-mono); font-size: clamp(1rem, 3vw, 1.5rem); letter-spacing: 0.3em; color: var(--amber);">EXPERIMENT IN PROGRESS...</p>
+            </div>
+        </section>
+
+        <!-- ========== EVENT DETAILS (02) ========== -->
+        <section id="details">
+            <div class="container">
+                <div class="section-label">
+                    <span class="label-number">02</span>
+                    <span class="label-line"></span>
+                    <span class="label-text">DETAILS</span>
+                </div>
+                <h2 class="section-title reveal">次回開催概要</h2>
+
+                <div class="details-card reveal">
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <span class="detail-key">イベント名</span>
+                            <span class="detail-val">夕方フリーライブ(+ラボ)</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-key">実験テーマ</span>
+                            <span class="detail-val">ライブハウスでカラオケ</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-key">日時</span>
+                            <span class="detail-val">2026/5/23（土） 16:00〜</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-key">料金</span>
+                            <span class="detail-val">¥1,200（1ドリンク付き）</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-key">会場</span>
+                            <span class="detail-val">Studio OWL</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-key">参加方法</span>
+                            <span class="detail-val">受付時に「エントリーします」とお伝えください。（カラオケを利用されるかどうか、このタイミングでお伝えいただけますと幸いです）</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-key">備考</span>
+                            <span class="detail-val">実験企画への参加は任意（オプション）です。<br>いつものフリーライブ参加者の方も、1曲だけでも実験に参加してみることが可能です！</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="notice-card reveal">
+                    <div class="notice-icon">⚠️</div>
+                    <div class="notice-body">
+                        <h4>β版についてのお約束</h4>
+                        <p>「+ラボ」の実験企画は試験的な取り組みです。機材トラブルや想定外の結果も実験の一部として楽しんでいただけると幸いです。皆さまのフィードバックが次回のアップデートに繋がります。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== EXPERIMENT (03) ========== -->
+        <section id="experiment">
+            <div class="container">
+                <div class="section-label">
+                    <span class="label-number">03</span>
+                    <span class="label-line"></span>
+                    <span class="label-text">EXPERIMENT</span>
+                </div>
+
+                <div class="experiment-header reveal">
+                    <div class="exp-badge">
+                        <span class="exp-vol">NEXT LAB</span>
+                        <span class="exp-status">NOW TESTING</span>
+                    </div>
+                    <h2 class="section-title">ライブハウスでカラオケ</h2>
+                    <p class="experiment-sub">記念すべき第1回目の実験は、<strong>普段は絶対にできない場所</strong>でカラオケをやってみるという試み。専用タブレットとライブハウスの本格PA機材をリンクさせ、ステージに立って歌えます。</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card reveal" style="--delay: 0.1s">
+                        <div class="feature-img-wrap">
+                            <img src="feature-stage.png" alt="ライブハウスのステージ" class="feature-img">
+                        </div>
+                        <h3>ライブハウスのステージに立てる</h3>
+                        <p>普段はアーティストしか立てないライブハウスのステージで、本格的なPA機材・照明に囲まれて歌える、ここだけの体験。</p>
+                    </div>
+                    <div class="feature-card reveal" style="--delay: 0.2s">
+                        <div class="feature-img-wrap">
+                            <img src="feature-screen.png" alt="大画面に歌詞を投影" class="feature-img">
+                        </div>
+                        <h3>大画面に歌詞を投影</h3>
+                        <p>手元のタブレットの歌詞画面をステージの大型スクリーンにミラーリング。お客さんも一緒に見られるから、みんなで盛り上がれます。</p>
+                    </div>
+                    <div class="feature-card reveal" style="--delay: 0.3s">
+                        <div class="feature-img-wrap">
+                            <img src="feature-verify.png" alt="検証ポイント" class="feature-img">
+                        </div>
+                        <h3>一緒に検証するポイント</h3>
+                        <ul class="check-list">
+                            <li>ワイヤレスミラーリングの遅延</li>
+                            <li>ボーカル除去の音質</li>
+                            <li>照明演出との連動性</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="terminal-window reveal">
+                    <div class="terminal-bar">
+                        <span class="terminal-dot red"></span>
+                        <span class="terminal-dot yellow"></span>
+                        <span class="terminal-dot green"></span>
+                        <span class="terminal-title">experiment_log.sh</span>
+                    </div>
+                    <div class="terminal-body">
+                        <p><span class="t-prompt">$</span> <span class="t-cmd">echo</span> <span class="t-str">"実験名: ライブハウスでカラオケ"</span></p>
+                        <p><span class="t-prompt">$</span> <span class="t-cmd">status</span> <span class="t-flag">--check</span></p>
+                        <p class="t-output">→ ステータス: <span class="t-success">TESTING</span></p>
+                        <p><span class="t-prompt">$</span> <span class="t-cmd">equipment</span> <span class="t-str">"PA + Tablet + Vocal Canceler"</span></p>
+                        <p class="t-output">→ 機材セットアップ: <span class="t-success">READY</span></p>
+                        <p><span class="t-prompt">$</span> <span class="t-cmd">deploy</span> <span class="t-flag">--env</span>=<span class="t-str">studio-owl</span></p>
+                        <p class="t-output t-blink">→ 検証開始を待機中... ▊</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== EXPERIMENT LOG ========== -->
+        <section id="log">
+            <div class="container">
+                <div class="section-label">
+                    <span class="label-number">04</span>
+                    <span class="label-line"></span>
+                    <span class="label-text">LOG</span>
+                </div>
+                <h2 class="section-title reveal">実験ログ</h2>
+                <p class="section-desc reveal">過去のアップデート履歴。実験の結果、どのような進展があったかを記録していきます。</p>
+
+                <div class="timeline">
+                    <div class="timeline-item reveal">
+                        <div class="timeline-marker current"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-header">
+                                <span class="timeline-version">実験ログ</span>
+                                <span class="timeline-date">2026/5/23</span>
+                            </div>
+                            <h4>Vol.1：ライブハウスでカラオケ</h4>
+                            <p>最新のボーカル除去技術を活用し、普段は立てないライブハウスのステージでカラオケに挑戦。</p>
+                            <div class="timeline-tags">
+                                <span class="tag-item new">NEW</span>
+                                <span class="tag-item">カラオケ</span>
+                                <span class="tag-item">PA連携</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item reveal" style="--delay: 0.15s">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content placeholder">
+                            <div class="timeline-header">
+                                <span class="timeline-version">次回予告</span>
+                                <span class="timeline-date">TBD</span>
+                            </div>
+                            <h4>次の実験は...？</h4>
+                            <p>あなたのリクエストが次回のテーマになるかもしれません。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== FEATURE REQUEST ========== -->
+        <section id="request">
+            <div class="container">
+                <div class="section-label">
+                    <span class="label-number">05</span>
+                    <span class="label-line"></span>
+                    <span class="label-text">REQUEST</span>
+                </div>
+                <h2 class="section-title reveal">アイデア募集</h2>
+                <p class="section-desc reveal">「こんな機能（実験）が欲しい！」というリクエストを<strong>24時間受け付けています</strong>。<br>あなたの提案が次回の「+ラボ」で実装されるかもしれません。</p>
+
+                <div class="backlog-section reveal">
+                    <h3 class="backlog-title">
+                        <span class="code-bracket">{</span> 開発バックログ（検討中の案）<span class="code-bracket">}</span>
+                    </h3>
+                    <div class="backlog-grid">
+                        <div class="backlog-item" style="--delay: 0.1s">
+                            <div class="backlog-status">💡 Idea</div>
+                            <h4>🎙️ レコーディング実験</h4>
+                            <p>ライブの演奏をその場で本格レコーディングする試み</p>
+                        </div>
+                        <div class="backlog-item" style="--delay: 0.2s">
+                            <div class="backlog-status">💡 Idea</div>
+                            <h4>📸 アー写撮影会</h4>
+                            <p>ステージ上でプロ級のアーティスト写真を撮影</p>
+                        </div>
+                        <div class="backlog-item" style="--delay: 0.3s">
+                            <div class="backlog-status">💡 Idea</div>
+                            <h4>🍔 フードセルフ仕上げ企画</h4>
+                            <p>自分だけのスペシャルメニューを仕上げる体験</p>
+                        </div>
+                        <div class="backlog-item" style="--delay: 0.4s">
+                            <div class="backlog-status">💡 Idea</div>
+                            <h4>🎸 機材持ち込みテスト</h4>
+                            <p>自慢の機材をOWLの環境で鳴らしてみよう</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="request-cta reveal">
+                    <p class="cta-text">あなたのアイデアを投稿する</p>
+                    <p class="cta-sub">Googleフォームから気軽にリクエストを送ってください（匿名OK）</p>
+                    <div class="cta-buttons">
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfodrcTRohwHvaoQDbhi4fJgFSWXRA_vx3E8KF6IHA_78v51w/viewform" target="_blank" rel="noopener noreferrer" class="btn btn-primary" id="ideaFormBtn">📝 アイデアを送る</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">
+                <svg class="footer-flask" viewBox="0 0 24 32" width="16" height="22" fill="currentColor">
+                    <path d="M9 0h6v2h-1v10l7.5 13c.8 1.4-.1 3-1.7 3H4.2c-1.6 0-2.5-1.6-1.7-3L10 12V2H9V0z"/>
+                </svg>
+                <span>フリーライブ(+ラボ)</span>
+            </div>
+            <p class="footer-desc">Studio OWLで、新しい音楽のカタチを一緒に開発しましょう。</p>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Studio OWL. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
