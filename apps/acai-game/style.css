@@ -285,3 +285,33 @@ header p {
 #clear-time.hidden {
     display: none;
 }
+
+#big-countdown {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 120px;
+    font-weight: 900;
+    color: white;
+    text-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    z-index: 100;
+    pointer-events: none;
+    opacity: 0;
+}
+
+#big-countdown.hidden {
+    display: none;
+}
+
+.animate-pop {
+    animation: popIn 1s ease-out;
+}
+
+@keyframes popIn {
+    0% { transform: translate(-50%, -50%) scale(0.2); opacity: 0; }
+    30% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+    50% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    80% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+}

@@ -56,6 +56,7 @@ if (typeof module !== 'undefined' && module.exports) {
         const paletteContainer = document.getElementById('palette-container');
         const palette = document.getElementById('palette');
         const mainBtn = document.getElementById('main-btn');
+        const bigCountdown = document.getElementById('big-countdown');
         const modal = document.getElementById('modal');
         const modalDesc = document.getElementById('modal-desc');
         const retryBtn = document.getElementById('retry-btn');
@@ -110,15 +111,32 @@ if (typeof module !== 'undefined' && module.exports) {
             
             updateSlotVisuals();
 
-            let count = 4;
+            let count = 3;
             mainBtn.disabled = true;
+            
+            bigCountdown.textContent = count;
+            bigCountdown.classList.remove('hidden');
+            bigCountdown.classList.remove('animate-pop');
+            void bigCountdown.offsetWidth; // 強制リフロー
+            bigCountdown.classList.add('animate-pop');
             
             const timer = setInterval(() => {
                 count--;
                 if (count > 0) {
                     mainBtn.textContent = `お手本を覚えて！ ${count}秒`;
+                    bigCountdown.textContent = count;
+                    bigCountdown.classList.remove('animate-pop');
+                    void bigCountdown.offsetWidth;
+                    bigCountdown.classList.add('animate-pop');
+                } else if (count === 0) {
+                    mainBtn.textContent = `スタート！`;
+                    bigCountdown.textContent = 'START!';
+                    bigCountdown.classList.remove('animate-pop');
+                    void bigCountdown.offsetWidth;
+                    bigCountdown.classList.add('animate-pop');
                 } else {
                     clearInterval(timer);
+                    bigCountdown.classList.add('hidden');
                     startPlayPhase();
                 }
             }, 1000);
