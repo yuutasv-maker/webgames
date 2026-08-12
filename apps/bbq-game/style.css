@@ -173,6 +173,7 @@ header h1 {
     justify-content: center;
     align-items: center;
     -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
 }
 
 .ingredient-btn:active {
