@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>爆速BBQ串メーカー</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+        <header>
+            <div class="stats">
+                <div class="stat-box time-box">TIME <span id="time-display">30.0</span>s</div>
+                <div class="stat-box score-box">SCORE <span id="score-display">0</span></div>
+            </div>
+            <h1>BBQ Skewer Rush!</h1>
+        </header>
+
+        <!-- オーダー表示エリア（グラスモーフィズム） -->
+        <div class="order-container">
+            <h3>ORDER</h3>
+            <div class="order-items" id="order-items">
+                <!-- JSで具材アイコンが注入される -->
+            </div>
+        </div>
+
+        <!-- 串焼きステージ -->
+        <div class="skewer-stage">
+            <div class="skewer-stick"></div>
+            <div class="skewer-items" id="skewer-items">
+                <!-- 下から上へ積み上がる -->
+            </div>
+        </div>
+
+        <!-- 具材ボタン -->
+        <div class="controls">
+            <button class="ingredient-btn" data-type="meat">🍖</button>
+            <button class="ingredient-btn" data-type="onion">🧅</button>
+            <button class="ingredient-btn" data-type="pepper">🫑</button>
+        </div>
+
+        <!-- カウントダウン用オーバーレイ -->
+        <div id="countdown-overlay" class="countdown-overlay hidden">
+            <div id="countdown-text">3</div>
+        </div>
+
+        <!-- 成功演出用エフェクト -->
+        <div id="success-effect" class="success-effect hidden">NICE!✨</div>
+
+        <!-- スタート＆結果表示モーダル -->
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <h2 id="modal-title">爆速BBQ串メーカー</h2>
+                <p id="modal-desc">オーダー通りに素早く具材をタップ！<br>制限時間内に何本作れるかな？</p>
+                <div id="final-score" class="final-score hidden">
+                    <span id="result-count">0</span> 本完成！
+                </div>
+                <!-- 完了した串の履歴リスト -->
+                <div id="completed-skewers-container" class="hidden">
+                    <div id="completed-skewers-list" class="completed-skewers-list"></div>
+                </div>
+                <button id="start-btn" class="action-btn">ゲームスタート</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,207 @@
+const GameLogic = {
+    /**
+     * ランダムなお手本を生成する
+     * @param {number} length スロット数
+     * @param {Array<string>} availableTypes 具材の種類
+     * @returns {Array<string>} お手本の配列
+     */
+    generateReference: function(length, availableTypes) {
+        const ref = [];
+        for (let i = 0; i < length; i++) {
+            ref.push(availableTypes[Math.floor(Math.random() * availableTypes.length)]);
+        }
+        return ref;
+    },
+
+    /**
+     * プレイヤーの配置とお手本を比較しスコアを算出する
+     * @param {Array<string>} reference お手本
+     * @param {Array<string>} player プレイヤーの配置
+     * @returns {number} 一致した数 (0〜length)
+     */
+    calculateScore: function(reference, player) {
+        let score = 0;
+        for (let i = 0; i < reference.length; i++) {
+            if (reference[i] === player[i]) {
+                score++;
+            }
+        }
+        return score;
+    }
+};
+
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { GameLogic };
+} else {
+    document.addEventListener('DOMContentLoaded', () => {
+        const emojis = {
+            'strawberry': '🍓',
+            'banana': '🍌',
+            'blueberry': '🫐',
+            'mango': '🥭',
+            'coconut': '🥥',
+            'kiwi': '🥝'
+        };
+        const availableTypes = Object.keys(emojis);
+        const SLOTS_COUNT = 4;
+
+        let referencePattern = [];
+        let playerPattern = new Array(SLOTS_COUNT).fill(null);
+        let activeSlotIndex = 0;
+        let gameState = 'START'; // START, MEMORIZE, PLAY, RESULT
+
+        const refView = document.getElementById('reference-view');
+        const playerView = document.getElementById('player-view');
+        const palette = document.getElementById('palette');
+        const mainBtn = document.getElementById('main-btn');
+        const modal = document.getElementById('modal');
+        const resultStars = document.getElementById('result-stars');
+        const modalDesc = document.getElementById('modal-desc');
+        const retryBtn = document.getElementById('retry-btn');
+        const refQuestion = document.getElementById('ref-question');
+        
+        const playerSlots = document.querySelectorAll('.player-slot');
+        const ingBtns = document.querySelectorAll('.ing-btn');
+
+        function updateSlotVisuals() {
+            // お手本の描画
+            for (let i = 0; i < SLOTS_COUNT; i++) {
+                const el = document.getElementById(`ref-${i}`);
+                el.textContent = referencePattern[i] ? emojis[referencePattern[i]] : '';
+            }
+            // プレイヤーの描画
+            for (let i = 0; i < SLOTS_COUNT; i++) {
+                const el = document.getElementById(`player-${i}`);
+                el.textContent = playerPattern[i] ? emojis[playerPattern[i]] : '';
+                
+                // アクティブ状態の更新
+                if (i === activeSlotIndex) {
+                    el.classList.add('active');
+                } else {
+                    el.classList.remove('active');
+                }
+            }
+            
+            // 全て埋まったかチェック
+            if (gameState === 'PLAY') {
+                const isComplete = playerPattern.every(item => item !== null);
+                if (isComplete) {
+                    mainBtn.textContent = '完成！ (判定する)';
+                    mainBtn.disabled = false;
+                } else {
+                    mainBtn.textContent = 'トッピング中...';
+                    mainBtn.disabled = true;
+                }
+            }
+        }
+
+        function startMemorizePhase() {
+            gameState = 'MEMORIZE';
+            referencePattern = GameLogic.generateReference(SLOTS_COUNT, availableTypes);
+            playerPattern = new Array(SLOTS_COUNT).fill(null);
+            activeSlotIndex = 0;
+            
+            refView.classList.remove('hidden');
+            refQuestion.classList.add('hidden');
+            playerView.classList.add('hidden');
+            palette.classList.add('disabled');
+            
+            updateSlotVisuals();
+
+            let count = 4;
+            mainBtn.disabled = true;
+            
+            const timer = setInterval(() => {
+                count--;
+                if (count > 0) {
+                    mainBtn.textContent = `お手本を覚えて！ ${count}秒`;
+                } else {
+                    clearInterval(timer);
+                    startPlayPhase();
+                }
+            }, 1000);
+            mainBtn.textContent = `お手本を覚えて！ ${count}秒`;
+        }
+
+        function startPlayPhase() {
+            gameState = 'PLAY';
+            refView.classList.add('hidden');
+            playerView.classList.remove('hidden');
+            palette.classList.remove('disabled');
+            
+            updateSlotVisuals();
+        }
+
+        function showResult() {
+            gameState = 'RESULT';
+            const score = GameLogic.calculateScore(referencePattern, playerPattern);
+            
+            let starsStr = '';
+            for (let i = 0; i < SLOTS_COUNT; i++) {
+                starsStr += (i < score) ? '⭐' : '⬛';
+            }
+            resultStars.textContent = starsStr;
+
+            if (score === 4) {
+                modalDesc.textContent = '完璧な仕上がり！本物の映え職人です✨';
+            } else if (score >= 2) {
+                modalDesc.textContent = 'おしい！あともう少しで完璧！😋';
+            } else {
+                modalDesc.textContent = 'うーん、ちょっと違うかも...💦';
+            }
+
+            modal.classList.remove('hidden');
+        }
+
+        // イベントリスナー設定
+        mainBtn.addEventListener('click', () => {
+            if (gameState === 'START') {
+                startMemorizePhase();
+            } else if (gameState === 'PLAY') {
+                showResult();
+            }
+        });
+
+        retryBtn.addEventListener('click', () => {
+            modal.classList.add('hidden');
+            gameState = 'START';
+            mainBtn.textContent = 'スタート';
+            mainBtn.disabled = false;
+            refView.classList.remove('hidden');
+            refQuestion.classList.remove('hidden');
+            playerView.classList.add('hidden');
+            palette.classList.add('disabled');
+            // 表示を空にリセット
+            referencePattern = new Array(SLOTS_COUNT).fill(null);
+            updateSlotVisuals();
+        });
+
+        playerSlots.forEach(slot => {
+            slot.addEventListener('click', (e) => {
+                if (gameState !== 'PLAY') return;
+                activeSlotIndex = parseInt(e.currentTarget.dataset.index);
+                updateSlotVisuals();
+            });
+        });
+
+        ingBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                if (gameState !== 'PLAY') return;
+                const type = e.currentTarget.dataset.type;
+                playerPattern[activeSlotIndex] = type;
+                
+                // 次の空きスロットを自動選択
+                let nextSlot = activeSlotIndex;
+                for (let i = 1; i < SLOTS_COUNT; i++) {
+                    const idx = (activeSlotIndex + i) % SLOTS_COUNT;
+                    if (playerPattern[idx] === null) {
+                        nextSlot = idx;
+                        break;
+                    }
+                }
+                activeSlotIndex = nextSlot;
+                updateSlotVisuals();
+            });
+        });
+    });
+}
