@@ -53,6 +53,7 @@ if (typeof module !== 'undefined' && module.exports) {
 
         const refView = document.getElementById('reference-view');
         const playerView = document.getElementById('player-view');
+        const paletteContainer = document.getElementById('palette-container');
         const palette = document.getElementById('palette');
         const mainBtn = document.getElementById('main-btn');
         const modal = document.getElementById('modal');
@@ -104,6 +105,7 @@ if (typeof module !== 'undefined' && module.exports) {
             refView.classList.remove('hidden');
             refQuestion.classList.add('hidden');
             playerView.classList.add('hidden');
+            paletteContainer.classList.add('hidden');
             palette.classList.add('disabled');
             
             updateSlotVisuals();
@@ -127,6 +129,7 @@ if (typeof module !== 'undefined' && module.exports) {
             gameState = 'PLAY';
             refView.classList.add('hidden');
             playerView.classList.remove('hidden');
+            paletteContainer.classList.remove('hidden');
             palette.classList.remove('disabled');
             playStartTime = Date.now();
             
@@ -199,6 +202,7 @@ if (typeof module !== 'undefined' && module.exports) {
             refView.classList.remove('hidden');
             refQuestion.classList.remove('hidden');
             playerView.classList.add('hidden');
+            paletteContainer.classList.add('hidden');
             palette.classList.add('disabled');
             // 表示を空にリセット
             referencePattern = new Array(SLOTS_COUNT).fill(null);
