@@ -160,8 +160,21 @@ if (typeof module !== 'undefined' && module.exports) {
                     modalDesc.textContent = 'うーん、ちょっと違うかも...💦';
                 }
                 const correctPatternEl = document.getElementById('correct-pattern');
-                const correctAnswerStr = referencePattern.map(item => emojis[item]).join('');
-                correctPatternEl.textContent = correctAnswerStr;
+                correctPatternEl.innerHTML = '';
+                referencePattern.forEach(item => {
+                    const iconDiv = document.createElement('div');
+                    iconDiv.style.width = '40px';
+                    iconDiv.style.height = '40px';
+                    iconDiv.style.background = '#f5f5f5';
+                    iconDiv.style.borderRadius = '20px';
+                    iconDiv.style.display = 'flex';
+                    iconDiv.style.justifyContent = 'center';
+                    iconDiv.style.alignItems = 'center';
+                    iconDiv.style.fontSize = '24px';
+                    iconDiv.style.boxShadow = 'inset 0 2px 4px rgba(0,0,0,0.05)';
+                    iconDiv.textContent = item ? emojis[item] : '？';
+                    correctPatternEl.appendChild(iconDiv);
+                });
                 correctAnswerContainer.classList.remove('hidden');
             }
 
