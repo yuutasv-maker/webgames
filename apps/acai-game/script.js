@@ -49,6 +49,7 @@ if (typeof module !== 'undefined' && module.exports) {
         let playerPattern = new Array(SLOTS_COUNT).fill(null);
         let activeSlotIndex = 0;
         let gameState = 'START'; // START, MEMORIZE, PLAY, RESULT
+        let playStartTime = null;
 
         const refView = document.getElementById('reference-view');
         const playerView = document.getElementById('player-view');
@@ -128,6 +129,7 @@ if (typeof module !== 'undefined' && module.exports) {
             refView.classList.add('hidden');
             playerView.classList.remove('hidden');
             palette.classList.remove('disabled');
+            playStartTime = Date.now();
             
             updateSlotVisuals();
         }
@@ -143,10 +145,15 @@ if (typeof module !== 'undefined' && module.exports) {
             resultStars.textContent = starsStr;
 
             const correctAnswerContainer = document.getElementById('correct-answer');
+            const clearTimeContainer = document.getElementById('clear-time');
             if (score === 4) {
+                const timeTaken = ((Date.now() - playStartTime) / 1000).toFixed(2);
                 modalDesc.textContent = '完璧な仕上がり！本物の映え職人です✨';
+                clearTimeContainer.textContent = `クリアタイム: ${timeTaken}秒`;
+                clearTimeContainer.classList.remove('hidden');
                 correctAnswerContainer.classList.add('hidden');
             } else {
+                clearTimeContainer.classList.add('hidden');
                 if (score >= 2) {
                     modalDesc.textContent = 'おしい！あともう少しで完璧！😋';
                 } else {
