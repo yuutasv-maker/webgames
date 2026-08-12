@@ -142,12 +142,20 @@ if (typeof module !== 'undefined' && module.exports) {
             }
             resultStars.textContent = starsStr;
 
+            const correctAnswerContainer = document.getElementById('correct-answer');
             if (score === 4) {
                 modalDesc.textContent = '完璧な仕上がり！本物の映え職人です✨';
-            } else if (score >= 2) {
-                modalDesc.textContent = 'おしい！あともう少しで完璧！😋';
+                correctAnswerContainer.classList.add('hidden');
             } else {
-                modalDesc.textContent = 'うーん、ちょっと違うかも...💦';
+                if (score >= 2) {
+                    modalDesc.textContent = 'おしい！あともう少しで完璧！😋';
+                } else {
+                    modalDesc.textContent = 'うーん、ちょっと違うかも...💦';
+                }
+                const correctPatternEl = document.getElementById('correct-pattern');
+                const correctAnswerStr = referencePattern.map(item => emojis[item]).join('');
+                correctPatternEl.textContent = correctAnswerStr;
+                correctAnswerContainer.classList.remove('hidden');
             }
 
             modal.classList.remove('hidden');
