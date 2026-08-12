@@ -147,6 +147,10 @@ header p {
     margin-bottom: 24px;
 }
 
+.palette-container.hidden {
+    display: none;
+}
+
 .palette-label {
     font-size: 12px;
     color: #555;
