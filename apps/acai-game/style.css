@@ -293,8 +293,8 @@ header p {
     transform: translateX(-50%);
     font-size: 80px;
     font-weight: 900;
-    color: white;
-    text-shadow: 0 4px 16px rgba(0,0,0,0.5);
+    color: #ffeb3b;
+    text-shadow: 0 4px 16px rgba(0,0,0,0.6);
     z-index: 100;
     pointer-events: none;
     opacity: 0;
