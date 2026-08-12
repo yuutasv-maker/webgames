@@ -4,11 +4,18 @@
     padding: 0;
 }
 
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: fixed;
+    touch-action: none;
+}
+
 body {
     font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
     /* 海辺をイメージした鮮やかなグラデーション */
     background: linear-gradient(to bottom, #4facfe 0%, #00f2fe 40%, #f6d365 70%, #fda085 100%);
-    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
