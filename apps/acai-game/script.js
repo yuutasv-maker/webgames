@@ -130,6 +130,14 @@ if (typeof module !== 'undefined' && module.exports) {
             palette.classList.remove('disabled');
             playStartTime = Date.now();
             
+            // パレットのボタンをシャッフルする
+            const btnsArray = Array.from(palette.children);
+            for (let i = btnsArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [btnsArray[i], btnsArray[j]] = [btnsArray[j], btnsArray[i]];
+            }
+            btnsArray.forEach(btn => palette.appendChild(btn));
+            
             updateSlotVisuals();
         }
 
