@@ -149,10 +149,10 @@ header p {
     left: 0; /* JSで translateX によりピクセル移動させる */
     width: 8px;
     height: 100%;
-    background: #ff4d4d;
+    background: #222;
     border-radius: 4px;
     transform: translateX(-50%);
-    box-shadow: 0 0 12px rgba(255, 77, 77, 0.8);
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.8);
     will-change: transform;
 }
 
