@@ -1,0 +1,18 @@
+{
+  "festivalName": "井上ヤスオバーガー OWL-STARS FESTIVAL 2026",
+  "date": "2026年11月1日 (日)\n開場 12:00 / 開演 13:00（19:00終演予定）",
+  "venue": {
+    "name": "スタジオOWL",
+    "address": "愛媛県松山市三番町三丁目6-2　ab’s square２Ｆ",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=%E6%84%9B%E5%AA%9B%E7%9C%8C%E6%9D%BE%E5%B1%B1%E5%B8%82%E4%B8%89%E7%95%AA%E7%94%BA%E4%B8%89%E4%B8%81%E7%9B%AE6-2%E3%80%80ab%E2%80%99s+square%EF%BC%92%EF%BC%A6",
+    "accessNote": "駐車場は近隣のコインパーキングをご利用ください"
+  },
+  "tickets": {
+    "price": "2,500円(ドリンク別)",
+    "notes": [
+      "入場券を兼ねた缶バッチ付き",
+      "小学生以下無料",
+      "※スタンドピクルスは外にブースがあるので、入場券なしでも購入可能です"
+    ]
+  }
+}

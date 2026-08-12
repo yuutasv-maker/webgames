@@ -1,0 +1,593 @@
+:root {
+  --bg-color: #f5f5f5;
+  --text-color: #333;
+  --stage-bg: #ffffff;
+  --border-color: #ccc;
+  --primary-color: #007bff;
+  --danger-color: #dc3545;
+  --bring-in-color: #ff9800; /* 持ち込み機材を示す色 */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  /* ページ全体の余計なスクロールやバウンスを防ぐ */
+  overscroll-behavior-y: none;
+  overflow-x: hidden;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- エクスポート領域 --- */
+#export-container {
+  background-color: var(--bg-color);
+  padding-bottom: 10px;
+}
+
+.form-header {
+  padding: 10px;
+  background-color: #fff;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.input-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.input-group.align-top {
+  align-items: flex-start;
+}
+
+.input-group label {
+  font-size: 14px;
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.input-group.align-top label {
+  margin-top: 6px;
+}
+
+.input-group input,
+.input-group textarea {
+  flex: 1;
+  padding: 6px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.input-group textarea {
+  resize: vertical;
+}
+
+/* --- ステージ領域 --- */
+.stage-area {
+  position: relative;
+  width: 100%;
+  /* 
+   * [Why] Safariでの「コンテナクエリやaspect-ratioによる高さ算出エラー（要素が縦に伸びるバグ）」を回避するため、
+   * padding-topハック（CSS 2.1時代の枯れた技術）を用いて、16:9 (9/16 = 56.25%) の高さを擬似的に確保しています。
+   * これにより、内部の position: absolute な子要素がすべてのブラウザで正しく計算されます。
+   */
+  padding-top: 56.25%;
+  background-color: #fcfcfc;
+  border: 2px solid #ccc;
+  overflow: hidden; /* has-pillars時はvisibleで上書き */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+  touch-action: none; /* iOS Safari用：ピンチズーム等のデフォルト動作を防ぐ */
+  container-type: inline-size;
+}
+
+/* プリセット時の「置けない場所（柱など）」の黒塗り表現 */
+.stage-area.has-pillars::before,
+.stage-area.has-pillars::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 14%; /* 横幅を広げました（ピアノの横幅とぴったり揃うサイズ） */
+  height: 25%;
+  background-color: #222; /* 黒塗り */
+  z-index: 0; /* 機材より下に描画 */
+  pointer-events: none; /* クリック不可 */
+}
+
+.stage-area.has-pillars {
+  overflow: visible;
+  margin-bottom: calc(20px + 12%); /* せり出し部分（高さの20%＝横幅の11.25%）が隠れないようにマージンを確保 */
+}
+
+/* 左手前のせり出しスペース */
+.stage-extension {
+  position: absolute;
+  top: 100%;
+  left: -2px; /* ステージの左ボーダーと揃える */
+  width: 25%;
+  height: 20%;
+  background-color: #fcfcfc;
+  border: 2px solid #ccc;
+  border-top: none;
+  box-sizing: content-box;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* つなぎ目のボーダーを隠す */
+.stage-extension::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #fcfcfc;
+}
+
+.stage-area.has-pillars::before {
+  left: 0;
+}
+
+.stage-area.has-pillars::after {
+  right: 0;
+}
+
+/* --- 下部操作領域 --- */
+.control-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  overflow-y: auto; /* 画面に収まらない場合にスクロール可能にする */
+  -webkit-overflow-scrolling: touch; /* iOSでのスクロールを滑らかにする */
+}
+
+.palette-header {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+  font-weight: bold;
+  background-color: #f8f9fa;
+  flex-shrink: 0;
+}
+
+
+
+.palette-area {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5px;
+  padding: 10px;
+  overflow-y: auto;
+  flex-shrink: 0; /* フレックスコンテナ（control-area）のコンテンツが増えた際に潰れるのを防ぐ */
+  /* パレット内はスクロール可能だが、ドラッグ対象アイテムには別途設定する */
+}
+
+.palette-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  /* パレット内の要素もドラッグ時はスクロールさせない */
+  touch-action: none;
+}
+
+.palette-item img {
+  width: 34px;
+  height: 34px;
+  pointer-events: none;
+  filter: brightness(0.75); /* デフォルト（店側機材）はグレー */
+}
+
+/* 自由枠はデフォルトで持ち込み機材扱いのため白く表示 */
+.palette-item[data-type^="free_text"] img {
+  filter: none;
+}
+
+.palette-item span {
+  font-size: 10px;
+  margin-top: 4px;
+  color: #555;
+  text-align: center;
+  word-break: keep-all;
+  pointer-events: none;
+}
+
+.action-buttons {
+  margin-top: auto;
+  padding: 15px;
+  display: flex;
+  gap: 10px;
+  border-top: 1px solid var(--border-color);
+}
+
+.btn {
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.action-buttons .btn {
+  flex: 1;
+  padding: 12px 4px;
+  font-size: 13.5px;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.btn-primary { background-color: var(--primary-color); }
+.btn-secondary { background-color: #6c757d; }
+.btn-warning { background-color: #f39c12; color: #fff; }
+.btn-danger { background-color: var(--danger-color); }
+
+/* --- 配置されたアイテム (Stage上のDOM) --- */
+.stage-item {
+  position: absolute;
+  /* width and height are set dynamically by JS based on item type */
+  cursor: grab;
+  touch-action: none;
+  transform-origin: center center;
+}
+
+/* 持ち込み機材のハイライト */
+.stage-item.bring-in img {
+  /* 持ち込み機材はデフォルト色（白）に戻して強調する */
+  filter: brightness(1);
+}
+
+.stage-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  pointer-events: none;
+  filter: brightness(0.75); /* デフォルト（店側機材）はグレー */
+}
+
+/* ドラッグ中の状態 */
+.stage-item.dragging {
+  opacity: 0.8;
+  /* オフセット等のための追加スタイルがあればここ */
+}
+
+/* --- モーダル (iOS Safari用) --- */
+.modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background-color: #fff;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 8px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.btn-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.modal-instruction {
+  font-size: 14px;
+  color: var(--danger-color);
+  margin-bottom: 10px;
+  font-weight: bold;
+  text-align: center;
+}
+
+#modal-image-container img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #ccc;
+}
+
+/* モード切り替えトグル */
+.mode-toggle {
+  display: flex;
+  gap: 10px;
+  background: #f0f0f0;
+  padding: 4px;
+  border-radius: 6px;
+}
+.mode-toggle label {
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+.mode-toggle input[type="radio"] {
+  display: none;
+}
+.mode-toggle input[type="radio"]:checked + span,
+.mode-toggle label:has(input[type="radio"]:checked) {
+  background: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  font-weight: bold;
+}
+
+/* 持ち込み機材テーブル */
+#bring-in-table-container {
+  margin-top: 15px;
+  padding: 10px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.table-title {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+  text-align: center;
+}
+.bring-in-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.bring-in-table th, .bring-in-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+.bring-in-table th {
+  background-color: #f9f9f9;
+}
+
+.flex-space-between {
+  display: flex;
+  justify-content: space-between;
+}
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn-danger:hover {
+  background-color: #c82333;
+}
+.checkbox-group {
+  margin-bottom: 15px;
+}
+
+/* ゴミ箱エリア */
+.trash-zone {
+  text-align: center;
+  padding: 10px;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  background-color: #ffe6e6;
+  border: 2px dashed #ff9999;
+  border-radius: 8px;
+  color: #cc0000;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+.trash-zone.drag-over {
+  background-color: #ffcccc;
+  border-style: solid;
+  transform: scale(1.02);
+}
+
+/* ヒントテキスト */
+.hint-text {
+  font-size: 13px;
+  color: #666;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+/* モーダル内のフォーム・ボタンの調整 */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+#detail-memo,
+#detail-name {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  font-family: inherit;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.modal-footer {
+  margin-top: 20px;
+  gap: 15px;
+}
+
+.modal-footer .btn {
+  padding: 8px 12px;
+  font-size: 14px;
+}
+
+/* 自由記入テキストのスタイル */
+.free-text-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: #000;
+  white-space: pre-wrap;
+  text-align: center;
+  line-height: 1.1;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* --- PC・大画面向けレイアウト（案B: 左右分割） --- */
+.app-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .app-container {
+    flex-direction: row;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-left: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
+  }
+
+  #export-container {
+    flex: 0 0 60%;
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 20px;
+    background-color: #f0f2f5;
+  }
+
+  .stage-area {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  .control-area {
+    flex: 1;
+    overflow-y: auto;
+    border-left: none; /* overrides mobile if any */
+  }
+
+  /* ホバーエフェクト（PCならではのUX） */
+  .palette-item:hover {
+    filter: brightness(0.9);
+    transform: translateY(-2px);
+    transition: all 0.2s ease;
+  }
+  
+  .btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+    transition: all 0.2s ease;
+  }
+}
+
+/* トースト通知 (非ブロックスタイルのメッセージ) */
+.toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.toast.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* 固定ピアノ (Pf) の特別スタイル（柱と同系のダークチャコールで表現） */
+.stage-item.free_text_pf img {
+  filter: brightness(0.22) contrast(1.2); /* 柱と同じ #222 〜 #333 相当のダークトーンに変更 */
+}
+.stage-item.free_text_pf .free-text-label {
+  color: #ffffff; /* 背景が黒いため文字色を白にする */
+  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+}
+
+/* ファンタム電源マーク */
+.phantom-mark {
+  position: absolute;
+  top: 5%;
+  right: -5%;
+  font-size: 4cqw;
+  font-weight: bold;
+  color: #000;
+  text-shadow: 1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff; /* 白フチ */
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* free_text系の場合は文字の横に添えたいので少し内側に寄せる */
+.stage-item[class*="free_text"] .phantom-mark {
+  top: 5%;
+  right: 5%;
+}
+

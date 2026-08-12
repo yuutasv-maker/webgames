@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>参加型イベント出力 - スタジオOWL</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0f1623;
+      --bg-secondary: #1a2332;
+      --bg-card: rgba(26, 35, 50, 0.85);
+      --bg-input: rgba(15, 22, 35, 0.7);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --border-focus: #d4a24e;
+      --text-primary: #e8eaf0;
+      --text-secondary: #8a94a6;
+      --text-label: #c0c8d8;
+      --accent: #d4a24e;
+      --accent-hover: #e6b85e;
+      --accent-glow: rgba(212, 162, 78, 0.25);
+      --success: #34d399;
+      --success-bg: rgba(52, 211, 153, 0.12);
+      --warning: #fbbf24;
+      --warning-bg: rgba(251, 191, 36, 0.12);
+      --error: #f87171;
+      --text-muted: #6b7280;
+      --border: rgba(255, 255, 255, 0.08);
+      --radius: 12px;
+      --radius-sm: 8px;
+      --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Noto Sans JP', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* 背景のグラデーション装飾 */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -40%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(212, 162, 78, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -30%;
+      left: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px 60px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ヘッダー */
+    .header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .header__icon {
+      font-size: 40px;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .header__title {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      background: linear-gradient(135deg, var(--accent), #f0d090);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header__subtitle {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    /* カード */
+    .card {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 32px;
+      margin-bottom: 20px;
+    }
+
+    .card__title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card__title::before {
+      content: '';
+      display: inline-block;
+      width: 3px;
+      height: 16px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    /* ボタン・フォーム要素 */
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    input[type="month"] {
+      width: 100%;
+      padding: 12px 14px;
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 15px;
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+
+    input[type="month"]:focus {
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 12px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition);
+      flex: 1;
+      min-width: 150px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #c4922e);
+      color: var(--bg-primary);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, var(--accent-hover), #d4a23e);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px var(--accent-glow);
+    }
+
+    .btn-success {
+      background: linear-gradient(135deg, #34d399, #059669);
+      color: var(--bg-primary);
+    }
+
+    .btn-success:hover {
+      background: linear-gradient(135deg, #4ade80, #34d399);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(52, 211, 153, 0.2);
+    }
+
+    .table-action-btn {
+      font-size: 12px;
+      padding: 6px 14px;
+      background: rgba(212, 162, 78, 0.1);
+      border: 1px solid rgba(212, 162, 78, 0.25);
+      color: var(--accent);
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all var(--transition);
+      text-decoration: none;
+    }
+
+    .table-action-btn:hover {
+      background: rgba(212, 162, 78, 0.2);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    /* 状態表示 */
+    .status-bar {
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      min-height: 20px;
+    }
+
+    .status-bar.success { color: var(--success); }
+    .status-bar.error { color: var(--error); }
+
+    /* テーブル */
+    .events-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 6px;
+    }
+
+    .events-table thead th {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 8px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .events-table tbody tr {
+      background: var(--bg-input);
+      transition: background var(--transition);
+    }
+
+    .events-table tbody tr:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .events-table tbody td {
+      padding: 12px;
+      font-size: 13px;
+      vertical-align: middle;
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .events-table tbody tr td:first-child {
+      border-left: 1px solid var(--border-color);
+      border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+    }
+
+    .events-table tbody tr td:last-child {
+      border-right: 1px solid var(--border-color);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+
+    .event-date {
+      color: var(--accent);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .badge-check {
+      background: rgba(52, 211, 153, 0.15);
+      color: var(--success);
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    .info-note {
+      font-size: 12px;
+      color: var(--text-secondary);
+      background: rgba(212, 162, 78, 0.06);
+      border: 1px solid rgba(212, 162, 78, 0.15);
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(15, 22, 35, 0.3);
+      border-top: 2px solid var(--bg-primary);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 24px 16px 40px; }
+      .card { padding: 20px; }
+      .events-table { font-size: 12px; }
+      .header__title { font-size: 20px; }
+      .btn-group { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- ヘッダー -->
+    <div class="header">
+      <span class="header__icon">📊</span>
+      <h1 class="header__title">参加型イベント出力</h1>
+      <p class="header__subtitle">スケジュールから「参加型イベント」カテゴリのイベントを抽出してCSVにエクスポートします</p>
+      <div class="header__nav" style="margin-top: 20px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+        <a href="/" class="table-action-btn" style="text-decoration: none; display: inline-block;">✍️ イベント登録</a>
+        <a href="/edit" class="table-action-btn" style="text-decoration: none; display: inline-block;">✏️ イベント編集</a>
+        <a href="/ticket-form" class="table-action-btn" style="text-decoration: none; display: inline-block;">🎫 チケット予約作成</a>
+        <a href="/export-events" class="table-action-btn" style="text-decoration: none; display: inline-block; background: var(--accent); color: var(--bg-primary); font-weight: 600;">📊 参加型イベント出力</a>
+      </div>
+    </div>
+
+    <!-- 条件指定セクション -->
+    <section class="card">
+      <div class="card__title">抽出条件指定</div>
+      <div class="form-group">
+        <label for="monthInput" style="display: block; font-size: 13px; font-weight: 500; color: var(--text-label); margin-bottom: 6px;">抽出対象の年月を選択</label>
+        <input type="month" id="monthInput">
+      </div>
+      <div class="btn-group">
+        <button class="btn btn-primary" id="previewBtn" onclick="fetchPreview()">
+          🔍 プレビュー表示
+        </button>
+        <button class="btn btn-success" id="downloadBtn" onclick="downloadCSV()">
+          📥 CSVファイルをダウンロード
+        </button>
+      </div>
+      <div class="status-bar" id="statusBar"></div>
+    </section>
+
+    <!-- プレビューテーブルセクション -->
+    <section class="card" id="previewSection" style="display:none;">
+      <div class="card__title" style="justify-content: space-between; display: flex;">
+        <span>🔍 抽出プレビュー</span>
+        <span style="font-size: 12px; color: var(--text-secondary); font-weight: normal;" id="eventCount"></span>
+      </div>
+
+      <div style="overflow-x: auto;">
+        <table class="events-table">
+          <thead>
+            <tr>
+              <th style="width:120px;">開催日</th>
+              <th>イベント名</th>
+              <th style="width:100px;">開演時間</th>
+              <th style="width:120px;">料金</th>
+              <th style="width:80px; text-align: center;">ドリンク</th>
+              <th style="width:80px; text-align: center;">軽食</th>
+            </tr>
+          </thead>
+          <tbody id="previewBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const DrinkType = {
+        INCLUDED: 'x',
+        NONE: '-',
+        ORDER_REQUIRED: ''
+    };
+
+    let allEvents = []; // 取得した全イベント
+    // デフォルト値として今月をセット (YYYY-MM 形式)
+    document.addEventListener('DOMContentLoaded', () => {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      document.getElementById('monthInput').value = `${year}-${month}`;
+    });
+
+    async function fetchPreview() {
+      const month = document.getElementById('monthInput').value;
+      const previewBtn = document.getElementById('previewBtn');
+      const statusBar = document.getElementById('statusBar');
+      const previewSection = document.getElementById('previewSection');
+      const tbody = document.getElementById('previewBody');
+
+      if (!month) {
+        statusBar.className = 'status-bar error';
+        statusBar.textContent = '❌ 年月を選択してください。';
+        return;
+      }
+
+      previewBtn.disabled = true;
+      previewBtn.innerHTML = '<span class="spinner"></span> 取得中...';
+      statusBar.className = 'status-bar';
+      statusBar.textContent = 'イベントを抽出しています。しばらくお待ちください...';
+      previewSection.style.display = 'none';
+
+      try {
+        const res = await fetch(`/api/export-events?month=${month}`);
+        const data = await res.json();
+
+        if (data.status === 'error') {
+          throw new Error(data.message);
+        }
+
+        const events = data.events || [];
+        if (events.length === 0) {
+          statusBar.className = 'status-bar success';
+          statusBar.textContent = '⚠️ 条件に一致する「参加型イベント」は見つかりませんでした。';
+          return;
+        }
+
+        tbody.innerHTML = '';
+        events.forEach(ev => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td class="event-date">${escapeHTML(ev.日付)}</td>
+            <td style="font-weight: 500;">${escapeHTML(ev.イベント)}</td>
+            <td>${escapeHTML(ev.開演時間 || '不明')}</td>
+            <td>${escapeHTML(ev.料金 || '無料 / 記載なし')}</td>
+            <td style="text-align: center;">${ev.ドリンク === DrinkType.INCLUDED ? '<span class="badge-check">あり</span>' : 'ー'}</td>
+            <td style="text-align: center;">${ev.軽食 === 'x' ? '<span class="badge-check">あり</span>' : 'ー'}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+
+        document.getElementById('eventCount').textContent = `${events.length} 件`;
+        previewSection.style.display = 'block';
+        statusBar.className = 'status-bar success';
+        statusBar.textContent = `✅ 正常に ${events.length} 件のイベントを抽出しました。`;
+
+      } catch (err) {
+        statusBar.className = 'status-bar error';
+        statusBar.textContent = `❌ エラー: ${err.message}`;
+      } finally {
+        previewBtn.disabled = false;
+        previewBtn.innerHTML = '🔍 プレビュー表示';
+      }
+    }
+
+    function downloadCSV() {
+      const month = document.getElementById('monthInput').value;
+      const statusBar = document.getElementById('statusBar');
+
+      if (!month) {
+        statusBar.className = 'status-bar error';
+        statusBar.textContent = '❌ 年月を選択してください。';
+        return;
+      }
+
+      // エンドポイントから直接ファイルをダウンロード
+      window.location.href = `/api/download-csv?month=${month}`;
+      statusBar.className = 'status-bar success';
+      statusBar.textContent = '📥 CSVファイルをダウンロードしています。';
+    }
+
+    function escapeHTML(str) {
+      if (typeof str !== 'string') return '';
+      return str.replace(/[&<>'"]/g, 
+        tag => ({
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          "'": '&#39;',
+          '"': '&quot;'
+        }[tag] || tag)
+      );
+    }
+  </script>
+</body>
+</html>

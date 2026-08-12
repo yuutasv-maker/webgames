@@ -1,0 +1,12 @@
+[
+  {
+    "id": "f01",
+    "name": "スタンドピクルス",
+    "description": "ここに簡単な紹介文",
+    "imageUrl": "./assets/images/standpickles_logo.jpg",
+    "menuImageUrl": "",
+    "socialLinks": {
+      "instagram": "https://www.instagram.com/standpickles/"
+    }
+  }
+]

@@ -1,0 +1,33 @@
+[
+  { 
+    "id": "p01", 
+    "name": "井上ヤスオバーガー", 
+    "kana": "いのうえやすおばーがー",
+    "description": "ここに簡単な紹介文", 
+    "imageUrl": "", 
+    "isMainGuest": true,
+    "socialLinks": {
+      "website": "http://yasuoburger.com/",
+      "twitter": "https://x.com/yasuoburger",
+      "instagram": "https://www.instagram.com/inoue_yasuoburger/",
+      "youtube": "https://www.youtube.com/@%E4%BA%95%E4%B8%8A%E3%83%A4%E3%82%B9%E3%82%AA%E3%83%90%E3%83%BC%E3%82%AC%E3%83%BC",
+      "facebook": "https://www.facebook.com/inoue.yasuo.71"
+    }
+  },
+  { "id": "p02", "name": "エルレンジャー", "kana": "えるれんじゃー", "description": "ここに簡単な紹介文", "imageUrl": "" },
+  { "id": "p03", "name": "ナム＆ぶた", "kana": "なむあんどぶた", "description": "ここに簡単な紹介文", "imageUrl": "" },
+  { "id": "p04", "name": "真夜中のオウルと羊たち", "kana": "まよなかのおうるとひつじたち", "description": "ここに簡単な紹介文", "imageUrl": "" },
+  { "id": "p05", 
+    "name": "Lettermore Lads", 
+    "kana": "れたーもあらっず",
+    "description": "ここに簡単な紹介文", 
+    "imageUrl": "",
+    "socialLinks": {
+      "twitter": "https://x.com/LadsLettermore"
+    }
+  },
+  { "id": "p07", "name": "ユーチーコーチー", "kana": "ゆーちーこーちー", "description": "ここに簡単な紹介文", "imageUrl": "" },
+  { "id": "p08", "name": "ニシオシンジ", "kana": "にしおしんじ", "description": "ここに簡単な紹介文", "imageUrl": "" },
+  { "id": "p09", "name": "みつはまやき", "kana": "みつはまやき", "description": "ここに簡単な紹介文", "imageUrl": "" },
+  { "id": "p10", "name": "STREET STAR(飛び込み路上ライブ)", "kana": "すとりーとすたー", "description": "ここに簡単な紹介文", "imageUrl": "" }
+]

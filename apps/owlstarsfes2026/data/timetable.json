@@ -1,0 +1,80 @@
+[
+  {
+    "time": "12:00",
+    "duration": 50,
+    "stage": "STREET LOFT",
+    "performerId": "p10"
+  },
+  {
+    "time": "13:00",
+    "duration": 10,
+    "stage": "STAR STAGE",
+    "performerId": "p01"
+  },
+  {
+    "time": "13:15",
+    "duration": 25,
+    "stage": "STAR STAGE",
+    "performerId": "p02"
+  },
+  {
+    "time": "13:45",
+    "duration": 25,
+    "stage": "STAR STAGE",
+    "performerId": "p03"
+  },
+  {
+    "time": "14:15",
+    "duration": 25,
+    "stage": "STAR STAGE",
+    "performerId": "p04"
+  },
+  {
+    "time": "14:45",
+    "duration": 25,
+    "stage": "STAR STAGE",
+    "performerId": "p05"
+  },
+  {
+    "time": "15:10",
+    "duration": 45,
+    "stage": "STREET LOFT",
+    "performerId": "p10"
+  },
+  {
+    "time": "15:55",
+    "duration": 15,
+    "stage": "STAR STAGE",
+    "performerId": "p01"
+  },
+  {
+    "time": "16:30",
+    "duration": 25,
+    "stage": "STAR STAGE",
+    "performerId": "p07"
+  },
+  {
+    "time": "17:00",
+    "duration": 25,
+    "stage": "STAR STAGE",
+    "performerId": "p08"
+  },
+  {
+    "time": "17:30",
+    "duration": 25,
+    "stage": "STAR STAGE",
+    "performerId": "p09"
+  },
+  {
+    "time": "17:55",
+    "duration": 30,
+    "stage": "STREET LOFT",
+    "performerId": "p10"
+  },
+  {
+    "time": "18:25",
+    "duration": 40,
+    "stage": "STAR STAGE",
+    "performerId": "p01"
+  }
+]

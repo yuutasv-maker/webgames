@@ -1,0 +1,14 @@
+{
+  "type": "module",
+  "devDependencies": {
+    "jsdom": "^29.1.1",
+    "puppeteer": "^25.3.0"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "node-ssh": "^13.2.1"
+  },
+  "scripts": {
+    "test": "node test.js"
+  }
+}

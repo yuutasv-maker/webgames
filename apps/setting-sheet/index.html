@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>セッティングシート作成システム</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css?v=3">
+</head>
+<body>
+  <!-- 画像書き出しの対象となるコンテナ -->
+  <div class="app-container">
+    <div id="export-container">
+    <!-- ステージエリア (16:9) -->
+    <div id="stage" class="stage-area">
+      <!-- 機材アイコンがここに配置される -->
+    </div>
+      <div id="preset-note" style="font-size: 12px; padding: 2px 10px; font-weight: bold; display: none;"></div>
+      <div id="phantom-legend" style="text-align: right; font-size: 12px; padding: 2px 10px; display: none; font-weight: bold;">※ *印はファンタム電源(+48V)必要</div>
+  </div>
+
+  <!-- 下部操作エリア -->
+  <div class="control-area">
+    <div id="trash-zone" class="trash-zone">
+      🗑️ ここにドロップして削除
+    </div>
+    
+    <div class="palette-header">
+      <div class="mode-toggle">
+        <label>
+          <input type="radio" name="edit-mode" value="move" checked> ✋ 移動
+        </label>
+        <label>
+          <input type="radio" name="edit-mode" value="rotate"> 🔄 回転
+        </label>
+      </div>
+      <div id="mode-hint" class="hint-text">
+        💡 機材タップで詳細設定（持込/備考）
+      </div>
+    </div>
+    <!-- 機材一覧 -->
+    <div id="palette" class="palette-area">
+      <div class="palette-item" data-type="vocal_mic"><img src="assets/vocal_mic.svg?v=2" alt="Voマイク"><span>Voマイク</span></div>
+      <div class="palette-item" data-type="cho_mic"><img src="assets/cho_mic.svg?v=1" alt="Choマイク"><span>Choマイク</span></div>
+      <div class="palette-item" data-type="inst_mic"><img src="assets/inst_mic.svg?v=1" alt="楽器用マイク"><span>Mic(楽器)</span></div>
+      <div class="palette-item" data-type="short_mic"><img src="assets/short_mic.svg?v=1" alt="ショートマイク"><span>S.Mic</span></div>
+      <div class="palette-item" data-type="gt_amp"><img src="assets/gt_amp.svg?v=2" alt="ギターアンプ"><span>Gtアンプ</span></div>
+      <div class="palette-item" data-type="ba_amp"><img src="assets/ba_amp.svg?v=2" alt="ベースアンプ"><span>Baアンプ</span></div>
+      <div class="palette-item" data-type="drum_set"><img src="assets/drum_set.svg?v=2" alt="ドラム"><span>ドラム</span></div>
+      <div class="palette-item" data-type="keyboard"><img src="assets/keyboard.svg?v=2" alt="キーボード"><span>キーボード</span></div>
+      <div class="palette-item" data-type="di"><img src="assets/di.svg?v=2" alt="DI"><span>DI</span></div>
+      <div class="palette-item" data-type="chair"><img src="assets/chair.svg?v=2" alt="イス"><span>イス</span></div>
+      <div class="palette-item" data-type="music_stand"><img src="assets/music_stand.svg?v=4" alt="譜面台"><span>譜面台</span></div>
+      <div class="palette-item" data-type="table"><img src="assets/table.svg?v=2" alt="机"><span>机</span></div>
+      <div class="palette-item" data-type="free_text_s"><img src="assets/free_text_circle.svg?v=1" alt="カスタム(小)"><span>カスタム(小)</span></div>
+      <div class="palette-item" data-type="free_text_m"><img src="assets/free_text.svg?v=2" alt="カスタム(中)"><span>カスタム(中)</span></div>
+      <div class="palette-item" data-type="free_text_l"><img src="assets/free_text.svg?v=2" alt="カスタム(大)"><span>カスタム(大)</span></div>
+    </div>
+    
+    <!-- バンド情報入力エリア -->
+    <header class="form-header" id="band-info-header">
+      <div class="input-group">
+        <label for="band-name">バンド名:</label>
+        <input type="text" id="band-name" placeholder="バンド名を入力" maxlength="50">
+      </div>
+      <div class="input-group">
+        <label for="band-members">バンド構成:</label>
+        <input type="text" id="band-members" placeholder="構成 (例: Vo, Gt, Ba...)" maxlength="100">
+      </div>
+      <div class="input-group align-top">
+        <label for="band-memo">備考:</label>
+        <textarea id="band-memo" placeholder="備考 (例: 転換20分&#10;※改行可能)" rows="2" maxlength="500"></textarea>
+      </div>
+    </header>
+
+    <div class="action-buttons">
+      <button id="btn-clear" class="btn btn-danger">全クリア・リセット</button>
+      <button id="btn-preset" class="btn btn-warning">プリセット配置</button>
+      <button id="btn-export" class="btn btn-primary">💾 保存・書き出し</button>
+    </div>
+    
+    <!-- クリア選択モーダル -->
+    <div id="clear-modal" class="modal hidden">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>クリア・リセットの選択</h3>
+          <button id="btn-close-clear" class="btn-close">×</button>
+        </div>
+        <div class="modal-body">
+          <p>どのような状態でリセットしますか？</p>
+          <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 20px;">
+            <button id="btn-clear-owl-init" class="btn btn-primary">🦉 スタジオOWL初期状態に戻す</button>
+            <div style="font-size: 12px; color: #666; margin-top: -6px; margin-bottom: 4px;">（スタジオOWLの形状・固定ピアノ・注釈を残し、配置機材と情報をリセット）</div>
+            
+            <button id="btn-clear-blank" class="btn btn-danger">📄 完全クリア（白紙に戻す）</button>
+            <div style="font-size: 12px; color: #666; margin-top: -6px;">（形状や固定ピアノも含め、すべてリセットして真っ白にします）</div>
+          </div>
+        </div>
+      </div>
+    </div>  
+
+    <!-- 持ち込み機材リスト -->
+    <div id="bring-in-table-container" style="display: none;">
+      <h3 class="table-title">持ち込み機材リスト</h3>
+      <table class="bring-in-table">
+        <thead>
+          <tr>
+            <th>機材名</th>
+            <th>備考</th>
+          </tr>
+        </thead>
+        <tbody id="bring-in-tbody">
+        </tbody>
+      </table>
+    </div>
+    </div>
+  </div>
+
+  <!-- 書き出し形式選択モーダル -->
+  <div id="format-modal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>書き出し形式の選択</h3>
+        <button id="btn-close-format" class="btn-close">×</button>
+      </div>
+      <div class="modal-body">
+        <p>どの形式で保存しますか？</p>
+        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;">
+          <button id="btn-export-image" class="btn btn-primary">🖼️ 画像 (PNG) で保存</button>
+          <button id="btn-export-pdf" class="btn btn-primary">📄 PDF 形式で保存</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 書き出し画像表示モーダル -->
+  <div id="export-modal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>完成画像</h3>
+        <button id="btn-close-modal" class="btn-close">×</button>
+      </div>
+      <p class="modal-instruction">画像を長押し（PCの場合は右クリック）して保存してください。</p>
+      <div id="modal-image-container"></div>
+    </div>
+  </div>
+
+  <!-- プリセット選択モーダル -->
+  <div id="preset-modal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>プリセット配置の選択</h3>
+        <button id="btn-close-preset" class="btn-close">×</button>
+      </div>
+      <div class="modal-body">
+        <p>配置したいプリセットを選択してください。<br>※現在の配置は上書きされます。</p>
+        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;">
+          <button class="btn btn-secondary btn-preset-option" data-preset="owl_basic">スタジオOWL基本バンドセット</button>
+          <button class="btn btn-secondary btn-preset-option" data-preset="acoustic">スタジオOWL基本弾き語り</button>
+          <button class="btn btn-secondary btn-preset-option" data-preset="band_simple">他会場基本バンドセット</button>
+          <button class="btn btn-secondary btn-preset-option" data-preset="acoustic_simple">他会場基本弾き語り</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 機材詳細設定モーダル -->
+  <div id="item-detail-modal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>詳細設定</h3>
+        <button id="btn-close-detail" class="btn-close">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group checkbox-group">
+          <label>
+            <input type="checkbox" id="detail-bring-in"> 持ち込み機材とする
+          </label>
+        </div>
+        <div class="form-group checkbox-group">
+          <label>
+            <input type="checkbox" id="detail-phantom"> ファンタム電源(+48V)を必要とする
+          </label>
+        </div>
+        <div class="form-group" id="detail-name-group" style="display: none;">
+          <label for="detail-name">表示名 (カスタムのみ)</label>
+          <textarea id="detail-name" placeholder="例: PC, DJ卓など&#10;※改行も可能です" rows="2" style="width: 100%; box-sizing: border-box; resize: vertical;" maxlength="50"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="detail-memo">型番・備考</label>
+          <input type="text" id="detail-memo" placeholder="例: YAMAHA MX88 / コーラス用" maxlength="100">
+        </div>
+      </div>
+      <div class="modal-footer flex-space-between">
+        <button id="btn-delete-item" class="btn btn-danger">削除</button>
+        <button id="btn-save-item" class="btn btn-primary">完了</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 画像出力用ライブラリ (ローカル化で完全オフライン対応) -->
+  <script src="html-to-image.min.js"></script>
+  <!-- PDF出力用ライブラリ -->
+  <script src="jspdf.umd.min.js"></script>
+  <script type="module" src="main.js?v=58"></script>
+</body>
+</html>

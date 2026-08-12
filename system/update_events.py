@@ -192,9 +192,9 @@ def generate_contact_info(category_name):
         return "" # 貸切の場合は別途本文自体も空にするが、ここでも空を返しておく
 
     if category_name == 'アーティストイベント':
-        return "<strong>ご予約・問い合わせ：</strong>スタジオOWL(<a href='https://owl21.info/%e3%83%81%e3%82%b1%e3%83%83%e3%83%88%e4%ba%88%e7%b4%84/'>HP予約</a>, 電話番号:089-941-0036, E-mail:<a href='mailto:studio.owl.contact@gmail.com'>studio.owl.contact@gmail.com</a>)"
+        return "<strong>ご予約・問い合わせ：</strong>スタジオOWL(HP予約: https://owl21.info/チケット予約/ , 電話番号: 089-941-0036, E-mail: studio.owl.contact@gmail.com)"
     else:
-        return "<strong>お問い合わせ：</strong>スタジオOWL(電話番号:089-941-0036, E-mail:<a href='mailto:studio.owl.contact@gmail.com'>studio.owl.contact@gmail.com</a>)"
+        return "<strong>お問い合わせ：</strong>スタジオOWL(電話番号: 089-941-0036, E-mail: studio.owl.contact@gmail.com)"
 
 def format_price(price_str):
     """数字のみの料金を「2,000円」形式にフォーマットし、0なら無料を返す"""
@@ -233,7 +233,8 @@ def upload_image_to_wp(config, file_path=None, file_data=None, file_name=None):
     headers = {
         'Content-Disposition': f'attachment; filename="{file_name}"',
         'Content-Type': mime_type,
-        'X-Owl-Auth': f"Basic {auth_base64}"
+        'X-Owl-Auth': f"Basic {auth_base64}",
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
     }
 
     try:
@@ -260,7 +261,8 @@ def check_duplicate_event(config, title, start_date_str):
     auth_string = f"{config['WP_USERNAME']}:{config['WP_APP_PASSWORD']}"
     auth_base64 = base64.b64encode(auth_string.encode('utf-8')).decode('utf-8')
     headers = {
-        'X-Owl-Auth': f"Basic {auth_base64}"
+        'X-Owl-Auth': f"Basic {auth_base64}",
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
     }
 
     # start_date_str は 'YYYY-MM-DD HH:MM:SS' 形式 → 日付部分だけ取り出す
@@ -339,7 +341,8 @@ def create_event(config, recurring_events, event_data):
     auth_base64 = base64.b64encode(auth_string.encode('utf-8')).decode('utf-8')
     headers = {
         'Content-Type': 'application/json',
-        'X-Owl-Auth': f"Basic {auth_base64}"
+        'X-Owl-Auth': f"Basic {auth_base64}",
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
     }
 
     start_date, end_date = parse_and_fill_datetime(event_data, is_all_day)
@@ -522,6 +525,8 @@ def create_event(config, recurring_events, event_data):
             return True
         else:
             logging.error(f"失敗: {event_data['イベントタイトル']} - HTTP {response.status_code}")
+            if response.status_code == 403:
+                logging.error(f"403 Forbidden Payload: {json.dumps(payload, ensure_ascii=False)}")
             logging.error(f"詳細: {response.text}")
             return False
     except Exception as e:

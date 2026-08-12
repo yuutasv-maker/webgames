@@ -1,0 +1,277 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Zen Maru Gothic', 'Outfit', sans-serif;
+    /* アサイーをイメージした紫とピンクのグラデーション */
+    background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #4a235a;
+    overflow: hidden;
+}
+
+.game-container {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 24px;
+    padding: 24px;
+    width: 95%;
+    max-width: 400px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    position: relative;
+    user-select: none;
+}
+
+header h1 {
+    font-size: 26px;
+    font-weight: 900;
+    color: #4a235a;
+    margin-bottom: 4px;
+}
+
+header p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 24px;
+}
+
+.game-stage {
+    min-height: 220px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 16px;
+    position: relative;
+}
+
+.bowl-container {
+    width: 100%;
+    animation: fadeIn 0.4s ease forwards;
+}
+
+.bowl-container.hidden {
+    display: none;
+}
+
+.bowl-label {
+    font-size: 16px;
+    font-weight: 700;
+    color: #4a235a;
+    margin-bottom: 12px;
+}
+
+.bowl {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto;
+    position: relative;
+    border-radius: 50%;
+    background: #e0e0e0;
+    /* 器のフチ（木製ボウル風） */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2), inset 0 -4px 8px rgba(0,0,0,0.1);
+    border: 8px solid #c19a6b;
+    overflow: hidden;
+}
+
+.bowl-base {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    /* アサイーペーストの色 */
+    background: radial-gradient(circle at 30% 30%, #6c3483, #4a235a);
+    z-index: 1;
+}
+
+.slot-grid {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    z-index: 2;
+    padding: 10%;
+    gap: 8px;
+}
+
+.slot {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    border-radius: 50%;
+    transition: transform 0.2s, background 0.2s;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+}
+
+.question-mark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 64px;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.8);
+    z-index: 3;
+    text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+.question-mark.hidden {
+    display: none;
+}
+
+.player-slot {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+}
+
+.player-slot.active {
+    border: 3px solid #ffeb3b;
+    background: rgba(255, 235, 59, 0.3);
+    animation: pulse 1s infinite;
+}
+
+.palette-container {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 16px;
+    padding: 12px;
+    margin-bottom: 24px;
+}
+
+.palette-label {
+    font-size: 12px;
+    color: #555;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.palette {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.palette.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.ing-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 24px;
+    border: none;
+    background: white;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.1s, box-shadow 0.1s;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.ing-btn:active {
+    transform: scale(0.9);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.action-btn {
+    background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+    color: #4a235a;
+    border: none;
+    border-radius: 50px;
+    padding: 16px 32px;
+    font-size: 18px;
+    font-weight: 900;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform 0.1s, filter 0.2s;
+    width: 100%;
+    box-shadow: 0 8px 16px rgba(161, 140, 209, 0.4);
+}
+
+.action-btn:active {
+    transform: scale(0.95);
+}
+
+.action-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(4px);
+    z-index: 10;
+}
+
+.modal.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal-content {
+    background: white;
+    padding: 32px 24px;
+    border-radius: 24px;
+    text-align: center;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.2);
+    transform: scale(1);
+    transition: transform 0.3s ease;
+    width: 85%;
+}
+
+.modal.hidden .modal-content {
+    transform: scale(0.8);
+}
+
+.modal h2 {
+    font-size: 24px;
+    font-weight: 900;
+    color: #4a235a;
+    margin-bottom: 12px;
+}
+
+.stars {
+    font-size: 32px;
+    margin-bottom: 12px;
+    letter-spacing: 4px;
+}
+
+.modal p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 24px;
+    font-weight: 700;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 235, 59, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 235, 59, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 235, 59, 0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

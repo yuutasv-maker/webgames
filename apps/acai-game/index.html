@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>映えアサイー職人</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+        <header>
+            <h1>映えアサイー職人 🫐</h1>
+            <p>お手本を覚えて、同じボウルを作ろう！</p>
+        </header>
+
+        <div class="game-stage">
+            <!-- お手本ボウル -->
+            <div id="reference-view" class="bowl-container">
+                <div class="bowl-label">お手本</div>
+                <div class="bowl">
+                    <div class="bowl-base"></div>
+                    <div class="question-mark" id="ref-question">？</div>
+                    <div class="slot-grid">
+                        <div class="slot" id="ref-0"></div>
+                        <div class="slot" id="ref-1"></div>
+                        <div class="slot" id="ref-2"></div>
+                        <div class="slot" id="ref-3"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- プレイヤー用ボウル -->
+            <div id="player-view" class="bowl-container hidden">
+                <div class="bowl-label">あなたのボウル</div>
+                <div class="bowl interactive" id="player-bowl">
+                    <div class="bowl-base"></div>
+                    <div class="slot-grid">
+                        <div class="slot player-slot active" data-index="0" id="player-0"></div>
+                        <div class="slot player-slot" data-index="1" id="player-1"></div>
+                        <div class="slot player-slot" data-index="2" id="player-2"></div>
+                        <div class="slot player-slot" data-index="3" id="player-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="palette-container">
+            <p class="palette-label">トッピングを選択</p>
+            <div id="palette" class="palette disabled">
+                <button class="ing-btn" data-type="strawberry">🍓</button>
+                <button class="ing-btn" data-type="banana">🍌</button>
+                <button class="ing-btn" data-type="blueberry">🫐</button>
+                <button class="ing-btn" data-type="mango">🥭</button>
+                <button class="ing-btn" data-type="coconut">🥥</button>
+                <button class="ing-btn" data-type="kiwi">🥝</button>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="main-btn" class="action-btn">スタート</button>
+        </div>
+
+        <!-- 結果モーダル -->
+        <div id="modal" class="modal hidden">
+            <div class="modal-content">
+                <h2 id="modal-title">結果発表</h2>
+                <div class="stars" id="result-stars">⭐⭐⭐⭐</div>
+                <p id="modal-desc">完璧な仕上がり！</p>
+                <button id="retry-btn" class="action-btn">もう一度挑戦</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -553,3 +553,239 @@
  * Running on http://127.0.0.1:5001
  * Running on http://192.168.3.3:5001
 2026-05-08 17:50:31,080 - INFO - [33mPress CTRL+C to quit[0m
+2026-05-11 13:29:10,864 - INFO - 100.85.116.52 - - [11/May/2026 13:29:10] "[33mGET /apple-touch-icon-precomposed.png HTTP/1.1[0m" 404 -
+2026-05-11 13:29:10,865 - INFO - 100.85.116.52 - - [11/May/2026 13:29:10] "[33mGET /apple-touch-icon.png HTTP/1.1[0m" 404 -
+2026-05-11 13:29:10,866 - INFO - 100.85.116.52 - - [11/May/2026 13:29:10] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-05-11 13:29:10,877 - INFO - 100.85.116.52 - - [11/May/2026 13:29:10] "GET / HTTP/1.1" 200 -
+2026-05-13 18:33:35,629 - INFO - 100.85.116.52 - - [13/May/2026 18:33:35] "[33mGET /apple-touch-icon-precomposed.png HTTP/1.1[0m" 404 -
+2026-05-13 18:33:35,651 - INFO - 100.85.116.52 - - [13/May/2026 18:33:35] "GET / HTTP/1.1" 200 -
+2026-05-13 18:33:35,651 - INFO - 100.85.116.52 - - [13/May/2026 18:33:35] "[33mGET /apple-touch-icon.png HTTP/1.1[0m" 404 -
+2026-05-13 18:33:35,652 - INFO - 100.85.116.52 - - [13/May/2026 18:33:35] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-05-13 20:15:15,030 - INFO - 100.85.116.52 - - [13/May/2026 20:15:15] "GET / HTTP/1.1" 200 -
+2026-05-13 20:15:15,504 - INFO - 100.85.116.52 - - [13/May/2026 20:15:15] "GET /api/recurring-events HTTP/1.1" 200 -
+2026-05-13 20:16:55,708 - ERROR - 画像アップロード失敗: IMG_6272.jpeg - HTTP 403
+2026-05-13 20:16:55,709 - ERROR - 詳細: <!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>403 Error - Forbidden</title>
+    <style>
+      html,body,h1,p {
+        margin: 0;
+        padding: 0;
+      }
+
+      body,html {
+        height: 100%;
+        text-align: center;
+        font-family: 'ãã©ã®ãè§ã´ Pro W3', 'Hiragino Kaku Gothic ProN', Meiryo, 'MS PGothic', Arial, sans-serif;
+        background: #fafbfd;
+        color: #505254;
+      }
+
+      .container {
+        padding: 100px 30px;
+      }
+
+      .message {
+        margin: 20px 0;
+        font-size: 20px;
+        line-height: 160%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <svg xmlns="http://www.w3.org/2000/svg" width="74" height="75" viewBox="0 0 74 75"><style type="text/css">.st0{fill:#E2E8EE;}</style><path class="st0" d="M37.3 1.5c-19.8 0-36 16.1-36 36 0 19.8 16.1 36 36 36 19.8 0 36-16.1 36-36 0-19.8-16.1-36-36-36zm-29.3 36c0-6.9 2.4-13.2 6.4-18.2l41.2 41.2c-5 4-11.3 6.4-18.2 6.4-16.2-.1-29.4-13.2-29.4-29.4zm52.3 18.2l-41.2-41.1c5-4 11.3-6.4 18.2-6.4 16.2 0 29.3 13.1 29.3 29.3 0 6.9-2.4 13.2-6.3 18.2z"/></svg>
+      <h1 class="message">403 Error</h1>
+      <p>ç¾å¨ããã®ãã¼ã¸ã¸ã®ã¢ã¯ã»ã¹ã¯ç¦æ­¢ããã¦ãã¾ãã<br>è©³ããã¯ä»¥ä¸ã®ãã¼ã¸ããç¢ºèªãã ããã</p>
+      <a href="https://support.lolipop.jp/hc/ja/articles/360049132833">403ERRORã¨ããã¨ã©ã¼ãçºçãã¾ã</a>
+    </div>
+  </body>
+</html>
+
+2026-05-13 20:16:55,711 - INFO - 100.85.116.52 - - [13/May/2026 20:16:55] "POST /api/upload-image HTTP/1.1" 200 -
+2026-05-13 20:17:04,453 - ERROR - 画像アップロード失敗: IMG_6272.jpeg - HTTP 403
+2026-05-13 20:17:04,454 - ERROR - 詳細: <!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>403 Error - Forbidden</title>
+    <style>
+      html,body,h1,p {
+        margin: 0;
+        padding: 0;
+      }
+
+      body,html {
+        height: 100%;
+        text-align: center;
+        font-family: 'ãã©ã®ãè§ã´ Pro W3', 'Hiragino Kaku Gothic ProN', Meiryo, 'MS PGothic', Arial, sans-serif;
+        background: #fafbfd;
+        color: #505254;
+      }
+
+      .container {
+        padding: 100px 30px;
+      }
+
+      .message {
+        margin: 20px 0;
+        font-size: 20px;
+        line-height: 160%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <svg xmlns="http://www.w3.org/2000/svg" width="74" height="75" viewBox="0 0 74 75"><style type="text/css">.st0{fill:#E2E8EE;}</style><path class="st0" d="M37.3 1.5c-19.8 0-36 16.1-36 36 0 19.8 16.1 36 36 36 19.8 0 36-16.1 36-36 0-19.8-16.1-36-36-36zm-29.3 36c0-6.9 2.4-13.2 6.4-18.2l41.2 41.2c-5 4-11.3 6.4-18.2 6.4-16.2-.1-29.4-13.2-29.4-29.4zm52.3 18.2l-41.2-41.1c5-4 11.3-6.4 18.2-6.4 16.2 0 29.3 13.1 29.3 29.3 0 6.9-2.4 13.2-6.3 18.2z"/></svg>
+      <h1 class="message">403 Error</h1>
+      <p>ç¾å¨ããã®ãã¼ã¸ã¸ã®ã¢ã¯ã»ã¹ã¯ç¦æ­¢ããã¦ãã¾ãã<br>è©³ããã¯ä»¥ä¸ã®ãã¼ã¸ããç¢ºèªãã ããã</p>
+      <a href="https://support.lolipop.jp/hc/ja/articles/360049132833">403ERRORã¨ããã¨ã©ã¼ãçºçãã¾ã</a>
+    </div>
+  </body>
+</html>
+
+2026-05-13 20:17:04,457 - INFO - 100.85.116.52 - - [13/May/2026 20:17:04] "POST /api/upload-image HTTP/1.1" 200 -
+2026-05-13 20:17:15,967 - INFO - 成功: Acoustic LIVE [publish] [PickUp] (ID: 2192)
+2026-05-13 20:17:15,969 - INFO - 100.85.116.52 - - [13/May/2026 20:17:15] "POST /api/submit HTTP/1.1" 200 -
+2026-05-13 20:21:44,365 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.3.3:5001
+2026-05-13 20:21:44,365 - INFO - [33mPress CTRL+C to quit[0m
+2026-05-13 20:31:52,122 - INFO - 100.85.116.52 - - [13/May/2026 20:31:52] "GET / HTTP/1.1" 200 -
+2026-05-13 20:31:52,225 - INFO - 100.85.116.52 - - [13/May/2026 20:31:52] "GET /api/recurring-events HTTP/1.1" 200 -
+2026-05-13 20:33:15,163 - ERROR - 失敗: Blues Rock Show Ⅱ - HTTP 403
+2026-05-13 20:33:15,164 - ERROR - 詳細: <!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>403 Error - Forbidden</title>
+    <style>
+      html,body,h1,p {
+        margin: 0;
+        padding: 0;
+      }
+
+      body,html {
+        height: 100%;
+        text-align: center;
+        font-family: 'ãã©ã®ãè§ã´ Pro W3', 'Hiragino Kaku Gothic ProN', Meiryo, 'MS PGothic', Arial, sans-serif;
+        background: #fafbfd;
+        color: #505254;
+      }
+
+      .container {
+        padding: 100px 30px;
+      }
+
+      .message {
+        margin: 20px 0;
+        font-size: 20px;
+        line-height: 160%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <svg xmlns="http://www.w3.org/2000/svg" width="74" height="75" viewBox="0 0 74 75"><style type="text/css">.st0{fill:#E2E8EE;}</style><path class="st0" d="M37.3 1.5c-19.8 0-36 16.1-36 36 0 19.8 16.1 36 36 36 19.8 0 36-16.1 36-36 0-19.8-16.1-36-36-36zm-29.3 36c0-6.9 2.4-13.2 6.4-18.2l41.2 41.2c-5 4-11.3 6.4-18.2 6.4-16.2-.1-29.4-13.2-29.4-29.4zm52.3 18.2l-41.2-41.1c5-4 11.3-6.4 18.2-6.4 16.2 0 29.3 13.1 29.3 29.3 0 6.9-2.4 13.2-6.3 18.2z"/></svg>
+      <h1 class="message">403 Error</h1>
+      <p>ç¾å¨ããã®ãã¼ã¸ã¸ã®ã¢ã¯ã»ã¹ã¯ç¦æ­¢ããã¦ãã¾ãã<br>è©³ããã¯ä»¥ä¸ã®ãã¼ã¸ããç¢ºèªãã ããã</p>
+      <a href="https://support.lolipop.jp/hc/ja/articles/360049132833">403ERRORã¨ããã¨ã©ã¼ãçºçãã¾ã</a>
+    </div>
+  </body>
+</html>
+
+2026-05-13 20:33:15,166 - INFO - 100.85.116.52 - - [13/May/2026 20:33:15] "POST /api/submit HTTP/1.1" 200 -
+2026-05-13 20:35:42,033 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.3.3:5001
+2026-05-13 20:35:42,034 - INFO - [33mPress CTRL+C to quit[0m
+2026-05-13 20:36:27,512 - ERROR - 失敗: Blues Rock Show Ⅱ - HTTP 403
+2026-05-13 20:36:27,512 - ERROR - 403 Forbidden Payload: {"title": "Blues Rock Show Ⅱ", "start_date": "2026-07-26 18:00:00", "end_date": "2026-07-26 21:00:00", "status": "publish", "all_day": false, "description": "<div class=\"event-details\">\n<strong>開催日：</strong>2026年7月26日<br>\n<strong>開場時間：</strong>17:30　<strong>開演時間：</strong>18:00<br>\n<strong>前売り料金：</strong>3,500円　<strong>当日料金：</strong>4,000円 ※要1ドリンクオーダー<br>\n<strong>出演者・詳細：</strong><br>画像のテキストは以下の通りです。<br><br>2026年7月26日(日)<br>Blues Rock Show Ⅱ<br>松山 スタジオOWL<br>出演：柳沢二三男(Vo,Gt)<br>17:30 open / 18:00 start<br>ADV¥3,500 / DOOR¥4,000 (+drink)<br>ご予約は OWL または TIGET にて<br>\n<strong>ご予約・問い合わせ：</strong>スタジオOWL(<a href='https://owl21.info/%e3%83%81%e3%82%b1%e3%83%83%e3%83%88%e4%ba%88%e7%b4%84/'>HP予約</a>, 電話番号:089-941-0036, E-mail:<a href='mailto:studio.owl.contact@gmail.com'>studio.owl.contact@gmail.com</a>)\n</div>", "cost": "3500", "categories": [11], "featured": true}
+2026-05-13 20:36:27,512 - ERROR - 詳細: <!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>403 Error - Forbidden</title>
+    <style>
+      html,body,h1,p {
+        margin: 0;
+        padding: 0;
+      }
+
+      body,html {
+        height: 100%;
+        text-align: center;
+        font-family: 'ãã©ã®ãè§ã´ Pro W3', 'Hiragino Kaku Gothic ProN', Meiryo, 'MS PGothic', Arial, sans-serif;
+        background: #fafbfd;
+        color: #505254;
+      }
+
+      .container {
+        padding: 100px 30px;
+      }
+
+      .message {
+        margin: 20px 0;
+        font-size: 20px;
+        line-height: 160%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <svg xmlns="http://www.w3.org/2000/svg" width="74" height="75" viewBox="0 0 74 75"><style type="text/css">.st0{fill:#E2E8EE;}</style><path class="st0" d="M37.3 1.5c-19.8 0-36 16.1-36 36 0 19.8 16.1 36 36 36 19.8 0 36-16.1 36-36 0-19.8-16.1-36-36-36zm-29.3 36c0-6.9 2.4-13.2 6.4-18.2l41.2 41.2c-5 4-11.3 6.4-18.2 6.4-16.2-.1-29.4-13.2-29.4-29.4zm52.3 18.2l-41.2-41.1c5-4 11.3-6.4 18.2-6.4 16.2 0 29.3 13.1 29.3 29.3 0 6.9-2.4 13.2-6.3 18.2z"/></svg>
+      <h1 class="message">403 Error</h1>
+      <p>ç¾å¨ããã®ãã¼ã¸ã¸ã®ã¢ã¯ã»ã¹ã¯ç¦æ­¢ããã¦ãã¾ãã<br>è©³ããã¯ä»¥ä¸ã®ãã¼ã¸ããç¢ºèªãã ããã</p>
+      <a href="https://support.lolipop.jp/hc/ja/articles/360049132833">403ERRORã¨ããã¨ã©ã¼ãçºçãã¾ã</a>
+    </div>
+  </body>
+</html>
+
+2026-05-13 20:36:27,515 - INFO - 100.85.116.52 - - [13/May/2026 20:36:27] "POST /api/submit HTTP/1.1" 200 -
+2026-05-13 21:00:40,501 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.3.3:5001
+2026-05-13 21:00:40,501 - INFO - [33mPress CTRL+C to quit[0m
+2026-05-13 21:02:04,279 - INFO - 成功: Blues Rock Show Ⅱ [publish] [PickUp] (ID: 2215)
+2026-05-13 21:02:04,282 - INFO - 100.85.116.52 - - [13/May/2026 21:02:04] "POST /api/submit HTTP/1.1" 200 -
+2026-05-14 10:48:18,460 - INFO - 100.85.116.52 - - [14/May/2026 10:48:18] "GET / HTTP/1.1" 200 -
+2026-05-14 10:48:19,557 - INFO - 100.85.116.52 - - [14/May/2026 10:48:19] "GET /api/recurring-events HTTP/1.1" 200 -
+2026-05-15 20:21:49,734 - INFO - 100.85.116.52 - - [15/May/2026 20:21:49] "GET / HTTP/1.1" 200 -
+2026-05-15 20:21:50,942 - INFO - 100.85.116.52 - - [15/May/2026 20:21:50] "GET /api/recurring-events HTTP/1.1" 200 -
+2026-05-15 20:24:15,532 - INFO - 成功: はやしみお MUSIC LIVE 2026 [publish]  (ID: 2216)
+2026-05-15 20:24:15,534 - INFO - 100.85.116.52 - - [15/May/2026 20:24:15] "POST /api/submit HTTP/1.1" 200 -
+2026-05-16 13:18:38,617 - INFO - 100.85.116.52 - - [16/May/2026 13:18:38] "[33mGET /apple-touch-icon-precomposed.png HTTP/1.1[0m" 404 -
+2026-05-16 13:18:38,635 - INFO - 100.85.116.52 - - [16/May/2026 13:18:38] "GET / HTTP/1.1" 200 -
+2026-05-16 13:18:38,637 - INFO - 100.85.116.52 - - [16/May/2026 13:18:38] "[33mGET /apple-touch-icon.png HTTP/1.1[0m" 404 -
+2026-05-16 13:18:38,637 - INFO - 100.85.116.52 - - [16/May/2026 13:18:38] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-05-18 16:41:35,256 - INFO - 100.85.116.52 - - [18/May/2026 16:41:35] "[33mGET /apple-touch-icon-precomposed.png HTTP/1.1[0m" 404 -
+2026-05-18 16:41:35,302 - INFO - 100.85.116.52 - - [18/May/2026 16:41:35] "GET / HTTP/1.1" 200 -
+2026-05-18 16:41:35,311 - INFO - 100.85.116.52 - - [18/May/2026 16:41:35] "[33mGET /apple-touch-icon.png HTTP/1.1[0m" 404 -
+2026-05-18 16:41:35,312 - INFO - 100.85.116.52 - - [18/May/2026 16:41:35] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-05-21 03:07:21,899 - INFO - 100.85.116.52 - - [21/May/2026 03:07:21] "[33mGET /apple-touch-icon-precomposed.png HTTP/1.1[0m" 404 -
+2026-05-21 03:07:21,901 - INFO - 100.85.116.52 - - [21/May/2026 03:07:21] "GET / HTTP/1.1" 200 -
+2026-05-21 03:07:21,905 - INFO - 100.85.116.52 - - [21/May/2026 03:07:21] "[33mGET /apple-touch-icon.png HTTP/1.1[0m" 404 -
+2026-05-21 03:07:21,905 - INFO - 100.85.116.52 - - [21/May/2026 03:07:21] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-05-21 14:36:19,228 - INFO - 100.85.116.52 - - [21/May/2026 14:36:19] "GET / HTTP/1.1" 200 -
+2026-05-21 14:36:19,789 - INFO - 100.85.116.52 - - [21/May/2026 14:36:19] "GET /api/recurring-events HTTP/1.1" 200 -
+2026-05-21 14:36:53,486 - INFO - 成功: 貸し切りイベント [publish]  (ID: 2217)
+2026-05-21 14:36:53,489 - INFO - 100.85.116.52 - - [21/May/2026 14:36:53] "POST /api/submit HTTP/1.1" 200 -
+2026-05-21 15:54:38,971 - INFO - 100.85.116.52 - - [21/May/2026 15:54:38] "GET / HTTP/1.1" 200 -
+2026-05-21 15:54:39,817 - INFO - 100.85.116.52 - - [21/May/2026 15:54:39] "GET /api/recurring-events HTTP/1.1" 200 -
+2026-05-21 20:44:38,357 - INFO - 100.85.116.52 - - [21/May/2026 20:44:38] "GET / HTTP/1.1" 200 -
+2026-05-21 20:44:39,323 - INFO - 100.85.116.52 - - [21/May/2026 20:44:39] "GET /api/recurring-events HTTP/1.1" 200 -
+2026-05-21 20:45:05,017 - INFO - 成功: 弾キガタリスト大集合！6月号 [publish]  (ID: 2218)
+2026-05-21 20:45:05,020 - INFO - 100.85.116.52 - - [21/May/2026 20:45:05] "POST /api/submit HTTP/1.1" 200 -
+2026-05-24 20:20:05,975 - INFO - 100.85.116.52 - - [24/May/2026 20:20:05] "GET / HTTP/1.1" 200 -
+2026-05-24 20:20:05,978 - INFO - 100.85.116.52 - - [24/May/2026 20:20:05] "[33mGET /apple-touch-icon-precomposed.png HTTP/1.1[0m" 404 -
+2026-05-24 20:20:05,989 - INFO - 100.85.116.52 - - [24/May/2026 20:20:05] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-05-24 20:20:05,989 - INFO - 100.85.116.52 - - [24/May/2026 20:20:05] "[33mGET /apple-touch-icon.png HTTP/1.1[0m" 404 -

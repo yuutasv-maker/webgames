@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>スタジオOWL イベント登録フォーム</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <div class="header">
+            <span class="header__icon">🦉</span>
+            <h1 class="header__title">スタジオOWL イベント登録</h1>
+            <p class="header__subtitle">フォームに入力して「登録」ボタンを押してください</p>
+            <div class="header__nav" style="margin-top: 20px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+                <a href="/" class="quick-select__btn active" style="text-decoration: none; display: inline-block;">✍️ イベント登録</a>
+                <a href="/edit" class="quick-select__btn" style="text-decoration: none; display: inline-block;">✏️ イベント編集</a>
+                <a href="/ticket-form" class="quick-select__btn" style="text-decoration: none; display: inline-block;">🎫 チケット予約作成</a>
+                <a href="/export-events" class="quick-select__btn" style="text-decoration: none; display: inline-block;">📊 参加型イベント出力</a>
+            </div>
+        </div>
+
+        <!-- ====== イベントタイトル ====== -->
+        <div class="card">
+            <div class="card__title">イベント情報</div>
+
+            <div class="form-group">
+                <label for="title">イベントタイトル</label>
+                <input type="text" id="title" placeholder="例: フリーライブ、弾キガタリスト...">
+                <div class="autofill-hint" id="autofill-hint">✨ 定期イベントの情報を自動入力しました</div>
+            </div>
+
+            <div class="form-group">
+                <label>定期イベントから選択（クイック入力）</label>
+                <div class="quick-select" id="quick-select">
+                    <!-- JS で動的に生成 -->
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="category">イベントカテゴリー</label>
+                <select id="category">
+                    <option value="">（未選択 / 自動補完に任せる）</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- ====== 日時 ====== -->
+        <div class="card">
+            <div class="card__title">日時</div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="start_date">開始日付 *</label>
+                    <input type="date" id="start_date">
+                </div>
+                <div class="form-group">
+                    <label for="end_date">終了日付（空なら開始日と同じ）</label>
+                    <input type="date" id="end_date">
+                </div>
+            </div>
+
+            <div class="form-row-3">
+                <div class="form-group">
+                    <label for="open_time">開場時間</label>
+                    <input type="time" id="open_time">
+                </div>
+                <div class="form-group">
+                    <label for="start_time">開始時間</label>
+                    <input type="time" id="start_time">
+                </div>
+                <div class="form-group">
+                    <label for="end_time">終了時間</label>
+                    <input type="time" id="end_time">
+                </div>
+            </div>
+        </div>
+
+        <!-- ====== 料金 ====== -->
+        <div class="card">
+            <div class="card__title">料金</div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="advance_price">前売り料金</label>
+                    <input type="text" id="advance_price" placeholder="例: 1200">
+                </div>
+                <div class="form-group">
+                    <label for="door_price">当日料金</label>
+                    <input type="text" id="door_price" placeholder="例: 1500">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>ドリンク</label>
+                    <label class="toggle">
+                        <input type="checkbox" id="drink">
+                        <span class="toggle__switch"></span>
+                        <span class="toggle__label">1ドリンク付き</span>
+                    </label>
+                    <div style="margin-top: 8px; font-size: 0.85em; color: #666; display: flex; align-items: center;">
+                        <input type="checkbox" id="no_drink" style="margin-right: 4px; width: auto; min-width: auto; margin-bottom: 0;">
+                        <label for="no_drink" style="margin-bottom: 0; font-weight: normal; color: #666; cursor: pointer;">ドリンク設定なし（野外等）</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="other">その他（軽食など）</label>
+                    <input type="text" id="other" placeholder="例: 軽食">
+                </div>
+                <div class="form-group" id="ticket_url_group" style="display: none;">
+                    <label for="ticket_url">チケット予約URL（プレイガイド等）</label>
+                    <input type="text" id="ticket_url" placeholder="例: https://tiget.net/...">
+                    <small style="display: block; margin-top: 4px; color: var(--text-secondary); font-size: 12px;">空欄の場合はOWL公式の予約ページがリンクされます</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- ====== 詳細 ====== -->
+        <div class="card">
+            <div class="card__title">詳細</div>
+
+            <div class="form-group">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                    <label for="description" style="margin-bottom: 0;">出演者・詳細</label>
+                    <button type="button" id="btn-analyze-details" class="btn" style="padding: 4px 12px; font-size: 12px; height: auto;">🪄 詳細から日時・料金を自動入力</button>
+                </div>
+                <textarea id="description" placeholder="出演者名やイベント詳細を入力してください。&#10;改行は \n で表現します。"></textarea>
+            </div>
+        </div>
+
+        <!-- ====== アイキャッチ画像 ====== -->
+        <div class="card">
+            <div class="card__title">アイキャッチ画像</div>
+
+            <div class="image-upload-area" id="upload-area" onclick="document.getElementById('image_file').click()">
+                <div class="image-upload-area__icon">📷</div>
+                <div class="image-upload-area__text">
+                    <span>ファイルを選択</span> またはここにドラッグ＆ドロップ
+                </div>
+                <input type="file" id="image_file" accept="image/*">
+            </div>
+
+            <div class="image-preview" id="image-preview">
+                <img id="preview-img" src="" alt="プレビュー">
+                <div class="image-preview__info">
+                    <div class="image-preview__status" id="upload-status">
+                        <span class="dot dot--pending"></span>
+                        <span>アップロード待ち</span>
+                    </div>
+                    <button type="button" class="image-preview__remove" onclick="removeImage()">✕ 画像を削除</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ====== オプション ====== -->
+        <div class="card">
+            <div class="card__title">オプション</div>
+
+            <div class="form-group">
+                <label>公開ステータス</label>
+                <div class="status-toggle">
+                    <div class="status-toggle__option">
+                        <input type="radio" name="status" id="status_publish" value="publish" checked>
+                        <label for="status_publish">公開 (publish)</label>
+                    </div>
+                    <div class="status-toggle__option">
+                        <input type="radio" name="status" id="status_draft" value="draft">
+                        <label for="status_draft">下書き (draft)</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="checkbox-group">
+                <label class="toggle">
+                    <input type="checkbox" id="featured">
+                    <span class="toggle__switch"></span>
+                    <span class="toggle__label">注目イベント（Pick Up Live!）</span>
+                </label>
+
+                <label class="toggle">
+                    <input type="checkbox" id="all_day">
+                    <span class="toggle__switch"></span>
+                    <span class="toggle__label">終日イベント</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- ====== 送信 ====== -->
+        <button class="submit-btn" id="submit-btn" onclick="submitEvent()">
+            <span class="spinner"></span>
+            イベントを登録する
+        </button>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/common.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/common.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const res = await fetch('/api/recurring-events');
+                const data = await res.json();
+                recurringEvents = data.recurring_events || {};
+                titleAliases = data.title_aliases || {};
+                const categories = data.categories || [];
+
+                const catSelect = document.getElementById('category');
+                categories.forEach(cat => {
+                    const opt = document.createElement('option');
+                    opt.value = cat;
+                    opt.textContent = cat;
+                    catSelect.appendChild(opt);
+                });
+
+                const quickSelect = document.getElementById('quick-select');
+                Object.keys(recurringEvents).forEach(name => {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = 'quick-select__btn';
+                    btn.textContent = name;
+                    btn.onclick = () => selectRecurringEvent(name, btn);
+                    quickSelect.appendChild(btn);
+                });
+
+                catSelect.addEventListener('change', (e) => {
+                    if (e.target.value === 'アーティストイベント') {
+                        const openTime = document.getElementById('open_time');
+                        const startTime = document.getElementById('start_time');
+                        const endTime = document.getElementById('end_time');
+                        const featured = document.getElementById('featured');
+                        
+                        if (!openTime.value) openTime.value = '19:00';
+                        if (!startTime.value) startTime.value = '19:30';
+                        if (!endTime.value) endTime.value = '22:00';
+                        featured.checked = true;
+                    } else if (e.target.value === '貸切イベント') {
+                        const titleField = document.getElementById('title');
+                        const allDayCheck = document.getElementById('all_day');
+                        const openTime = document.getElementById('open_time');
+                        const startTime = document.getElementById('start_time');
+                        const endTime = document.getElementById('end_time');
+                        
+                        if (!titleField.value) titleField.value = '貸し切りイベント';
+                        allDayCheck.checked = true;
+                        openTime.value = '';
+                        startTime.value = '';
+                        endTime.value = '';
+                    }
+                    
+                    const ticketUrlGroup = document.getElementById('ticket_url_group');
+                    if (e.target.value === 'アーティストイベント') {
+                        ticketUrlGroup.style.display = 'block';
+                    } else {
+                        ticketUrlGroup.style.display = 'none';
+                        document.getElementById('ticket_url').value = '';
+                    }
+                });
+
+                setupCommonListeners();
+
+            } catch (err) {
+                console.error('初期データの読み込みに失敗:', err);
+            }
+        });
+
+        async function submitEvent() {
+            const btn = document.getElementById('submit-btn');
+            const resultEl = document.getElementById('result');
+
+            const title = document.getElementById('title').value.trim();
+            const startDate = document.getElementById('start_date').value;
+
+            if (!title) {
+                showResult('error', 'イベントタイトルを入力してください。');
+                return;
+            }
+            if (!startDate) {
+                showResult('error', '開始日付を入力してください。');
+                return;
+            }
+
+            btn.disabled = true;
+            btn.classList.add('loading');
+            resultEl.classList.remove('show');
+
+            const payload = {
+                title: title,
+                start_date: startDate,
+                open_time: document.getElementById('open_time').value,
+                start_time: document.getElementById('start_time').value,
+                end_date: document.getElementById('end_date').value,
+                end_time: document.getElementById('end_time').value,
+                all_day: document.getElementById('all_day').checked,
+                category: document.getElementById('category').value,
+                description: document.getElementById('description').value,
+                advance_price: document.getElementById('advance_price').value,
+                door_price: document.getElementById('door_price').value,
+                drink: document.getElementById('drink').checked,
+                no_drink: document.getElementById('no_drink').checked,
+                ticket_url: document.getElementById('ticket_url').value,
+                other: document.getElementById('other').value,
+                featured: document.getElementById('featured').checked,
+                status: document.querySelector('input[name="status"]:checked').value,
+                image_id: uploadedImageId
+            };
+
+            try {
+                const res = await fetch('/api/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+                showResult(data.status, data.message);
+            } catch (err) {
+                showResult('error', `通信エラーが発生しました: ${err.message}`);
+            } finally {
+                btn.disabled = false;
+                btn.classList.remove('loading');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>チケット予約 プルダウン生成 - スタジオOWL</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0f1623;
+      --bg-secondary: #1a2332;
+      --bg-card: rgba(26, 35, 50, 0.85);
+      --bg-input: rgba(15, 22, 35, 0.7);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --border-focus: #d4a24e;
+      --text-primary: #e8eaf0;
+      --text-secondary: #8a94a6;
+      --text-label: #c0c8d8;
+      --accent: #d4a24e;
+      --accent-hover: #e6b85e;
+      --accent-glow: rgba(212, 162, 78, 0.25);
+      --success: #34d399;
+      --success-bg: rgba(52, 211, 153, 0.12);
+      --warning: #fbbf24;
+      --warning-bg: rgba(251, 191, 36, 0.12);
+      --text-muted: #6b7280;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-active: #d4a24e;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Noto Sans JP', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* 背景のグラデーション装飾 */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -40%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(212, 162, 78, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -30%;
+      left: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px 60px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ヘッダー */
+    .header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .header__icon {
+      font-size: 40px;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .header__title {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      background: linear-gradient(135deg, var(--accent), #f0d090);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header__subtitle {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    /* カード */
+    .card {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 32px;
+      margin-bottom: 20px;
+    }
+
+    .card__title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card__title::before {
+      content: '';
+      display: inline-block;
+      width: 3px;
+      height: 16px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #c4922e);
+      color: var(--bg-primary);
+      font-weight: 600;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, var(--accent-hover), #d4a23e);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px var(--accent-glow);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-success {
+      background: linear-gradient(135deg, #34d399, #059669);
+      color: var(--bg-primary);
+      font-weight: 600;
+    }
+
+    .btn-success:hover {
+      background: linear-gradient(135deg, #4ade80, #34d399);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(52, 211, 153, 0.2);
+    }
+
+    .status-bar {
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      min-height: 20px;
+    }
+
+    .status-bar.success {
+      color: var(--success);
+    }
+
+    .status-bar.error {
+      color: #f87171;
+    }
+
+    /* 選択すべて解除など */
+    .table-actions {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .table-action-btn {
+      font-size: 12px;
+      padding: 6px 14px;
+      background: rgba(212, 162, 78, 0.1);
+      border: 1px solid rgba(212, 162, 78, 0.25);
+      color: var(--accent);
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all var(--transition);
+      text-decoration: none;
+    }
+
+    .table-action-btn:hover {
+      background: rgba(212, 162, 78, 0.2);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    /* テーブル */
+    .events-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 6px;
+    }
+
+    .events-table thead th {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 8px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .events-table tbody tr {
+      background: var(--bg-input);
+      transition: background var(--transition);
+    }
+
+    .events-table tbody tr:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .events-table tbody td {
+      padding: 10px 12px;
+      font-size: 13px;
+      vertical-align: middle;
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .events-table tbody tr td:first-child {
+      border-left: 1px solid var(--border-color);
+      border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+    }
+
+    .events-table tbody tr td:last-child {
+      border-right: 1px solid var(--border-color);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+
+    .event-checkbox {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    .event-date {
+      color: var(--accent);
+      font-weight: 600;
+      white-space: nowrap;
+      font-size: 14px;
+    }
+
+    .event-title {
+      color: var(--text-primary);
+      font-size: 13px;
+      max-width: 260px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .performer-input {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 13px;
+      padding: 6px 10px;
+      width: 100%;
+      transition: border-color var(--transition), box-shadow var(--transition);
+      outline: none;
+    }
+
+    .performer-input:focus {
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    .performer-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    /* 出力セクション */
+    .output-tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 16px;
+      background: var(--bg-input);
+      border-radius: var(--radius-sm);
+      padding: 4px;
+      border: 1px solid var(--border-color);
+    }
+
+    .output-tab {
+      flex: 1;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 6px;
+      background: transparent;
+      color: var(--text-secondary);
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .output-tab.active {
+      background: var(--accent);
+      color: var(--bg-primary);
+      font-weight: 600;
+    }
+
+    .output-tab:hover:not(.active) {
+      color: var(--text-primary);
+    }
+
+    .output-area {
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      font-family: 'SFMono-Regular', 'Consolas', 'Liberation Mono', 'Menlo', monospace;
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--text-primary);
+      min-height: 120px;
+      white-space: pre-wrap;
+      word-break: break-all;
+      position: relative;
+      user-select: all;
+    }
+
+    .output-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .copy-toast {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--success);
+      color: var(--bg-primary);
+      padding: 10px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1000;
+      pointer-events: none;
+      box-shadow: 0 4px 12px rgba(52, 211, 153, 0.3);
+    }
+
+    .copy-toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(15, 22, 35, 0.3);
+      border-top: 2px solid var(--bg-primary);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .info-note {
+      font-size: 12px;
+      color: var(--text-secondary);
+      background: rgba(212, 162, 78, 0.06);
+      border: 1px solid rgba(212, 162, 78, 0.15);
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    /* レスポンシブ */
+    @media (max-width: 600px) {
+      .container {
+        padding: 24px 16px 40px;
+      }
+      .card {
+        padding: 20px;
+      }
+      .events-table {
+        font-size: 12px;
+      }
+      .event-title {
+        max-width: 140px;
+      }
+      .header__title {
+        font-size: 20px;
+      }
+    }
+
+    .preview-item {
+      padding: 4px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .preview-item:last-child {
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- ヘッダー -->
+    <div class="header">
+      <span class="header__icon">🎫</span>
+      <h1 class="header__title">チケット予約 プルダウン生成</h1>
+      <p class="header__subtitle">スケジュールからアーティストイベントを取得し、Contact Form 7用コードを生成します</p>
+      <div class="header__nav" style="margin-top: 20px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+        <a href="/" class="table-action-btn" style="text-decoration: none; display: inline-block;">✍️ イベント登録</a>
+        <a href="/edit" class="table-action-btn" style="text-decoration: none; display: inline-block;">✏️ イベント編集</a>
+        <a href="/ticket-form" class="table-action-btn" style="text-decoration: none; display: inline-block; background: var(--accent); color: var(--bg-primary); font-weight: 600;">🎫 チケット予約作成</a>
+        <a href="/export-events" class="table-action-btn" style="text-decoration: none; display: inline-block;">📊 参加型イベント出力</a>
+      </div>
+    </div>
+
+    <!-- 取得セクション -->
+    <section class="card">
+      <div class="card__title">イベントデータ取得</div>
+      <p class="info-note">
+        owl21.info のスケジュールから「アーティストイベント」カテゴリのイベントを自動取得します。<br>
+        出演者名はイベントタイトルから自動推測されますが、必要に応じて手動で編集できます。
+      </p>
+      <button class="btn btn-primary" id="fetchBtn" onclick="fetchEvents()">
+        🔄 イベントを取得
+      </button>
+      <div class="status-bar" id="statusBar"></div>
+    </section>
+
+    <!-- イベント一覧セクション -->
+    <section class="card" id="eventsSection" style="display:none;">
+      <div class="card__title" style="justify-content: space-between; display: flex;">
+        <span>🎤 イベント一覧</span>
+        <span style="font-size: 12px; color: var(--text-secondary); font-weight: normal;" id="eventCount"></span>
+      </div>
+
+      <div class="table-actions">
+        <button class="table-action-btn" onclick="toggleAll(true)">✅ すべて選択</button>
+        <button class="table-action-btn" onclick="toggleAll(false)">❎ すべて解除</button>
+        <button class="table-action-btn" onclick="resetPerformers()">🔄 出演者名リセット</button>
+      </div>
+
+      <div style="overflow-x: auto;">
+        <table class="events-table">
+          <thead>
+            <tr>
+              <th style="width:40px;">選択</th>
+              <th style="width:110px;">日付</th>
+              <th>イベントタイトル</th>
+              <th>プルダウン表示名（出演者名）</th>
+            </tr>
+          </thead>
+          <tbody id="eventsBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 出力セクション -->
+    <section class="card" id="outputSection" style="display:none;">
+      <div class="card__title">📋 生成結果</div>
+
+      <div class="output-tabs">
+        <button class="output-tab active" onclick="switchTab('preview')" id="tabPreview">プレビュー</button>
+        <button class="output-tab" onclick="switchTab('shortcode')" id="tabShortcode">ショートコード</button>
+        <button class="output-tab" onclick="switchTab('options')" id="tabOptions">HTML optionタグ</button>
+      </div>
+
+      <div class="output-area" id="outputArea"></div>
+
+      <div class="output-actions">
+        <button class="btn btn-success" onclick="copyOutput()">📋 コピー</button>
+        <button class="btn btn-primary" onclick="generateOutput()">🔄 再生成</button>
+      </div>
+    </section>
+  </div>
+
+  <div class="copy-toast" id="copyToast">✅ クリップボードにコピーしました</div>
+
+  <script>
+    const API_URL = 'https://owl21.info/wp-json/tribe/events/v1/events';
+    const CATEGORY_SLUG = '%e3%82%a2%e3%83%bc%e3%83%86%e3%82%a3%e3%82%b9%e3%83%88%e3%82%a4%e3%83%99%e3%83%b3%e3%83%88'; // アーティストイベント
+    const DAY_NAMES = ['日', '月', '火', '水', '木', '金', '土'];
+
+    let events = [];
+    let currentTab = 'preview';
+
+    // ------- Performer name extraction -------
+    function cleanTitle(title) {
+      let t = title.replace(/&#(\d+);/g, (match, dec) => String.fromCharCode(dec))
+                  .replace(/&quot;/g, '"')
+                  .replace(/&amp;/g, '&')
+                  .replace(/&lt;/g, '<')
+                  .replace(/&gt;/g, '>');
+      t = t.replace(/[\u201c\u201d]/g, '"').replace(/[\u2018\u2019]/g, "'");
+      return t;
+    }
+
+    function extractPerformer(title) {
+      let t = cleanTitle(title);
+
+      t = t.replace(/\s*(at|in|@)\s*スタジオ\s*OWL/gi, '');
+      t = t.replace(/\s*(at|in|@)\s*Studio\s*OWL/gi, '');
+      t = t.replace(/スタジオ\s*OWL/g, '');
+      t = t.replace(/Studio\s*OWL/gi, '');
+
+      const bracketMatch = t.match(/「[^」]+」(.+)/);
+      if (bracketMatch) {
+        t = bracketMatch[1].trim();
+      }
+
+      t = t.replace(/\s*『[^』]+』.*/g, ''); 
+      t = t.replace(/\s*"[^"]+"\s*Release\s*TOUR.*$/gi, ''); 
+      t = t.replace(/\s*OWLライブ$/g, '');
+      t = t.replace(/\s*ライブ$/g, '');
+      t = t.replace(/\s*LIVE$/gi, '');
+      t = t.replace(/\s*ツアー$/g, '');
+      t = t.replace(/\s*JAPAN\s*TOUR\s*\d+.*$/gi, '');
+
+      const tildeMatch = t.match(/^[〜～](.+?)[〜～](.*)$/);
+      if (tildeMatch) {
+        const inner = tildeMatch[1].trim();
+        const after = (tildeMatch[2] && tildeMatch[2].trim) ? tildeMatch[2].trim() : (tildeMatch[2] || '');
+        if (after && after.length > 0) {
+          t = after;
+        } else {
+          t = inner;
+        }
+      }
+
+      const sswMatch = t.match(/シンガーソングライター(.+)/);
+      if (sswMatch) {
+        let name = sswMatch[1].trim();
+        const dashMatch = name.match(/^(.+?)[\s-]*[-ー]([^-ー]+)[-ー]/);
+        if (dashMatch) {
+          name = dashMatch[1];
+        }
+        t = name.trim().replace(/^[- \t]+/, '').replace(/[- \t]+$/, '');
+      }
+
+      t = t.replace(/【[^】]*】/g, '');
+      t = t.replace(/\[[^\]]*\]/g, '');
+      t = t.replace(/\u3000/g, ' ');
+      
+      return t.trim().replace(/^[\s\-〜～]+/, '').replace(/[\s\-〜～]+$/, '') || title;
+    }
+
+    function formatDate(dateStr) {
+      const d = new Date(dateStr);
+      const month = d.getMonth() + 1;
+      const day = d.getDate();
+      const dayName = DAY_NAMES[d.getDay()];
+      return `${month}/${day}(${dayName})`;
+    }
+
+    async function fetchEvents() {
+      const btn = document.getElementById('fetchBtn');
+      const statusBar = document.getElementById('statusBar');
+
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span> 取得中...';
+      statusBar.className = 'status-bar';
+      statusBar.textContent = 'API に接続中...';
+
+      try {
+        const url = `${API_URL}?per_page=50&categories=${CATEGORY_SLUG}`;
+        const resp = await fetch(url);
+
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+
+        const data = await resp.json();
+        
+        // 特定のキーワードが含まれるイベントは「チケット予約対象外」として除外
+        const ignoreKeywords = ['eplus.jp', 'プレイガイド', '予約対象外', 'チケットぴあ', 'ローソンチケット', 'l-tike.com'];
+        const filteredEvents = data.events.filter(ev => {
+          const evString = JSON.stringify(ev);
+          return !ignoreKeywords.some(kw => evString.includes(kw));
+        });
+
+        events = filteredEvents.map(ev => ({
+          id: ev.id,
+          title: ev.title,
+          date: ev.start_date,
+          dateFormatted: formatDate(ev.start_date),
+          performer: extractPerformer(ev.title),
+          checked: true
+        }));
+
+        events.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+        // --- 追加: 本番サイトのプルダウン情報をマージ ---
+        try {
+          statusBar.textContent = '本番サイトの既存情報を取得中...';
+          const scrapeResp = await fetch('/api/scrape-ticket-options');
+          if (scrapeResp.ok) {
+            const scrapeData = await scrapeResp.json();
+            if (scrapeData.status === 'success' && scrapeData.options) {
+              const scrapedMap = {};
+              scrapeData.options.forEach(opt => {
+                // "7/26(日)柳沢二三男" から "7/26" と "柳沢二三男" を抽出
+                const m = opt.match(/^(\d{1,2}\/\d{1,2})/);
+                if (m) {
+                  const dateKey = m[1];
+                  // "(日)"などの曜日表記の次から最後までの文字列を取得
+                  const nameMatch = opt.match(/^\d{1,2}\/\d{1,2}\([日月火水木金土]\)(.+)$/);
+                  if (nameMatch) {
+                    scrapedMap[dateKey] = nameMatch[1].trim();
+                  } else {
+                    const parts = opt.split(')');
+                    if (parts.length > 1) {
+                       scrapedMap[dateKey] = parts.slice(1).join(')').trim();
+                    } else {
+                       scrapedMap[dateKey] = opt.replace(m[0], '').trim();
+                    }
+                  }
+                }
+              });
+
+              // eventsにマージ (上書き)
+              let mergeCount = 0;
+              events.forEach(ev => {
+                const m = ev.dateFormatted.match(/^(\d{1,2}\/\d{1,2})/);
+                if (m) {
+                  const evDateKey = m[1];
+                  if (scrapedMap[evDateKey]) {
+                    ev.performer = scrapedMap[evDateKey];
+                    mergeCount++;
+                  }
+                }
+              });
+              console.log(`Merged ${mergeCount} existing performer names from live site.`);
+            }
+          }
+        } catch (e) {
+          console.error("Scraping fallback failed:", e);
+        }
+        // ------------------------------------------------
+
+        renderTable();
+        generateOutput();
+
+        statusBar.className = 'status-bar success';
+        statusBar.textContent = `✅ ${events.length} 件のアーティストイベントを取得・構成しました`;
+
+        document.getElementById('eventsSection').style.display = '';
+        document.getElementById('outputSection').style.display = '';
+
+      } catch (err) {
+        statusBar.className = 'status-bar error';
+        statusBar.textContent = `❌ エラー: ${err.message}`;
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '🔄 イベントを取得';
+      }
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('eventsBody');
+      tbody.innerHTML = '';
+
+      events.forEach((ev, i) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>
+            <input type="checkbox" class="event-checkbox" ${ev.checked ? 'checked' : ''}
+              onchange="events[${i}].checked = this.checked; generateOutput();">
+          </td>
+          <td class="event-date">${ev.dateFormatted}</td>
+          <td class="event-title" title="${ev.title}">${ev.title}</td>
+          <td>
+            <input type="text" class="performer-input" value="${ev.performer}"
+              data-index="${i}"
+              oninput="events[${i}].performer = this.value; generateOutput();"
+              placeholder="出演者名を入力">
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById('eventCount').textContent = `${events.length} 件`;
+    }
+
+    function toggleAll(state) {
+      events.forEach(ev => ev.checked = state);
+      renderTable();
+      generateOutput();
+    }
+
+    function resetPerformers() {
+      events.forEach(ev => {
+        ev.performer = extractPerformer(ev.title);
+      });
+      renderTable();
+      generateOutput();
+    }
+
+    function generateOutput() {
+      const selected = events.filter(e => e.checked);
+      const outputArea = document.getElementById('outputArea');
+
+      if (selected.length === 0) {
+        outputArea.textContent = '（イベントが選択されていません）';
+        return;
+      }
+
+      const items = selected.map(e => `${e.dateFormatted}${e.performer}`);
+
+      if (currentTab === 'preview') {
+        outputArea.innerHTML = items.map(item =>
+          `<div class="preview-item">${item}</div>`
+        ).join('') +
+        `<div class="preview-item" style="color: var(--text-muted);">その他(お手数ですが特記事項欄にご記入ください)</div>`;
+
+      } else if (currentTab === 'shortcode') {
+        outputArea.textContent = `[select* select-artist "${items.join('" "')}" "その他(お手数ですが特記事項欄にご記入ください)"]`;
+
+      } else if (currentTab === 'options') {
+        outputArea.textContent = items.map(v =>
+          `<option value="${v}">${v}</option>`
+        ).join('\n') +
+        `\n<option value="その他">その他(お手数ですが特記事項欄にご記入ください)</option>`;
+      }
+    }
+
+    function switchTab(tab) {
+      currentTab = tab;
+      document.querySelectorAll('.output-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById('tab' + tab.charAt(0).toUpperCase() + tab.slice(1)).classList.add('active');
+      generateOutput();
+    }
+
+    async function copyOutput() {
+      const outputArea = document.getElementById('outputArea');
+      const text = outputArea.textContent || outputArea.innerText;
+
+      try {
+        await navigator.clipboard.writeText(text);
+        const toast = document.getElementById('copyToast');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2000);
+      } catch (err) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        const toast = document.getElementById('copyToast');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2000);
+      }
+    }
+  </script>
+</body>
+</html>

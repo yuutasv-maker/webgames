@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>スイカ割りゲーム！🍉</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+        <header>
+            <div class="score-header">SCORE <span id="total-score">0</span></div>
+            <h1>Watermelon Smash! 🍉</h1>
+            <p>ゲージの真ん中を狙ってスイカを割ろう！</p>
+        </header>
+
+        <div class="watermelon-stage">
+            <div id="watermelon" class="watermelon">
+                <!-- SVGアセット：コンテナ側での可変サイズに対応できるよう viewBox 指定 -->
+                <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+                    <!-- 左半分のスイカ -->
+                    <g id="melon-left" class="melon-part">
+                        <!-- スイカの赤い実と緑の皮 -->
+                        <path d="M 50 10 A 40 40 0 0 0 50 90 L 50 10" fill="#ff4d4d" stroke="#2e8b57" stroke-width="4"/>
+                        <!-- 種 -->
+                        <circle cx="35" cy="40" r="2.5" fill="#222"/>
+                        <circle cx="45" cy="55" r="2.5" fill="#222"/>
+                        <circle cx="25" cy="60" r="2.5" fill="#222"/>
+                    </g>
+                    <!-- 右半分のスイカ -->
+                    <g id="melon-right" class="melon-part">
+                        <path d="M 50 10 A 40 40 0 0 1 50 90 L 50 10" fill="#ff4d4d" stroke="#2e8b57" stroke-width="4"/>
+                        <circle cx="65" cy="40" r="2.5" fill="#222"/>
+                        <circle cx="55" cy="55" r="2.5" fill="#222"/>
+                        <circle cx="75" cy="60" r="2.5" fill="#222"/>
+                    </g>
+                </svg>
+            </div>
+        </div>
+
+        <div class="gauge-container">
+            <div class="target-zone" id="target-zone"></div>
+            <div class="cursor" id="cursor"></div>
+        </div>
+
+        <button id="smash-btn" class="smash-btn">HIT!!</button>
+
+        <!-- 結果表示用のモーダル（グラスモーフィズムデザイン） -->
+        <div id="result-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2 id="result-title">Perfect!</h2>
+                <div class="earned-score">獲得スコア: <span id="earned-score-val">0</span></div>
+                <p id="result-desc">ど真ん中！かき氷無料券GET！</p>
+                <button id="retry-btn" class="retry-btn">もう一度遊ぶ</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
