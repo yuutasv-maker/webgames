@@ -56,7 +56,6 @@ if (typeof module !== 'undefined' && module.exports) {
         const palette = document.getElementById('palette');
         const mainBtn = document.getElementById('main-btn');
         const modal = document.getElementById('modal');
-        const resultStars = document.getElementById('result-stars');
         const modalDesc = document.getElementById('modal-desc');
         const retryBtn = document.getElementById('retry-btn');
         const refQuestion = document.getElementById('ref-question');
@@ -137,12 +136,6 @@ if (typeof module !== 'undefined' && module.exports) {
         function showResult() {
             gameState = 'RESULT';
             const score = GameLogic.calculateScore(referencePattern, playerPattern);
-            
-            let starsStr = '';
-            for (let i = 0; i < SLOTS_COUNT; i++) {
-                starsStr += (i < score) ? '⭐' : '⬛';
-            }
-            resultStars.textContent = starsStr;
 
             const correctAnswerContainer = document.getElementById('correct-answer');
             const clearTimeContainer = document.getElementById('clear-time');
