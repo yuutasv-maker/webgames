@@ -173,7 +173,6 @@ if (typeof module !== 'undefined' && module.exports) {
                 modalDesc.textContent = '完璧な仕上がり！本物の映え職人です✨';
                 clearTimeContainer.textContent = `クリアタイム: ${timeTaken}秒`;
                 clearTimeContainer.classList.remove('hidden');
-                correctAnswerContainer.classList.add('hidden');
             } else {
                 clearTimeContainer.classList.add('hidden');
                 if (score >= 2) {
@@ -181,24 +180,17 @@ if (typeof module !== 'undefined' && module.exports) {
                 } else {
                     modalDesc.textContent = 'うーん、ちょっと違うかも...💦';
                 }
-                const correctPatternEl = document.getElementById('correct-pattern');
-                correctPatternEl.innerHTML = '';
-                referencePattern.forEach(item => {
-                    const iconDiv = document.createElement('div');
-                    iconDiv.style.width = '40px';
-                    iconDiv.style.height = '40px';
-                    iconDiv.style.background = '#f5f5f5';
-                    iconDiv.style.borderRadius = '20px';
-                    iconDiv.style.display = 'flex';
-                    iconDiv.style.justifyContent = 'center';
-                    iconDiv.style.alignItems = 'center';
-                    iconDiv.style.fontSize = '24px';
-                    iconDiv.style.boxShadow = 'inset 0 2px 4px rgba(0,0,0,0.05)';
-                    iconDiv.textContent = item ? emojis[item] : '？';
-                    correctPatternEl.appendChild(iconDiv);
-                });
-                correctAnswerContainer.classList.remove('hidden');
             }
+
+            const correctPatternEl = document.getElementById('correct-pattern');
+            correctPatternEl.innerHTML = '';
+            referencePattern.forEach(item => {
+                const iconDiv = document.createElement('div');
+                iconDiv.className = 'result-slot';
+                iconDiv.textContent = item ? emojis[item] : '？';
+                correctPatternEl.appendChild(iconDiv);
+            });
+            correctAnswerContainer.classList.remove('hidden');
 
             modal.classList.remove('hidden');
         }
