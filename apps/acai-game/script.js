@@ -188,9 +188,13 @@ if (typeof module !== 'undefined' && module.exports) {
 
             const correctPatternEl = document.getElementById('correct-pattern');
             correctPatternEl.innerHTML = '';
-            referencePattern.forEach(item => {
+            referencePattern.forEach((item, index) => {
                 const iconDiv = document.createElement('div');
                 iconDiv.className = 'result-slot';
+                // プレイヤーの配置と一致していない場合はエラークラスを付与してハイライト
+                if (playerPattern[index] !== item) {
+                    iconDiv.classList.add('error');
+                }
                 iconDiv.textContent = item ? emojis[item] : '？';
                 correctPatternEl.appendChild(iconDiv);
             });
