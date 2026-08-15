@@ -168,13 +168,17 @@ if (typeof module !== 'undefined' && module.exports) {
 
             const correctAnswerContainer = document.getElementById('correct-answer');
             const clearTimeContainer = document.getElementById('clear-time');
+            const correctLabel = document.getElementById('correct-label');
+            
             if (score === 4) {
                 const timeTaken = ((Date.now() - playStartTime) / 1000).toFixed(2);
                 modalDesc.textContent = '完璧な仕上がり！本物の映え職人です✨';
                 clearTimeContainer.textContent = `クリアタイム: ${timeTaken}秒`;
                 clearTimeContainer.classList.remove('hidden');
+                correctLabel.classList.add('hidden');
             } else {
                 clearTimeContainer.classList.add('hidden');
+                correctLabel.classList.remove('hidden');
                 if (score >= 2) {
                     modalDesc.textContent = 'おしい！あともう少しで完璧！😋';
                 } else {

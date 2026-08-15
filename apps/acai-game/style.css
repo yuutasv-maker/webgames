@@ -282,7 +282,8 @@ header p {
 }
 
 #correct-answer.hidden,
-#clear-time.hidden {
+#clear-time.hidden,
+#correct-label.hidden {
     display: none;
 }
 
