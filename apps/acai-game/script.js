@@ -27,6 +27,38 @@ const GameLogic = {
             }
         }
         return score;
+    },
+
+    /**
+     * 7秒以内かつ全問正解でクーポン獲得対象かを判定
+     * @param {number} score プレイヤーのスコア
+     * @param {number} timeTaken クリアにかかった秒数
+     * @returns {boolean}
+     */
+    isEligibleForCoupon: function(score, timeTaken) {
+        return score === 4 && typeof timeTaken === 'number' && timeTaken <= 7.0;
+    },
+
+    /**
+     * YYYY-MM-DD形式の日付文字列を生成（日本時間基準で安全に比較）
+     * @param {Date} [date=new Date()]
+     * @returns {string}
+     */
+    getTodayDateString: function(date = new Date()) {
+        const y = date.getFullYear();
+        const m = String(date.getMonth() + 1).padStart(2, '0');
+        const d = String(date.getDate()).padStart(2, '0');
+        return `${y}-${m}-${d}`;
+    },
+
+    /**
+     * 当日クーポンを獲得可能かどうか（未獲得ならtrue）
+     * @param {string|null} lastClaimedDate 最後に獲得した日付 (YYYY-MM-DD)
+     * @param {string} todayDate 今日の日付 (YYYY-MM-DD)
+     * @returns {boolean}
+     */
+    canClaimCouponToday: function(lastClaimedDate, todayDate) {
+        return lastClaimedDate !== todayDate;
     }
 };
 
@@ -171,14 +203,27 @@ if (typeof module !== 'undefined' && module.exports) {
             const correctLabel = document.getElementById('correct-label');
             
             if (score === 4) {
-                const timeTaken = ((Date.now() - playStartTime) / 1000).toFixed(2);
+                const timeTakenNum = (Date.now() - playStartTime) / 1000;
+                const timeTaken = timeTakenNum.toFixed(2);
                 modalDesc.textContent = '完璧な仕上がり！本物の映え職人です✨';
                 clearTimeContainer.textContent = `クリアタイム: ${timeTaken}秒`;
                 clearTimeContainer.classList.remove('hidden');
                 correctLabel.classList.add('hidden');
+
+                // 共通CouponUIを利用したクーポン獲得判定 & 描画
+                CouponUI.renderResult({
+                    containerId: 'coupon-section',
+                    gameId: 'acai',
+                    isEligible: GameLogic.isEligibleForCoupon(score, timeTakenNum),
+                    time: timeTaken,
+                    conditionHint: '💡 <strong>7秒以内</strong>に完成させると限定クーポンGET！',
+                    successMsg: '🎉 <strong>7秒以内クリア達成！</strong><br>1日1回限定クーポンを獲得しました！',
+                    claimedMsg: '🎉 <strong>7秒以内クリア！お見事！</strong><br><span style="font-size: 12px; color: #777;">※ 本日のクーポンは獲得済みです（1日1回限定）</span>'
+                });
             } else {
                 clearTimeContainer.classList.add('hidden');
                 correctLabel.classList.remove('hidden');
+                CouponUI.hide('coupon-section');
                 if (score >= 2) {
                     modalDesc.textContent = 'おしい！あともう少しで完璧！😋';
                 } else {
@@ -214,6 +259,7 @@ if (typeof module !== 'undefined' && module.exports) {
 
         retryBtn.addEventListener('click', () => {
             modal.classList.add('hidden');
+            CouponUI.hide('coupon-section');
             gameState = 'START';
             mainBtn.textContent = 'スタート';
             mainBtn.disabled = false;

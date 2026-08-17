@@ -1,0 +1,79 @@
+const assert = require('assert');
+const { CouponManager } = require('./coupon-manager.js');
+
+// モックストレージ作成用ヘルパー
+function createMockStorage(initial = {}) {
+    const store = { ...initial };
+    return {
+        getItem: (key) => store[key] !== undefined ? store[key] : null,
+        setItem: (key, val) => { store[key] = String(val); },
+        removeItem: (key) => { delete store[key]; },
+        clear: () => { Object.keys(store).forEach(k => delete store[k]); },
+        _dump: () => store
+    };
+}
+
+try {
+    const today = new Date(2026, 7, 17); // 2026-08-17
+    const yesterday = new Date(2026, 7, 16); // 2026-08-16
+
+    // 1. getTodayDateString
+    assert.strictEqual(CouponManager.getTodayDateString(today), '2026-08-17');
+    assert.strictEqual(CouponManager.getTodayDateString(yesterday), '2026-08-16');
+
+    // 2. getStorageKey
+    assert.strictEqual(CouponManager.getStorageKey('acai'), 'uminoie_coupon_acai_claimed_date');
+    assert.strictEqual(CouponManager.getStorageKey('watermelon'), 'uminoie_coupon_watermelon_claimed_date');
+
+    // 3. canClaimToday & claimCoupon (新規ストレージ)
+    const storage1 = createMockStorage();
+    assert.strictEqual(CouponManager.canClaimToday('acai', today, storage1), true, 'First time can claim');
+    
+    // クーポン獲得
+    CouponManager.claimCoupon('acai', today, storage1);
+    assert.strictEqual(storage1.getItem('uminoie_coupon_acai_claimed_date'), '2026-08-17');
+    assert.strictEqual(CouponManager.canClaimToday('acai', today, storage1), false, 'Already claimed today cannot claim');
+    // 別ゲームには影響しない
+    assert.strictEqual(CouponManager.canClaimToday('watermelon', today, storage1), true, 'Different game can claim');
+
+    // 4. 前日獲得済みの場合の当日再獲得
+    const storage2 = createMockStorage({
+        'uminoie_coupon_acai_claimed_date': '2026-08-16'
+    });
+    assert.strictEqual(CouponManager.canClaimToday('acai', today, storage2), true, 'Claimed yesterday can claim today');
+
+    // 5. 旧キー（acai_game_coupon_claimed_date）の後方互換性テスト
+    const storageLegacy = createMockStorage({
+        'acai_game_coupon_claimed_date': '2026-08-17'
+    });
+    assert.strictEqual(CouponManager.canClaimToday('acai', today, storageLegacy), false, 'Legacy key claimed today blocks claim');
+
+    // 6. getStatus
+    const status = CouponManager.getStatus('acai', today, storage1);
+    assert.strictEqual(status.today, '2026-08-17');
+    assert.strictEqual(status.lastClaimed, '2026-08-17');
+    assert.strictEqual(status.isClaimedToday, true);
+
+    // 7. getCouponUrl
+    assert.strictEqual(CouponManager.getCouponUrl('acai'), '../../common/coupon.html?game=acai');
+    assert.strictEqual(CouponManager.getCouponUrl('acai', { time: '5.42' }), '../../common/coupon.html?game=acai&time=5.42');
+    assert.strictEqual(CouponManager.getCouponUrl('bbq', { record: '15本' }), '../../common/coupon.html?game=bbq&record=15%E6%9C%AC');
+
+    // 8. getGameConfig
+    const acaiConfig = CouponManager.getGameConfig('acai');
+    assert.strictEqual(acaiConfig.name, '映えアサイー職人');
+    assert.strictEqual(acaiConfig.codePrefix, 'ACAI');
+    assert.strictEqual(acaiConfig.image, 'images/acai_ice.png');
+
+    const suikaConfig = CouponManager.getGameConfig('watermelon');
+    assert.strictEqual(suikaConfig.name, 'スイカ割りタイミングゲーム');
+    assert.strictEqual(suikaConfig.codePrefix, 'SUIKA');
+
+    const unknownConfig = CouponManager.getGameConfig('unknown');
+    assert.strictEqual(unknownConfig.codePrefix, 'GIFT');
+
+    console.log("CouponManager all tests passed!");
+} catch (e) {
+    console.error("CouponManager test failed:", e.message);
+    process.exit(1);
+}

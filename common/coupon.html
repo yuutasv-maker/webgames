@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>【GoGoUmi Paradise】特別クーポン券</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%2250%%22 y=%2250%%22 style=%22dominant-baseline:central;text-anchor:middle;font-size:90px;%22>🎫</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="coupon.css">
+</head>
+<body class="coupon-page-body">
+    <div class="coupon-card-container">
+        <div class="congrats-badge" id="badge-text">🎉 チャレンジ達成特典</div>
+        <h1 class="coupon-main-title">限定特別クーポン券</h1>
+        <div class="coupon-shop-name">海の家 GoGoUmi Paradise 🏖️</div>
+
+        <div class="ticket-card">
+            <div class="ticket-game-title" id="ticket-title">ゲーム チャレンジ成功</div>
+            <div id="record-display" class="clear-record-badge hidden"></div>
+            <div class="ticket-benefit" id="ticket-benefit">
+                特典内容
+            </div>
+            <p class="ticket-desc" id="ticket-desc">
+                店頭注文時にこちらの画面をご提示いただくと、特典をご利用いただけます！
+            </p>
+
+            <div id="coupon-image-area" class="coupon-image-area">
+                <!-- 任意の画像またはプレースホルダーが動的に挿入されます -->
+            </div>
+
+            <div class="validity-tag">
+                有効期限: <span id="valid-until">本日限り有効</span>
+            </div>
+        </div>
+
+        <ul class="coupon-notice-list">
+            <li>※ 本クーポンはお1人様1日1回限りのご利用となります。</li>
+            <li>※ 他の割引券・キャンペーンとの併用はできません。</li>
+            <li>※ 会計時にスタッフへこの画面をお見せください。</li>
+            <li>※ 本券はゲーム達成特典の仮クーポン画面です。</li>
+        </ul>
+
+        <div class="coupon-action-group">
+            <a href="../../index.html" id="back-game-btn" class="page-btn page-btn-primary">🎮 もう一度遊ぶ</a>
+        </div>
+    </div>
+
+    <script src="coupon-manager.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // URLパラメータからgameIdおよび任意の画像URL、クリアタイム等を取得
+            const params = new URLSearchParams(window.location.search);
+            const gameId = params.get('game') || 'acai';
+            const config = CouponManager.getGameConfig(gameId);
+
+            // コンテンツの反映
+            document.getElementById('badge-text').textContent = `🎉 ${config.name} 達成特典`;
+            document.getElementById('ticket-title').textContent = config.title;
+            document.getElementById('ticket-benefit').textContent = config.benefit;
+            document.getElementById('ticket-desc').textContent = config.description;
+            
+            // クリアタイム/達成記録の反映
+            const clearTime = params.get('time');
+            const clearRecord = params.get('record');
+            const recordEl = document.getElementById('record-display');
+
+            if (clearTime) {
+                recordEl.textContent = `⏱️ クリアタイム: ${clearTime}秒`;
+                recordEl.classList.remove('hidden');
+            } else if (clearRecord) {
+                recordEl.textContent = `🏆 達成記録: ${clearRecord}`;
+                recordEl.classList.remove('hidden');
+            } else {
+                recordEl.classList.add('hidden');
+            }
+
+            if (config.backUrl) {
+                document.getElementById('back-game-btn').setAttribute('href', config.backUrl);
+            }
+
+            // 画像の表示処理（URLパラメータ優先 > config.image > プレースホルダー）
+            const customImage = params.get('image') || config.image;
+            const imageArea = document.getElementById('coupon-image-area');
+            if (customImage) {
+                imageArea.innerHTML = `
+                    <img src="${customImage}" alt="クーポン引換画像" class="coupon-image" id="coupon-img">
+                `;
+            } else {
+                // 画像未指定時はQR/チケット風SVGアイコンを表示
+                imageArea.innerHTML = `
+                    <div class="coupon-image-placeholder">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                    </div>
+                `;
+            }
+
+            // 本日の日付を有効期限にセット
+            const now = new Date();
+            const y = now.getFullYear();
+            const m = String(now.getMonth() + 1).padStart(2, '0');
+            const d = String(now.getDate()).padStart(2, '0');
+            document.getElementById('valid-until').textContent = `${y}年${m}月${d}日 本日限り有効`;
+        });
+    </script>
+</body>
+</html>
