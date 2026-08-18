@@ -132,12 +132,13 @@ header p {
     left: 50%;
     transform: translateX(-50%);
     width: 40%; /* GOOD判定の範囲全体 (±20%、つまり全体の40%) */
-    /* GOOD: 濃い緑(0-12.5%, 87.5-100%), GREAT: 薄い緑(12.5-31.25%, 68.75-87.5%), PERFECT: 赤(31.25-68.75%) */
+    /* GOOD〜GREAT: 緑〜黄緑グラデーション(0〜31.25%, 68.75〜100%), PERFECT〜CRITICAL: 薄い赤〜中心濃い赤グラデーション(31.25%〜50%〜68.75%) */
     background: linear-gradient(90deg, 
         rgba(0, 128, 0, 0.8) 0%, 
         rgba(50, 205, 50, 0.8) 31.25%,
-        #ff4d4d 31.25%, 
-        #ff4d4d 68.75%,
+        #ff7575 31.25%, 
+        #b71c1c 50%,
+        #ff7575 68.75%,
         rgba(50, 205, 50, 0.8) 68.75%, 
         rgba(0, 128, 0, 0.8) 100%
     );
@@ -232,9 +233,10 @@ header p {
     letter-spacing: 1px;
 }
 
-.modal h2.PERFECT { color: #ff007f; text-shadow: 0 2px 4px rgba(255,0,127,0.3); }
-.modal h2.GREAT { color: #ff8c00; text-shadow: 0 2px 4px rgba(255,140,0,0.3); }
-.modal h2.GOOD { color: #00ba7c; text-shadow: 0 2px 4px rgba(0,186,124,0.3); }
+.modal h2.CRITICAL { color: #b71c1c; text-shadow: 0 2px 6px rgba(183, 28, 28, 0.4); }
+.modal h2.PERFECT { color: #ff5252; text-shadow: 0 2px 4px rgba(255, 82, 82, 0.3); }
+.modal h2.GREAT { color: #ff8c00; text-shadow: 0 2px 4px rgba(255, 140, 0, 0.3); }
+.modal h2.GOOD { color: #00ba7c; text-shadow: 0 2px 4px rgba(0, 186, 124, 0.3); }
 .modal h2.MISS { color: #555; }
 
 .earned-score {

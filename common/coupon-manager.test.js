@@ -63,11 +63,16 @@ try {
     const acaiConfig = CouponManager.getGameConfig('acai');
     assert.strictEqual(acaiConfig.name, '映えアサイー職人');
     assert.strictEqual(acaiConfig.codePrefix, 'ACAI');
+    assert.strictEqual(acaiConfig.theme, 'acai');
     assert.strictEqual(acaiConfig.image, 'images/acai_ice.png');
 
     const suikaConfig = CouponManager.getGameConfig('watermelon');
     assert.strictEqual(suikaConfig.name, 'スイカ割りタイミングゲーム');
     assert.strictEqual(suikaConfig.codePrefix, 'SUIKA');
+    assert.strictEqual(suikaConfig.theme, 'watermelon');
+    assert.strictEqual(suikaConfig.icon, '🍉');
+    assert.strictEqual(suikaConfig.benefit, 'バニラアイストッピング追加 または 100円引き');
+    assert.strictEqual(suikaConfig.image, 'images/watermelon_coupon.jpg');
 
     const unknownConfig = CouponManager.getGameConfig('unknown');
     assert.strictEqual(unknownConfig.codePrefix, 'GIFT');

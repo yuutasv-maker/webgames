@@ -32,6 +32,11 @@ try {
     assert.strictEqual(result, 'COMPLETE', 'Correct final item should return COMPLETE');
     assert.strictEqual(currentSkewer.length, 4, 'Skewer should be full');
 
+    // Test: isEligibleForCoupon (10本以上でクーポン対象)
+    assert.strictEqual(GameLogic.isEligibleForCoupon(9), false, '9 skewers should not be eligible for coupon');
+    assert.strictEqual(GameLogic.isEligibleForCoupon(10), true, '10 skewers must be eligible for coupon');
+    assert.strictEqual(GameLogic.isEligibleForCoupon(15), true, '15 skewers must be eligible for coupon');
+
     console.log("All tests passed!");
 } catch (e) {
     console.error("Test failed:", e.message);

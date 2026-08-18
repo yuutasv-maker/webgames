@@ -1,6 +1,15 @@
 // テスト時にも利用できるようロジックを分離
 const GameLogic = {
     /**
+     * クーポン獲得対象か判定する（CRITICALのみ対象）
+     * @param {string} rank 判定ランク
+     * @returns {boolean}
+     */
+    isEligibleForCoupon: function(rank) {
+        return rank === 'CRITICAL';
+    },
+
+    /**
      * カーソルの位置からスコアを算出する
      * @param {number} cursorPos カーソルのピクセル座標 (左端からの距離)
      * @param {number} centerPos ターゲット中心のピクセル座標
@@ -18,8 +27,10 @@ const GameLogic = {
             score = Math.max(0, Math.floor(1000 * (1 - normalized)));
         }
         
-        if (normalized <= 0.15) return { rank: 'PERFECT', score: score, message: '見事命中！✨\nかき氷無料券GET！🍧' };
-        if (normalized <= 0.30) return { rank: 'GREAT', score: score, message: 'いい音色！🍉\nトッピング無料券GET！' };
+        // CRITICAL: 芯を直撃（normalized <= 0.04）のみクーポン獲得対象
+        if (normalized <= 0.04) return { rank: 'CRITICAL', score: 1000, message: '神業！芯を直撃！✨\nアイストッピング or 100円引きGET！🍨' };
+        if (normalized <= 0.15) return { rank: 'PERFECT', score: score, message: '見事命中！🍉\nナイススマッシュ！' };
+        if (normalized <= 0.30) return { rank: 'GREAT', score: score, message: 'いい感じ！🍉\nナイスヒット！' };
         if (normalized <= 0.40) return { rank: 'GOOD', score: score, message: '見事割れました！🍉' };
         return { rank: 'MISS', score: 0, message: '残念、空振り...💦\nもう一度挑戦しよう！' };
     }
@@ -81,6 +92,11 @@ if (typeof module !== 'undefined' && module.exports) {
             watermelon.className = 'watermelon';
             smashBtn.disabled = false;
             
+            // クーポン枠のリセット
+            if (typeof CouponUI !== 'undefined') {
+                CouponUI.hide('coupon-section');
+            }
+
             // ランダムな位置と方向から開始
             position = Math.random() * gaugeWidth;
             direction = Math.random() > 0.5 ? 1 : -1;
@@ -114,6 +130,19 @@ if (typeof module !== 'undefined' && module.exports) {
                 resultTitle.className = result.rank;
                 earnedScoreVal.textContent = result.score;
                 resultDesc.innerHTML = result.message.replace(/\n/g, '<br>');
+
+                // クーポン獲得セクションの制御（CRITICAL達成時のみクーポン券受取ボタンを表示）
+                if (typeof CouponUI !== 'undefined') {
+                    CouponUI.renderResult({
+                        containerId: 'coupon-section',
+                        gameId: 'watermelon',
+                        isEligible: GameLogic.isEligibleForCoupon(result.rank),
+                        conditionHint: '', // CRITICAL以外ではボタン非表示
+                        successMsg: '🎉 <strong>神業！芯を直撃達成！</strong><br>アイストッピング or 100円引きクーポンを獲得しました！',
+                        claimedMsg: '🎉 <strong>神業クリア！お見事！</strong><br><span style="font-size: 12px; color: #777;">※ 本日のクーポンは獲得済みです（1日1回限定）</span>'
+                    });
+                }
+
                 modal.classList.remove('hidden');
             }, 800);
         }

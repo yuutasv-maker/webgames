@@ -53,8 +53,13 @@
             const gameId = params.get('game') || 'acai';
             const config = CouponManager.getGameConfig(gameId);
 
+            // ゲームに応じたテーマカラー（data-theme属性）を適用
+            const theme = config.theme || gameId;
+            document.body.setAttribute('data-theme', theme);
+
             // コンテンツの反映
-            document.getElementById('badge-text').textContent = `🎉 ${config.name} 達成特典`;
+            const icon = config.icon ? `${config.icon} ` : '';
+            document.getElementById('badge-text').textContent = `🎉 ${icon}${config.name} 達成特典`;
             document.getElementById('ticket-title').textContent = config.title;
             document.getElementById('ticket-benefit').textContent = config.benefit;
             document.getElementById('ticket-desc').textContent = config.description;

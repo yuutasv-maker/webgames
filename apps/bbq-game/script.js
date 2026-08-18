@@ -14,6 +14,15 @@ const GameLogic = {
     },
 
     /**
+     * クーポン獲得条件（10本以上完成）を満たしているか判定
+     * @param {number} score 完成した串の本数
+     * @returns {boolean}
+     */
+    isEligibleForCoupon: function(score) {
+        return score >= 10;
+    },
+
+    /**
      * 入力された具材が正しいか判定する
      * @param {Array<string>} currentOrder 現在のオーダー配列
      * @param {Array<string>} currentSkewer 現在刺さっている具材の配列
@@ -62,13 +71,14 @@ if (typeof module !== 'undefined' && module.exports) {
             'pepper': '🫑'
         };
         const availableTypes = Object.keys(emojis);
+        const GAME_DURATION = 20.0; // 制限時間（秒）
         const orderLength = 4; // 1本あたりの具材数
 
         let currentOrder = [];
         let currentSkewer = [];
         let completedSkewers = [];
         let score = 0;
-        let timeLeft = 30.0;
+        let timeLeft = GAME_DURATION;
         let timerInterval;
         let isPlaying = false;
         let orderStartTime = 0;
@@ -192,12 +202,16 @@ if (typeof module !== 'undefined' && module.exports) {
 
         function startActualGame() {
             score = 0;
-            timeLeft = 30.0;
+            timeLeft = GAME_DURATION;
             completedSkewers = [];
             scoreDisplay.textContent = score;
             timeDisplay.textContent = timeLeft.toFixed(1);
             isPlaying = true;
             
+            if (typeof CouponUI !== 'undefined') {
+                CouponUI.hide('coupon-section');
+            }
+
             document.getElementById('completed-skewers-container').classList.add('hidden');
             setupNewOrder();
 
@@ -239,6 +253,19 @@ if (typeof module !== 'undefined' && module.exports) {
             finalScore.classList.remove('hidden');
             resultCount.textContent = score;
             
+            // クーポン獲得セクションの制御（10本以上完成でクーポン表示）
+            if (typeof CouponUI !== 'undefined') {
+                CouponUI.renderResult({
+                    containerId: 'coupon-section',
+                    gameId: 'bbq',
+                    isEligible: GameLogic.isEligibleForCoupon(score),
+                    record: `${score}本`,
+                    conditionHint: '💡 <strong>10本以上</strong>完成させると限定クーポンGET！',
+                    successMsg: '🎉 <strong>10本以上達成！</strong><br>限定クーポンを獲得しました！',
+                    claimedMsg: '🎉 <strong>10本以上達成！お見事！</strong><br><span style="font-size: 12px; color: #777;">※ 本日のクーポンは獲得済みです（1日1回限定）</span>'
+                });
+            }
+
             // 履歴を描画
             const container = document.getElementById('completed-skewers-container');
             const list = document.getElementById('completed-skewers-list');

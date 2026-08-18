@@ -12,6 +12,7 @@ const CouponManager = {
             description: '店頭注文時にこちらの画面をご提示いただくと、バニラアイストッピングを追加、または合計金額から100円引きいたします！',
             codePrefix: 'ACAI',
             icon: '🫐',
+            theme: 'acai',
             image: 'images/acai_ice.png',
             backUrl: '../apps/acai-game/index.html'
         },
@@ -19,10 +20,12 @@ const CouponManager = {
             id: 'watermelon',
             name: 'スイカ割りタイミングゲーム',
             title: 'スイカ割り チャレンジ成功',
-            benefit: 'かき氷無料 または トッピング無料',
-            description: '店頭注文時にこちらの画面をご提示いただくと、かき氷1杯無料、またはトッピングを無料でお付けします！',
+            benefit: 'バニラアイストッピング追加 または 100円引き',
+            description: '店頭注文時にこちらの画面をご提示いただくと、バニラアイストッピングを追加、または合計金額から100円引きいたします！',
             codePrefix: 'SUIKA',
-            image: '',
+            icon: '🍉',
+            theme: 'watermelon',
+            image: 'images/watermelon_coupon.jpg',
             backUrl: '../apps/watermelon-game/index.html'
         },
         'bbq': {
@@ -32,6 +35,8 @@ const CouponManager = {
             benefit: 'BBQ串1本無料 または 100円引き',
             description: '店頭注文時にこちらの画面をご提示いただくと、お好きなBBQ串1本無料、または合計金額から100円引きいたします！',
             codePrefix: 'BBQ',
+            icon: '🍖',
+            theme: 'bbq',
             image: '',
             backUrl: '../apps/bbq-game/index.html'
         }
