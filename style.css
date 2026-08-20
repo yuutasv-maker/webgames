@@ -123,3 +123,63 @@ header p {
     header h1 { font-size: 28px; }
     .game-grid { gap: 16px; }
 }
+
+/* 今週のゲーム強調バッジ */
+.card-badge {
+    display: none;
+    position: absolute;
+    top: -12px;
+    right: 16px;
+    background: linear-gradient(135deg, #ff4757, #ff6b81);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 900;
+    padding: 6px 14px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(255, 71, 87, 0.4);
+    letter-spacing: 0.5px;
+}
+
+.game-card {
+    position: relative;
+}
+
+.game-card.is-featured {
+    border: 2px solid #ff4757;
+    box-shadow: 0 16px 36px rgba(255, 71, 87, 0.2);
+}
+
+.game-card.is-featured .card-badge {
+    display: block;
+    animation: bounceBadge 2s infinite ease-in-out;
+}
+
+@keyframes bounceBadge {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+}
+
+/* リダイレクト通知エリア */
+.redirect-notice {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 16px;
+    padding: 16px 24px;
+    margin-bottom: 24px;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(0, 100, 150, 0.1);
+    border: 1px solid rgba(2, 119, 189, 0.2);
+}
+
+.redirect-notice p {
+    font-size: 15px;
+    color: #0277bd;
+    margin-bottom: 6px;
+}
+
+.redirect-manual-link {
+    font-size: 13px;
+    color: #e65100;
+    font-weight: 700;
+    text-decoration: underline;
+}
+

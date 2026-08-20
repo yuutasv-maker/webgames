@@ -6,10 +6,40 @@
     <title>海の家 ミニゲームコレクション</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
+    <!-- 運用設定ファイル: 今週のゲーム設定を読み込み -->
+    <script src="config.js"></script>
+    <script>
+        // 即時リダイレクト（レンダリング前の最速遷移）
+        (function() {
+            try {
+                if (typeof resolveActiveGame === 'function') {
+                    var target = resolveActiveGame();
+                    if (target && target.redirectUrl && !target.isPortal) {
+                        window.location.replace(target.redirectUrl);
+                    }
+                }
+            } catch (e) {
+                console.error('Redirect check error:', e);
+            }
+        })();
+    </script>
 </head>
 <body>
     <div class="page-bg"></div>
     <div class="container">
+        <!-- リダイレクト遷移中およびフォールバック用の案内表示 -->
+        <div id="redirect-notice" class="redirect-notice" style="display: none;">
+            <p>🏖️ <strong id="redirect-target-name">今週のゲーム</strong> へ移動中...</p>
+            <p><a id="redirect-target-link" href="apps/watermelon-game/index.html" class="redirect-manual-link">自動で移動しない場合はこちらをクリック</a></p>
+        </div>
+
+        <noscript>
+            <div class="redirect-notice" style="display: block;">
+                <p>🏖️ JavaScriptが無効です。以下のリンクから今週のゲームをプレイしてください：</p>
+                <p><a href="apps/watermelon-game/index.html" class="redirect-manual-link">スイカ割りタイミングゲームを遊ぶ</a></p>
+            </div>
+        </noscript>
+
         <header>
             <h1>海の家<br>ミニゲームコレクション 🏖️</h1>
             <p>友人と一緒に楽しめる、ブラウザですぐに遊べるカジュアルゲーム！</p>
@@ -17,7 +47,8 @@
 
         <div class="game-grid">
             <!-- ゲーム1 -->
-            <a href="apps/watermelon-game/index.html" class="game-card">
+            <a href="apps/watermelon-game/index.html" class="game-card" data-game-id="watermelon">
+                <div class="card-badge">今週のゲーム！</div>
                 <div class="card-icon" style="background: linear-gradient(135deg, #ff8b94, #ffaaa5);">🍉</div>
                 <div class="card-content">
                     <h2>スイカ割りタイミングゲーム</h2>
@@ -26,7 +57,8 @@
             </a>
 
             <!-- ゲーム2 -->
-            <a href="apps/bbq-game/index.html" class="game-card">
+            <a href="apps/bbq-game/index.html" class="game-card" data-game-id="bbq">
+                <div class="card-badge">今週のゲーム！</div>
                 <div class="card-icon" style="background: linear-gradient(135deg, #ff9a9e, #fecfef);">🍖</div>
                 <div class="card-content">
                     <h2>爆速BBQ串メーカー</h2>
@@ -35,7 +67,8 @@
             </a>
 
             <!-- ゲーム3 -->
-            <a href="apps/acai-game/index.html" class="game-card">
+            <a href="apps/acai-game/index.html" class="game-card" data-game-id="acai">
+                <div class="card-badge">今週のゲーム！</div>
                 <div class="card-icon" style="background: linear-gradient(135deg, #a18cd1, #fbc2eb);">🫐</div>
                 <div class="card-content">
                     <h2>映えアサイー職人</h2>
@@ -44,5 +77,34 @@
             </a>
         </div>
     </div>
+
+    <script>
+        // ポータル表示モード時のアクティブゲーム強調とフォールバックUIの初期化
+        (function() {
+            try {
+                if (typeof resolveActiveGame === 'function') {
+                    var target = resolveActiveGame();
+                    if (target && target.key) {
+                        var card = document.querySelector('.game-card[data-game-id="' + target.key + '"]');
+                        if (card) {
+                            card.classList.add('is-featured');
+                        }
+                    }
+                    if (target && target.redirectUrl && !target.isPortal) {
+                        var notice = document.getElementById('redirect-notice');
+                        var nameEl = document.getElementById('redirect-target-name');
+                        var linkEl = document.getElementById('redirect-target-link');
+                        if (notice && nameEl && linkEl) {
+                            nameEl.textContent = target.game ? target.game.name : '今週のゲーム';
+                            linkEl.href = target.redirectUrl;
+                            notice.style.display = 'block';
+                        }
+                    }
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        })();
+    </script>
 </body>
 </html>
