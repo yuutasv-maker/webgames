@@ -3,10 +3,17 @@ const { GAME_CONFIG, resolveActiveGame } = require('./config.js');
 
 try {
     // 1. デフォルト設定（activeGame: 'watermelon'）のテスト
-    const resDefault = resolveActiveGame(GAME_CONFIG, '');
+    const configWatermelon = { ...GAME_CONFIG, activeGame: 'watermelon' };
+    const resDefault = resolveActiveGame(configWatermelon, '');
     assert.strictEqual(resDefault.key, 'watermelon');
     assert.strictEqual(resDefault.redirectUrl, 'apps/watermelon-game/index.html');
     assert.strictEqual(resDefault.isPortal, false);
+
+    // 1-b. 現在の GAME_CONFIG の解決テスト
+    const resCurrent = resolveActiveGame(GAME_CONFIG, '');
+    const expectedKey = GAME_CONFIG.activeGame || GAME_CONFIG.defaultGame;
+    assert.strictEqual(resCurrent.key, expectedKey);
+    assert.strictEqual(resCurrent.redirectUrl, `apps/${expectedKey}-game/index.html`);
 
     // 2. activeGame による手動切り替え（'bbq', 'acai'）のテスト
     const configBbq = { ...GAME_CONFIG, activeGame: 'bbq' };
