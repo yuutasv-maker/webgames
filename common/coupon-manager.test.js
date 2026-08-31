@@ -79,6 +79,7 @@ try {
     assert.strictEqual(bbqConfig.codePrefix, 'BBQ');
     assert.strictEqual(bbqConfig.theme, 'bbq');
     assert.strictEqual(bbqConfig.icon, '🍖');
+    assert.strictEqual(bbqConfig.benefit, 'バニラアイストッピング追加 または 100円引き');
     assert.strictEqual(bbqConfig.image, 'images/bbq_coupon.jpg');
 
     const unknownConfig = CouponManager.getGameConfig('unknown');
