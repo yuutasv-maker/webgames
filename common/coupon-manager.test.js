@@ -74,6 +74,13 @@ try {
     assert.strictEqual(suikaConfig.benefit, 'バニラアイストッピング追加 または 100円引き');
     assert.strictEqual(suikaConfig.image, 'images/watermelon_coupon.jpg');
 
+    const bbqConfig = CouponManager.getGameConfig('bbq');
+    assert.strictEqual(bbqConfig.name, '爆速BBQ串メーカー');
+    assert.strictEqual(bbqConfig.codePrefix, 'BBQ');
+    assert.strictEqual(bbqConfig.theme, 'bbq');
+    assert.strictEqual(bbqConfig.icon, '🍖');
+    assert.strictEqual(bbqConfig.image, 'images/bbq_coupon.jpg');
+
     const unknownConfig = CouponManager.getGameConfig('unknown');
     assert.strictEqual(unknownConfig.codePrefix, 'GIFT');
 
