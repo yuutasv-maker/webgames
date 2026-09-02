@@ -69,31 +69,27 @@ const GameLogic = {
     },
 
     /**
-     * クーポン獲得条件（10問全問クリア かつ 所要時間12.0秒以内）
-     * @param {number} clearedRounds 正解数
+     * クーポン獲得条件（3回正解クリアでOK）
+     * @param {number} clearedCount 正解数
      * @param {number} totalTime かかった合計秒数
-     * @param {number} maxRounds 目標クリア数（デフォルト10）
-     * @param {number} targetTime 基準タイム（デフォルト12.0秒）
+     * @param {number} targetClears 目標クリア数（デフォルト3）
      * @returns {boolean}
      */
-    isEligibleForCoupon: function(clearedRounds, totalTime, maxRounds = 10, targetTime = 12.0) {
-        return clearedRounds >= maxRounds && typeof totalTime === 'number' && totalTime > 0 && totalTime <= targetTime;
+    isEligibleForCoupon: function(clearedCount, totalTime, targetClears = 3) {
+        return clearedCount >= targetClears && typeof totalTime === 'number' && totalTime > 0;
     },
 
     /**
      * ランク判定
      */
-    getRank: function(clearedRounds, totalTime, maxRounds = 10) {
-        if (clearedRounds < maxRounds) {
+    getRank: function(clearedCount, totalTime, targetClears = 3) {
+        if (clearedCount < targetClears) {
             return { rank: 'C', title: '😅 脳がバグった見習い', eligible: false };
         }
-        if (totalTime <= 7.5) {
+        if (totalTime <= 4.5) {
             return { rank: 'S', title: '👑 神速のじゃんけんマスター', eligible: true };
         }
-        if (totalTime <= 12.0) {
-            return { rank: 'A', title: '🌟 脳バグ克服！合格！', eligible: true };
-        }
-        return { rank: 'B', title: '👏 一人前じゃんけん師', eligible: false };
+        return { rank: 'A', title: '🌟 脳バグ克服！合格！', eligible: true };
     }
 };
 
@@ -103,8 +99,9 @@ if (typeof module !== 'undefined' && module.exports) {
 } else {
     // ブラウザ環境
     document.addEventListener('DOMContentLoaded', () => {
-        const TOTAL_ROUNDS = 10;
-        const ROUND_TIME_SEC = 1.5; // 1問あたりの制限時間（秒）
+        // ユーザー要望により「3回クリアでOK」に変更
+        const TARGET_CLEARS = 3;
+        const ROUND_TIME_SEC = 3.0;
         const MAX_LIVES = 3;
 
         // DOM要素
@@ -213,13 +210,16 @@ if (typeof module !== 'undefined' && module.exports) {
         }
 
         function nextQuestion() {
-            if (lives <= 0 || currentRound >= TOTAL_ROUNDS) {
-                endGame(lives > 0 && currentRound >= TOTAL_ROUNDS);
+            if (clearedCount >= TARGET_CLEARS) {
+                endGame(true);
+                return;
+            }
+            if (lives <= 0) {
+                endGame(false);
                 return;
             }
 
-            currentRound++;
-            currentRoundEl.textContent = `${currentRound}/${TOTAL_ROUNDS}`;
+            currentRoundEl.textContent = `${clearedCount}/${TARGET_CLEARS}`;
             currentQuestion = GameLogic.generateQuestion(currentQuestion ? currentQuestion.opponentHand : null);
             renderQuestion(currentQuestion);
 
@@ -263,7 +263,15 @@ if (typeof module !== 'undefined' && module.exports) {
 
             if (isCorrect) {
                 clearedCount++;
+                currentRoundEl.textContent = `${clearedCount}/${TARGET_CLEARS}`;
                 Sound.playSuccess();
+
+                if (clearedCount >= TARGET_CLEARS) {
+                    showFeedback('CLEAR! 🎉', true);
+                    setTimeout(() => endGame(true), 250);
+                    return;
+                }
+
                 showFeedback('NICE! ✨', true);
                 setTimeout(nextQuestion, 200);
             } else {
@@ -274,7 +282,11 @@ if (typeof module !== 'undefined' && module.exports) {
                 document.querySelector('.game-stage').classList.add('shake');
                 setTimeout(() => {
                     document.querySelector('.game-stage').classList.remove('shake');
-                    nextQuestion();
+                    if (lives <= 0) {
+                        endGame(false);
+                    } else {
+                        nextQuestion();
+                    }
                 }, 400);
             }
         }
@@ -291,7 +303,11 @@ if (typeof module !== 'undefined' && module.exports) {
             document.querySelector('.game-stage').classList.add('shake');
             setTimeout(() => {
                 document.querySelector('.game-stage').classList.remove('shake');
-                nextQuestion();
+                if (lives <= 0) {
+                    endGame(false);
+                } else {
+                    nextQuestion();
+                }
             }, 400);
         }
 
@@ -328,6 +344,7 @@ if (typeof module !== 'undefined' && module.exports) {
             lives = MAX_LIVES;
             isPlaying = true;
             updateLivesDisplay();
+            currentRoundEl.textContent = `0/${TARGET_CLEARS}`;
             timeDisplayEl.textContent = '0.0s';
             gameStartTime = Date.now();
 
@@ -355,7 +372,7 @@ if (typeof module !== 'undefined' && module.exports) {
             setButtonsEnabled(false);
 
             const totalTime = parseFloat(((Date.now() - gameStartTime) / 1000).toFixed(2));
-            const rank = GameLogic.getRank(clearedCount, totalTime, TOTAL_ROUNDS);
+            const rank = GameLogic.getRank(clearedCount, totalTime, TARGET_CLEARS);
 
             // 1. TIME UP / FINISH 全画面演出で連打抜け・誤タップを即時遮断
             countdownOverlay.classList.add('time-up');
@@ -371,23 +388,23 @@ if (typeof module !== 'undefined' && module.exports) {
 
                 modalTitle.textContent = isClear ? rank.title : "GAME OVER 💦";
                 modalDesc.textContent = isClear
-                    ? `10問全問クリア達成！クリアタイム: ${totalTime}秒`
-                    : `正解数: ${clearedCount}/${TOTAL_ROUNDS}問（タイム: ${totalTime}秒）`;
+                    ? `見事3回クリア達成！クリアタイム: ${totalTime}秒`
+                    : `クリア数: ${clearedCount}/${TARGET_CLEARS}回（タイム: ${totalTime}秒）`;
 
                 finalScore.classList.remove('hidden');
-                resultCleared.textContent = `${clearedCount}/${TOTAL_ROUNDS}`;
+                resultCleared.textContent = `${clearedCount}/${TARGET_CLEARS}`;
                 resultTime.textContent = `${totalTime}s`;
 
-                // クーポン判定 & 表示
+                // クーポン判定 & 表示（3回クリアでOK）
                 if (typeof CouponUI !== 'undefined') {
                     CouponUI.renderResult({
                         containerId: 'coupon-section',
                         gameId: 'janken',
-                        isEligible: GameLogic.isEligibleForCoupon(clearedCount, totalTime, TOTAL_ROUNDS, 12.0),
+                        isEligible: GameLogic.isEligibleForCoupon(clearedCount, totalTime, TARGET_CLEARS),
                         time: `${totalTime}秒`,
-                        record: `${clearedCount}問正解`,
-                        conditionHint: '💡 <strong>10問全問正解 & 12秒以内</strong>で限定クーポンGET！',
-                        successMsg: `🎉 <strong>12秒以内全問クリア達成！（${totalTime}秒）</strong><br>限定クーポンを獲得しました！`,
+                        record: `${clearedCount}回クリア`,
+                        conditionHint: '💡 <strong>3回クリア</strong>で限定クーポンGET！',
+                        successMsg: `🎉 <strong>3回クリア達成！（${totalTime}秒）</strong><br>限定クーポンを獲得しました！`,
                         claimedMsg: `🎉 <strong>見事クリア！（${totalTime}秒）</strong><br><span style="font-size: 12px; color: #777;">※ 本日のクーポンは獲得済みです（1日1回限定）</span>`
                     });
                 }
