@@ -65,6 +65,18 @@ const CouponManager = {
             theme: 'frankfurt',
             image: 'images/frankfurt_coupon.jpg',
             backUrl: '../apps/frankfurt-game/index.html'
+        },
+        'janken': {
+            id: 'janken',
+            name: '脳バグ！後出しじゃんけん',
+            title: '脳バグ！後出しじゃんけん チャレンジ成功',
+            benefit: 'バニラアイストッピング追加 または 100円引き',
+            description: '店頭注文時にこちらの画面をご提示いただくと、バニラアイストッピングを追加、または合計金額から100円引きいたします！',
+            codePrefix: 'JANKEN',
+            icon: '✌️',
+            theme: 'janken',
+            image: 'images/watermelon_coupon.jpg',
+            backUrl: '../apps/janken-game/index.html'
         }
     },
 

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>脳バグ！後出しじゃんけん</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%2250%%22 y=%2250%%22 style=%22dominant-baseline:central;text-anchor:middle;font-size:90px;%22>✌️</text></svg>">
+    <link rel="stylesheet" href="../../common/coupon.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Zen+Maru+Gothic:wght@700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+        <!-- ヘッダー情報（ラウンド・ライフ・タイム） -->
+        <header>
+            <div class="stats">
+                <div class="stat-box round-box">ROUND <span id="current-round">1/10</span></div>
+                <div class="stat-box lives-box" id="lives-display">❤️❤️❤️</div>
+                <div class="stat-box time-box">TIME <span id="time-display">0.0s</span></div>
+            </div>
+            <h1>Brain Janken Rush!</h1>
+            <!-- 1問あたりの残り時間プログレスバー -->
+            <div class="timer-bar-container">
+                <div id="timer-progress" class="timer-progress"></div>
+            </div>
+        </header>
+
+        <!-- じゃんけん対戦ステージ -->
+        <div class="game-stage">
+            <div class="opponent-section">
+                <div class="opponent-name">🏖️ 海の家マスター</div>
+                <div id="opponent-hand" class="opponent-hand">✊</div>
+            </div>
+
+            <!-- 指示バッジ -->
+            <div id="instruction-badge" class="instruction-badge">
+                <span id="instruction-text">勝て！</span>
+            </div>
+
+            <!-- 正解・不正解のポップ演出 -->
+            <div id="feedback-overlay" class="feedback-overlay hidden">NICE! ✨</div>
+        </div>
+
+        <!-- プレイヤー手札ボタンエリア -->
+        <div class="player-controls">
+            <button class="hand-btn" data-hand="rock" aria-label="グー">
+                <span class="hand-icon">✊</span>
+                <span class="hand-label">グー</span>
+            </button>
+            <button class="hand-btn" data-hand="scissors" aria-label="チョキ">
+                <span class="hand-icon">✌️</span>
+                <span class="hand-label">チョキ</span>
+            </button>
+            <button class="hand-btn" data-hand="paper" aria-label="パー">
+                <span class="hand-icon">🖐️</span>
+                <span class="hand-label">パー</span>
+            </button>
+        </div>
+
+        <!-- カウントダウン・タイムアップ用オーバーレイ -->
+        <div id="countdown-overlay" class="countdown-overlay hidden">
+            <div id="countdown-text">3</div>
+        </div>
+
+        <!-- スタート＆結果表示モーダル -->
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <h2 id="modal-title">脳バグ！後出しじゃんけん</h2>
+                <p id="modal-desc">
+                    相手の手と指示（勝て・負けろ・あいこ）を瞬時に判断！<br>
+                    10問全問正解＆12秒以内でクーポンGET！
+                </p>
+                <div id="final-score" class="final-score hidden">
+                    <div class="score-row">正解: <span id="result-cleared" class="highlight">0/10</span></div>
+                    <div class="score-row">タイム: <span id="result-time" class="highlight">0.0s</span></div>
+                </div>
+
+                <!-- クーポン獲得セクション -->
+                <div id="coupon-section" class="coupon-section hidden">
+                    <p id="coupon-msg" class="coupon-msg"></p>
+                    <a id="coupon-btn" href="../../common/coupon.html?game=janken" class="coupon-btn hidden">🎫 クーポンを受け取る</a>
+                </div>
+
+                <button id="start-btn" class="action-btn">ゲームスタート</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 共通クーポンマネージャーおよびゲームスクリプト -->
+    <script src="../../common/coupon-manager.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

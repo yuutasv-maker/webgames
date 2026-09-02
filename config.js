@@ -28,7 +28,8 @@ const GAME_CONFIG = {
             'acai-tower',  // 9/1  (Day 1)
             'bbq',         // 9/2  (Day 2)
             'watermelon',  // 9/3  (Day 3)
-            'frankfurt'    // 9/4  (Day 4)
+            'frankfurt',   // 9/4  (Day 4)
+            'janken'       // 9/5  (Day 5)
         ]
     },
 
@@ -76,6 +77,13 @@ const GAME_CONFIG = {
             icon: '🌭',
             path: 'apps/frankfurt-game/index.html',
             description: '合図が出たら素早くタップ！ライバルから最後の一本を奪い取れ！'
+        },
+        'janken': {
+            id: 'janken',
+            name: '脳バグ！後出しじゃんけん',
+            icon: '✌️',
+            path: 'apps/janken-game/index.html',
+            description: '相手の手と指示（勝て・負けろ・あいこ）を瞬時に判断してタップする脳トレ勝負！'
         }
     },
 

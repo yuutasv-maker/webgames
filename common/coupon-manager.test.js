@@ -97,6 +97,12 @@ try {
     assert.strictEqual(frankfurtConfig.image, 'images/frankfurt_coupon.jpg');
     assert.strictEqual(frankfurtConfig.backUrl, '../apps/frankfurt-game/index.html');
 
+    const jankenConfig = CouponManager.getGameConfig('janken');
+    assert.strictEqual(jankenConfig.name, '脳バグ！後出しじゃんけん');
+    assert.strictEqual(jankenConfig.codePrefix, 'JANKEN');
+    assert.strictEqual(jankenConfig.icon, '✌️');
+    assert.strictEqual(jankenConfig.benefit, 'バニラアイストッピング追加 または 100円引き');
+
     const unknownConfig = CouponManager.getGameConfig('unknown');
     assert.strictEqual(unknownConfig.codePrefix, 'GIFT');
 

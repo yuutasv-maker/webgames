@@ -35,6 +35,11 @@ try {
     assert.strictEqual(resFrankfurt.key, 'frankfurt');
     assert.strictEqual(resFrankfurt.redirectUrl, 'apps/frankfurt-game/index.html');
 
+    const configJanken = { ...GAME_CONFIG, activeGame: 'janken' };
+    const resJanken = resolveActiveGame(configJanken, '');
+    assert.strictEqual(resJanken.key, 'janken');
+    assert.strictEqual(resJanken.redirectUrl, 'apps/janken-game/index.html');
+
     // 3. activeGame: 'portal' の場合は一覧表示
     const configPortal = { ...GAME_CONFIG, activeGame: 'portal' };
     const resPortal = resolveActiveGame(configPortal, '');
@@ -55,7 +60,7 @@ try {
     assert.strictEqual(resParamOverride.key, 'bbq');
     assert.strictEqual(resParamOverride.redirectUrl, 'apps/bbq-game/index.html');
 
-    // 6. 日替わりローテーション（activeGame: 'daily'）の5日周期テスト
+    // 6. 日替わりローテーション（activeGame: 'daily'）の6日周期テスト
     // 8/31 (Day 0) -> acai
     const res831 = resolveActiveGame(GAME_CONFIG, '', new Date('2026-08-31T09:00:00+09:00'));
     assert.strictEqual(res831.key, 'acai');
@@ -76,9 +81,13 @@ try {
     const res904 = resolveActiveGame(GAME_CONFIG, '', new Date('2026-09-04T12:00:00+09:00'));
     assert.strictEqual(res904.key, 'frankfurt');
 
-    // 9/5 (Day 5) -> 循環して acai (Day 0)
+    // 9/5 (Day 5) -> janken
     const res905 = resolveActiveGame(GAME_CONFIG, '', new Date('2026-09-05T12:00:00+09:00'));
-    assert.strictEqual(res905.key, 'acai');
+    assert.strictEqual(res905.key, 'janken');
+
+    // 9/6 (Day 6) -> 循環して acai (Day 0)
+    const res906 = resolveActiveGame(GAME_CONFIG, '', new Date('2026-09-06T12:00:00+09:00'));
+    assert.strictEqual(res906.key, 'acai');
 
     // 7. ゲーム数変更（動的周期）のテスト: 3ゲームの場合（3日周期）
     const config3Games = {
