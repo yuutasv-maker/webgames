@@ -16,19 +16,30 @@
 一瞬だけ表示されるお手本を記憶して、完璧なアサイーボウルを再現するゲームです。
 - **特徴:** 瞬間記憶力と正確な配置能力を試す記憶ゲーム。
 
+### 4. 30秒アサイータワー・スタック (`apps/acai-tower/`)
+カップをスライドしてフルーツをキャッチ！30秒で豪華な映えタワーを積み上げるゲームです。
+- **特徴:** バランスとキャッチ精度のカジュアルアクション。
+
+### 5. 最後の一本フランクフルト (`apps/frankfurt-game/`)
+星のカービィ「刹那の見斬り」風の8bitレトロ瞬間反射神経ゲーム！合図の瞬間にタップして最後の一本を奪え！
+- **特徴:** 0.1秒を争う極限の瞬間反射神経バトル。
+
 ## 📁 ディレクトリ構成
 
 ```text
 uminoie/
 └── webgames/
     ├── index.html        # エントリーポイント / ポータル画面（自動リダイレクト機能付き）
-    ├── config.js         # 今週のゲーム・運用スケジュール設定
+    ├── portal.html       # ゲーム一覧ポータル
+    ├── config.js         # 今日のゲーム・運用スケジュール設定
     ├── config.test.js    # 設定・リダイレクト判定テスト
     ├── style.css         # ポータル画面用スタイルシート
     ├── common/           # 共通コンポーネント（クーポンマネージャー等）
     └── apps/             # 各ミニゲームのディレクトリ
-        ├── acai-game/    # 映えアサイー職人
-        ├── bbq-game/     # 爆速BBQ串メーカー
+        ├── acai-game/       # 映えアサイー職人
+        ├── acai-tower/      # 30秒アサイータワー・スタック
+        ├── bbq-game/        # 爆速BBQ串メーカー
+        ├── frankfurt-game/  # 最後の一本フランクフルト
         └── watermelon-game/ # スイカ割りタイミングゲーム
 ```
 
@@ -89,5 +100,7 @@ node webgames/common/coupon-manager.test.js
 node webgames/apps/watermelon-game/script.test.js
 node webgames/apps/bbq-game/script.test.js
 node webgames/apps/acai-game/script.test.js
+node webgames/apps/acai-tower/script.test.js
+node webgames/apps/frankfurt-game/script.test.js
 ```
 

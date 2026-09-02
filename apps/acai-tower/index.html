@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>30秒アサイータワー・スタック 🫐｜GoGoUmi paradise</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%2250%%22 y=%2250%%22 style=%22dominant-baseline:central;text-anchor:middle;font-size:90px;%22>🫐</text></svg>">
+    <link rel="stylesheet" href="../../common/coupon.css">
+    <link rel="stylesheet" href="style.css?v=20">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-wrapper">
+        <!-- ヘッダー（タイトル・戻るリンク） -->
+        <header class="game-header">
+            <a href="../../portal.html" class="back-link">◀ ゲーム一覧へ</a>
+            <h1>アサイータワー・スタック 🫐</h1>
+        </header>
+
+        <!-- メインゲームエリア -->
+        <div class="canvas-container">
+            <!-- 上部ステータスバー（タイマー＆スコア） -->
+            <div class="status-bar">
+                <div class="timer-box">
+                    <span class="status-label">TIME</span>
+                    <div class="time-bar-bg">
+                        <div id="time-bar-fill" class="time-bar-fill"></div>
+                    </div>
+                    <span id="time-text" class="time-text">30s</span>
+                </div>
+                <div class="score-box">
+                    <span class="status-label">SCORE</span>
+                    <span id="score-text" class="score-val">0</span>
+                </div>
+            </div>
+
+            <!-- 推奨レシピオーダーバー -->
+            <div class="order-bar-container">
+                <div class="target-order-bar">
+                    <span class="order-label">📋 推奨レシピ:</span>
+                    <div id="order-items-list" class="order-items-list"></div>
+                    <span class="order-bonus-tag">+1,200pt</span>
+                </div>
+            </div>
+
+            <!-- コンボ & フィーバーバッジ -->
+            <div class="badge-layer">
+                <div id="combo-badge" class="badge-combo hidden">0 COMBO</div>
+                <div id="fever-badge" class="badge-fever hidden">🍯 FEVER!</div>
+            </div>
+
+            <!-- ゲーム描画用Canvas -->
+            <canvas id="game-canvas"></canvas>
+
+            <!-- スタート前オーバーレイ -->
+            <div id="start-screen" class="overlay-screen">
+                <div class="start-card">
+                    <div class="start-icon">🫐 🍓 🍌</div>
+                    <h2>30秒アサイータワー</h2>
+                    <p class="start-desc">カップを指でスライドしてフルーツをキャッチ！<br>30秒で豪華な映えタワーを作ろう！</p>
+                    
+                    <div class="rule-chips">
+                        <span class="chip">👉 <strong>カップをスライドしてキャッチ（5段で完成！）</strong></span>
+                        <span class="chip chip-special">📋 <strong>推奨レシピ達成で +1,200pt！</strong></span>
+                        <span class="chip chip-special">🌈 全部別 or 🍓 全部同じで <strong>+800pt！</strong></span>
+                        <span class="chip chip-gold">🍯 ハニーでフィーバー突入</span>
+                        <span class="chip chip-warn">🦀 カニに注意！（崩れる）</span>
+                    </div>
+
+                    <div class="coupon-hint">
+                        <strong>🌟 Aランク（10,000点）以上</strong> 達成で<br>
+                        「アサイーボウル トッピング無料券」プレゼント！
+                    </div>
+
+                    <button id="start-btn" class="action-btn">ゲームスタート！</button>
+                </div>
+            </div>
+
+            <!-- カウントダウンオーバーレイ -->
+            <div id="countdown-overlay" class="countdown-overlay hidden">
+                <div id="countdown-number" class="countdown-num">3</div>
+            </div>
+
+            <!-- 結果発表モーダル -->
+            <div id="result-modal" class="modal hidden">
+                <div class="modal-card">
+                    <div class="modal-header">
+                        <span id="result-rank-badge" class="rank-badge">RANK A</span>
+                        <h2 id="result-rank-title">🌟 プロアサイー職人</h2>
+                    </div>
+
+                    <div class="score-summary">
+                        <div class="summary-item">
+                            <span class="item-label">最終スコア</span>
+                            <span id="result-score" class="item-value score-highlight">0</span>
+                        </div>
+                        <div class="summary-sub-grid">
+                            <div class="summary-sub-item">
+                                <span class="item-label">完成杯数</span>
+                                <span id="result-bowls-count" class="item-value">0 杯</span>
+                            </div>
+                            <div class="summary-sub-item">
+                                <span class="item-label">最大コンボ</span>
+                                <span id="result-max-combo" class="item-value">0 COMBO</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- クーポン獲得セクション -->
+                    <div id="coupon-section" class="coupon-section hidden">
+                        <p id="coupon-msg" class="coupon-msg"></p>
+                        <a id="coupon-btn" href="#" class="coupon-btn hidden">🎫 クーポンを受け取る</a>
+                    </div>
+
+                    <div class="modal-actions">
+                        <button id="retry-btn" class="action-btn retry-btn">もう一度挑戦</button>
+                        <button id="share-btn" class="action-btn share-btn">𝕏 で結果をシェア</button>
+                        <a href="../../portal.html" class="action-btn home-btn">🎮 ゲーム一覧へ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="game-footer">
+            <p>© GoGoUmi paradise（愛媛県松山市・興居島）</p>
+        </footer>
+    </div>
+
+    <script src="../../common/coupon-manager.js"></script>
+    <script src="script.js?v=20"></script>
+</body>
+</html>

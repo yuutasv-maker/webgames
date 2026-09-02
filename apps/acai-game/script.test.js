@@ -26,10 +26,17 @@ try {
     // Test: isEligibleForCoupon (7秒以内かつ全問正解)
     assert.strictEqual(GameLogic.isEligibleForCoupon(4, 5.0), true, '4 points in 5.0s is eligible');
     assert.strictEqual(GameLogic.isEligibleForCoupon(4, 7.0), true, '4 points in 7.0s is eligible');
+    assert.strictEqual(GameLogic.isEligibleForCoupon(4, 7.001), false, '4 points in 7.001s is not eligible');
     assert.strictEqual(GameLogic.isEligibleForCoupon(4, 7.01), false, '4 points in 7.01s is not eligible');
     assert.strictEqual(GameLogic.isEligibleForCoupon(4, 10.0), false, '4 points in 10.0s is not eligible');
     assert.strictEqual(GameLogic.isEligibleForCoupon(3, 5.0), false, '3 points in 5.0s is not eligible');
     assert.strictEqual(GameLogic.isEligibleForCoupon(0, 3.0), false, '0 points in 3.0s is not eligible');
+    assert.strictEqual(GameLogic.isEligibleForCoupon(4, -1), false, 'Negative time is not eligible');
+    assert.strictEqual(GameLogic.isEligibleForCoupon(5, 5.0), false, 'Score other than 4 is not eligible');
+
+    // Test: calculateScore with empty or mismatched arrays
+    assert.strictEqual(GameLogic.calculateScore([], []), 0);
+    assert.strictEqual(GameLogic.calculateScore(['strawberry'], []), 0);
 
     // Test: getTodayDateString
     const fixedDate = new Date(2026, 7, 17); // 2026-08-17 (Month is 0-indexed: 7 is August)

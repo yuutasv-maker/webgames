@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>最後の一本フランクフルト｜GoGoUmi paradise</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><rect x=%221%22 y=%2213%22 width=%222%22 height=%222%22 fill=%22%23b45309%22/><rect x=%222%22 y=%2212%22 width=%222%22 height=%222%22 fill=%22%23d97706%22/><rect x=%223%22 y=%2211%22 width=%222%22 height=%222%22 fill=%22%23f59e0b%22/><rect x=%223%22 y=%226%22 width=%228%22 height=%226%22 rx=%222%22 fill=%22%23991b1b%22/><rect x=%225%22 y=%224%22 width=%228%22 height=%226%22 rx=%222%22 fill=%22%23991b1b%22/><rect x=%224%22 y=%226%22 width=%227%22 height=%225%22 fill=%22%23dc2626%22/><rect x=%225%22 y=%225%22 width=%227%22 height=%225%22 fill=%22%23ef4444%22/><rect x=%225%22 y=%228%22 width=%221%22 height=%222%22 fill=%22%237f1d1d%22/><rect x=%228%22 y=%226%22 width=%221%22 height=%222%22 fill=%22%237f1d1d%22/><rect x=%2210%22 y=%225%22 width=%221%22 height=%222%22 fill=%22%237f1d1d%22/><rect x=%226%22 y=%227%22 width=%222%22 height=%221%22 fill=%22%23facc15%22/><rect x=%227%22 y=%228%22 width=%222%22 height=%221%22 fill=%22%23facc15%22/><rect x=%229%22 y=%226%22 width=%222%22 height=%221%22 fill=%22%23fde047%22/><rect x=%2212%22 y=%223%22 width=%222%22 height=%222%22 fill=%22%23d97706%22/><rect x=%2213%22 y=%222%22 width=%221%22 height=%221%22 fill=%22%23f59e0b%22/></svg>">
+    <link rel="stylesheet" href="../../common/coupon.css">
+    <link rel="stylesheet" href="style.css?v=2">
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Outfit:wght@700;900&family=Press+Start+2P&family=Zen+Maru+Gothic:wght@700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-wrapper">
+        <!-- ヘッダー（タイトル・戻るリンク） -->
+        <header class="game-header">
+            <a href="../../portal.html" class="back-link">◀ ゲーム一覧へ</a>
+            <h1>最後の一本フランクフルト <svg class="pixel-frank-icon" viewBox="0 0 16 16" width="1em" height="1em" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="13" width="2" height="2" fill="#b45309"/><rect x="2" y="12" width="2" height="2" fill="#d97706"/><rect x="3" y="11" width="2" height="2" fill="#f59e0b"/><rect x="3" y="6" width="8" height="6" rx="2" fill="#991b1b"/><rect x="5" y="4" width="8" height="6" rx="2" fill="#991b1b"/><rect x="4" y="6" width="7" height="5" fill="#dc2626"/><rect x="5" y="5" width="7" height="5" fill="#ef4444"/><rect x="5" y="8" width="1" height="2" fill="#7f1d1d"/><rect x="8" y="6" width="1" height="2" fill="#7f1d1d"/><rect x="10" y="5" width="1" height="2" fill="#7f1d1d"/><rect x="6" y="7" width="2" height="1" fill="#facc15"/><rect x="7" y="8" width="2" height="1" fill="#facc15"/><rect x="9" y="6" width="2" height="1" fill="#fde047"/><rect x="12" y="3" width="2" height="2" fill="#d97706"/><rect x="13" y="2" width="1" height="1" fill="#f59e0b"/></svg></h1>
+        </header>
+
+        <!-- メインゲームエリア -->
+        <div class="canvas-container">
+            <!-- 上部レトロステータスバー -->
+            <div class="status-bar">
+                <div class="round-box">
+                    <span class="status-label">ROUND</span>
+                    <span id="round-text" class="round-val">1/3</span>
+                </div>
+                <div class="rival-box">
+                    <span class="status-label">VS</span>
+                    <span id="rival-name" class="rival-val">腹ペコ店長 👨‍🍳</span>
+                </div>
+                <div class="best-box">
+                    <span class="status-label">BEST</span>
+                    <span id="best-time-text" class="best-val">--- ms</span>
+                </div>
+            </div>
+
+            <!-- 残り挑戦回数アイコンバー -->
+            <div class="attempts-bar">
+                <span class="attempts-label">REMAIN:</span>
+                <div id="attempts-icons" class="attempts-icons">
+                    <span class="attempt-icon active"><svg class="pixel-frank-icon" viewBox="0 0 16 16" width="1em" height="1em" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="13" width="2" height="2" fill="#b45309"/><rect x="2" y="12" width="2" height="2" fill="#d97706"/><rect x="3" y="11" width="2" height="2" fill="#f59e0b"/><rect x="3" y="6" width="8" height="6" rx="2" fill="#991b1b"/><rect x="5" y="4" width="8" height="6" rx="2" fill="#991b1b"/><rect x="4" y="6" width="7" height="5" fill="#dc2626"/><rect x="5" y="5" width="7" height="5" fill="#ef4444"/><rect x="5" y="8" width="1" height="2" fill="#7f1d1d"/><rect x="8" y="6" width="1" height="2" fill="#7f1d1d"/><rect x="10" y="5" width="1" height="2" fill="#7f1d1d"/><rect x="6" y="7" width="2" height="1" fill="#facc15"/><rect x="7" y="8" width="2" height="1" fill="#facc15"/><rect x="9" y="6" width="2" height="1" fill="#fde047"/><rect x="12" y="3" width="2" height="2" fill="#d97706"/><rect x="13" y="2" width="1" height="1" fill="#f59e0b"/></svg></span>
+                    <span class="attempt-icon active"><svg class="pixel-frank-icon" viewBox="0 0 16 16" width="1em" height="1em" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="13" width="2" height="2" fill="#b45309"/><rect x="2" y="12" width="2" height="2" fill="#d97706"/><rect x="3" y="11" width="2" height="2" fill="#f59e0b"/><rect x="3" y="6" width="8" height="6" rx="2" fill="#991b1b"/><rect x="5" y="4" width="8" height="6" rx="2" fill="#991b1b"/><rect x="4" y="6" width="7" height="5" fill="#dc2626"/><rect x="5" y="5" width="7" height="5" fill="#ef4444"/><rect x="5" y="8" width="1" height="2" fill="#7f1d1d"/><rect x="8" y="6" width="1" height="2" fill="#7f1d1d"/><rect x="10" y="5" width="1" height="2" fill="#7f1d1d"/><rect x="6" y="7" width="2" height="1" fill="#facc15"/><rect x="7" y="8" width="2" height="1" fill="#facc15"/><rect x="9" y="6" width="2" height="1" fill="#fde047"/><rect x="12" y="3" width="2" height="2" fill="#d97706"/><rect x="13" y="2" width="1" height="1" fill="#f59e0b"/></svg></span>
+                    <span class="attempt-icon active"><svg class="pixel-frank-icon" viewBox="0 0 16 16" width="1em" height="1em" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="13" width="2" height="2" fill="#b45309"/><rect x="2" y="12" width="2" height="2" fill="#d97706"/><rect x="3" y="11" width="2" height="2" fill="#f59e0b"/><rect x="3" y="6" width="8" height="6" rx="2" fill="#991b1b"/><rect x="5" y="4" width="8" height="6" rx="2" fill="#991b1b"/><rect x="4" y="6" width="7" height="5" fill="#dc2626"/><rect x="5" y="5" width="7" height="5" fill="#ef4444"/><rect x="5" y="8" width="1" height="2" fill="#7f1d1d"/><rect x="8" y="6" width="1" height="2" fill="#7f1d1d"/><rect x="10" y="5" width="1" height="2" fill="#7f1d1d"/><rect x="6" y="7" width="2" height="1" fill="#facc15"/><rect x="7" y="8" width="2" height="1" fill="#facc15"/><rect x="9" y="6" width="2" height="1" fill="#fde047"/><rect x="12" y="3" width="2" height="2" fill="#d97706"/><rect x="13" y="2" width="1" height="1" fill="#f59e0b"/></svg></span>
+                </div>
+            </div>
+
+            <!-- ゲーム描画用Canvas（ピクセルパーフェクト240x360） -->
+            <canvas id="game-canvas" width="240" height="360"></canvas>
+
+            <!-- スタート前オーバーレイ -->
+            <div id="start-screen" class="overlay-screen">
+                <div class="start-card pixel-card">
+                    <div class="start-pixel-icon"><svg class="pixel-frank-icon" viewBox="0 0 16 16" width="1em" height="1em" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="13" width="2" height="2" fill="#b45309"/><rect x="2" y="12" width="2" height="2" fill="#d97706"/><rect x="3" y="11" width="2" height="2" fill="#f59e0b"/><rect x="3" y="6" width="8" height="6" rx="2" fill="#991b1b"/><rect x="5" y="4" width="8" height="6" rx="2" fill="#991b1b"/><rect x="4" y="6" width="7" height="5" fill="#dc2626"/><rect x="5" y="5" width="7" height="5" fill="#ef4444"/><rect x="5" y="8" width="1" height="2" fill="#7f1d1d"/><rect x="8" y="6" width="1" height="2" fill="#7f1d1d"/><rect x="10" y="5" width="1" height="2" fill="#7f1d1d"/><rect x="6" y="7" width="2" height="1" fill="#facc15"/><rect x="7" y="8" width="2" height="1" fill="#facc15"/><rect x="9" y="6" width="2" height="1" fill="#fde047"/><rect x="12" y="3" width="2" height="2" fill="#d97706"/><rect x="13" y="2" width="1" height="1" fill="#f59e0b"/></svg> 🔥</div>
+                    <h2 class="retro-title">最後の一本<br>フランクフルト！</h2>
+                    <p class="start-desc">鉄板に輝く最後の一本…！<br>合図が出たら素早くタップしてライバルから奪い取れ！</p>
+                    
+                    <div class="rule-box pixel-box">
+                        <div class="rule-line">⚡ <strong>「！」</strong>が出た瞬間に画面をタップ！</div>
+                        <div class="rule-line">⚠️ 合図前のタップは<strong>お手つき（火傷）</strong>！</div>
+                        <div class="rule-line">🎯 3回中<strong>1回でもライバルに勝てば</strong>クーポンGET！</div>
+                        <div class="rule-line">👥 ラウンドが進むほど相手がのんびり（易しく）なるぞ！</div>
+                    </div>
+
+                    <div class="coupon-hint-pixel">
+                        🎫 <strong>1勝達成でアイストッピング or 100円引GET！</strong>
+                    </div>
+
+                    <button id="start-btn" class="pixel-btn start-action-btn">
+                        ▶ はじめる (TAP START)
+                    </button>
+                </div>
+            </div>
+
+            <!-- 結果発表モーダル -->
+            <div id="result-modal" class="modal hidden">
+                <div class="modal-content pixel-modal">
+                    <div id="result-rank-badge" class="result-rank-badge">RANK A</div>
+                    <h2 id="result-rank-title" class="result-title">プロの早業！</h2>
+
+                    <div class="score-board pixel-box">
+                        <div class="score-row main-score">
+                            <span class="score-label">BEST TIME:</span>
+                            <span id="result-best-time" class="score-num">248 ms</span>
+                        </div>
+                        <div class="score-divider"></div>
+                        <div class="rounds-history" id="rounds-history-list">
+                            <!-- 各ラウンドの結果リストが動的挿入される -->
+                        </div>
+                    </div>
+
+                    <!-- クーポン獲得セクション -->
+                    <div id="coupon-section" class="coupon-section hidden">
+                        <p id="coupon-msg" class="coupon-msg"></p>
+                        <a id="coupon-btn" href="#" class="coupon-btn hidden">🎫 クーポンを受け取る</a>
+                    </div>
+
+                    <div id="failed-msg" class="failed-msg hidden">
+                        あと少しでクーポン獲得！<br>
+                        3回中1回でもライバルに勝てばGETできるぞ！再挑戦しよう！
+                    </div>
+
+                    <div class="modal-buttons">
+                        <button id="retry-btn" class="pixel-btn retry-btn">🔄 もう一度遊ぶ</button>
+                        <button id="share-btn" class="pixel-btn share-btn">𝕏 結果をポスト</button>
+                    </div>
+
+                    <div class="modal-footer-nav">
+                        <a href="../../portal.html" class="portal-link">🎮 ゲーム一覧へ戻る</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 共通クーポンマネージャー -->
+    <script src="../../common/coupon-manager.js"></script>
+    <script src="script.js?v=1"></script>
+</body>
+</html>

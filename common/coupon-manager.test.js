@@ -66,6 +66,12 @@ try {
     assert.strictEqual(acaiConfig.theme, 'acai');
     assert.strictEqual(acaiConfig.image, 'images/acai_ice.png');
 
+    const acaiTowerConfig = CouponManager.getGameConfig('acai-tower');
+    assert.strictEqual(acaiTowerConfig.name, '30秒アサイータワー・スタック');
+    assert.strictEqual(acaiTowerConfig.codePrefix, 'TOWER');
+    assert.strictEqual(acaiTowerConfig.theme, 'acai');
+    assert.strictEqual(acaiTowerConfig.image, 'images/acai_ice.png');
+
     const suikaConfig = CouponManager.getGameConfig('watermelon');
     assert.strictEqual(suikaConfig.name, 'スイカ割りタイミングゲーム');
     assert.strictEqual(suikaConfig.codePrefix, 'SUIKA');
@@ -82,8 +88,26 @@ try {
     assert.strictEqual(bbqConfig.benefit, 'バニラアイストッピング追加 または 100円引き');
     assert.strictEqual(bbqConfig.image, 'images/bbq_coupon.jpg');
 
+    const frankfurtConfig = CouponManager.getGameConfig('frankfurt');
+    assert.strictEqual(frankfurtConfig.name, '最後の一本フランクフルト');
+    assert.strictEqual(frankfurtConfig.codePrefix, 'FRANK');
+    assert.strictEqual(frankfurtConfig.theme, 'frankfurt');
+    assert.strictEqual(frankfurtConfig.icon, '🌭');
+    assert.strictEqual(frankfurtConfig.benefit, 'バニラアイストッピング追加 または 100円引き');
+    assert.strictEqual(frankfurtConfig.image, 'images/frankfurt_coupon.jpg');
+    assert.strictEqual(frankfurtConfig.backUrl, '../apps/frankfurt-game/index.html');
+
     const unknownConfig = CouponManager.getGameConfig('unknown');
     assert.strictEqual(unknownConfig.codePrefix, 'GIFT');
+
+    // 9. 例外をスローするストレージ（Safariプライベートブラウズやクォータ超過等）のテスト
+    const throwingStorage = {
+        getItem: () => { throw new Error("SecurityError: Access is denied"); },
+        setItem: () => { throw new Error("QuotaExceededError"); }
+    };
+    assert.strictEqual(CouponManager.getClaimedDate('acai', throwingStorage), null, 'Throwing storage should return null without crash');
+    assert.strictEqual(CouponManager.canClaimToday('acai', today, throwingStorage), true, 'Throwing storage can claim by default');
+    assert.strictEqual(CouponManager.claimCoupon('acai', today, throwingStorage), false, 'Throwing storage claim returns false safely');
 
     console.log("CouponManager all tests passed!");
 } catch (e) {

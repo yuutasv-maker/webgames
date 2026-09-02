@@ -6,7 +6,7 @@
     <title>【GoGoUmi Paradise】特別クーポン券</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%2250%%22 y=%2250%%22 style=%22dominant-baseline:central;text-anchor:middle;font-size:90px;%22>🎫</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="coupon.css">
+    <link rel="stylesheet" href="coupon.css?v=2">
 </head>
 <body class="coupon-page-body">
     <div class="coupon-card-container">
@@ -37,11 +37,11 @@
             <li>※ 本クーポンはお1人様1日1回限りのご利用となります。</li>
             <li>※ 他の割引券・キャンペーンとの併用はできません。</li>
             <li>※ 会計時にスタッフへこの画面をお見せください。</li>
-            <li>※ 本券はゲーム達成特典の仮クーポン画面です。</li>
+            <li>※ スクリーンショット等の複製画面ではご利用いただけません。</li>
         </ul>
 
         <div class="coupon-action-group">
-            <a href="../../index.html" id="back-game-btn" class="page-btn page-btn-primary">🎮 もう一度遊ぶ</a>
+            <a href="../portal.html" id="back-game-btn" class="page-btn page-btn-primary">🎮 もう一度遊ぶ</a>
         </div>
     </div>
 
@@ -67,9 +67,17 @@
             // クリアタイム/達成記録の反映
             const clearTime = params.get('time');
             const clearRecord = params.get('record');
+            const scoreParam = params.get('score');
+            const rankParam = params.get('rank');
             const recordEl = document.getElementById('record-display');
 
-            if (clearTime) {
+            if (scoreParam && rankParam) {
+                recordEl.textContent = `🏆 スコア: ${Number(scoreParam).toLocaleString()}点 (RANK ${rankParam})`;
+                recordEl.classList.remove('hidden');
+            } else if (scoreParam) {
+                recordEl.textContent = `🏆 スコア: ${Number(scoreParam).toLocaleString()}点`;
+                recordEl.classList.remove('hidden');
+            } else if (clearTime) {
                 recordEl.textContent = `⏱️ クリアタイム: ${clearTime}秒`;
                 recordEl.classList.remove('hidden');
             } else if (clearRecord) {
@@ -84,12 +92,17 @@
             }
 
             // 画像の表示処理（URLパラメータ優先 > config.image > プレースホルダー）
+            // DOM XSS対策: URLパラメータからの入力を innerHTML に直接挿入せず、createElement で安全にプロパティ設定
             const customImage = params.get('image') || config.image;
             const imageArea = document.getElementById('coupon-image-area');
+            imageArea.innerHTML = '';
             if (customImage) {
-                imageArea.innerHTML = `
-                    <img src="${customImage}" alt="クーポン引換画像" class="coupon-image" id="coupon-img">
-                `;
+                const img = document.createElement('img');
+                img.src = customImage;
+                img.alt = 'クーポン引換画像';
+                img.className = 'coupon-image';
+                img.id = 'coupon-img';
+                imageArea.appendChild(img);
             } else {
                 // 画像未指定時はQR/チケット風SVGアイコンを表示
                 imageArea.innerHTML = `

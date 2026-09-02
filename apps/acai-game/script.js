@@ -36,7 +36,7 @@ const GameLogic = {
      * @returns {boolean}
      */
     isEligibleForCoupon: function(score, timeTaken) {
-        return score === 4 && typeof timeTaken === 'number' && timeTaken <= 7.0;
+        return score === 4 && typeof timeTaken === 'number' && timeTaken > 0 && timeTaken <= 7.0;
     },
 
     /**

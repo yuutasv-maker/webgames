@@ -33,13 +33,46 @@ try {
     assert.doesNotMatch(result.message, /無料券GET/, 'GREAT should not have coupon reward');
     assert.match(result.message, /いい感じ！/, 'GREAT message check');
 
-    // Test GOOD (<= 0.40)
+    // Test GREAT threshold (0.30)
+    result = GameLogic.calculateScore(130, centerPos, gaugeWidth);
+    assert.strictEqual(result.rank, 'GREAT', '30px off (0.30) should be GREAT');
+
+    // Test GOOD (> 0.30 and <= 0.40)
     result = GameLogic.calculateScore(135, centerPos, gaugeWidth);
     assert.strictEqual(result.rank, 'GOOD', '35px off (0.35) should be GOOD');
+
+    // Test GOOD threshold (0.40)
+    result = GameLogic.calculateScore(140, centerPos, gaugeWidth);
+    assert.strictEqual(result.rank, 'GOOD', '40px off (0.40) should be GOOD');
+
+    // Test MISS boundary (> 0.40)
+    result = GameLogic.calculateScore(140.1, centerPos, gaugeWidth);
+    assert.strictEqual(result.rank, 'MISS', '40.1px off (>0.40) should be MISS');
 
     // Test MISS (> 0.40)
     result = GameLogic.calculateScore(150, centerPos, gaugeWidth);
     assert.strictEqual(result.rank, 'MISS', '50px off (0.50) should be MISS');
+
+    // Test Left-side symmetry (negative offset relative to center)
+    result = GameLogic.calculateScore(96, centerPos, gaugeWidth);
+    assert.strictEqual(result.rank, 'CRITICAL', 'Left 4px off should be CRITICAL');
+    result = GameLogic.calculateScore(85, centerPos, gaugeWidth);
+    assert.strictEqual(result.rank, 'PERFECT', 'Left 15px off should be PERFECT');
+
+    // Test Out-of-bounds (beyond gauge width)
+    result = GameLogic.calculateScore(-50, centerPos, gaugeWidth);
+    assert.strictEqual(result.rank, 'MISS', 'Negative position should be MISS with 0 score');
+    assert.strictEqual(result.score, 0);
+
+    result = GameLogic.calculateScore(300, centerPos, gaugeWidth);
+    assert.strictEqual(result.rank, 'MISS', 'Position beyond gauge should be MISS with 0 score');
+    assert.strictEqual(result.score, 0);
+
+    // Test isEligibleForCoupon with invalid/null ranks
+    assert.strictEqual(GameLogic.isEligibleForCoupon('PERFECT'), false);
+    assert.strictEqual(GameLogic.isEligibleForCoupon(''), false);
+    assert.strictEqual(GameLogic.isEligibleForCoupon(null), false);
+    assert.strictEqual(GameLogic.isEligibleForCoupon(undefined), false);
 
     console.log("All tests passed!");
 } catch (e) {
