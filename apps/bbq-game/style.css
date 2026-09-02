@@ -336,8 +336,12 @@ header h1 {
     filter: brightness(1.1);
 }
 
-.action-btn:active {
-    transform: scale(0.95);
+.action-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    filter: grayscale(0.6);
+    box-shadow: none;
 }
 
 .countdown-overlay {
@@ -367,6 +371,14 @@ header h1 {
     color: #d32f2f;
     text-shadow: 0 4px 16px rgba(211, 47, 47, 0.4);
     animation: pulse 1s infinite;
+}
+
+/* タイムアップ表示時のテキストスタイル（幅溢れ防止＆強調） */
+.countdown-overlay.time-up #countdown-text {
+    font-size: 48px;
+    letter-spacing: 2px;
+    white-space: nowrap;
+    animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 @keyframes pulse {

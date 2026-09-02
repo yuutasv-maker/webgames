@@ -195,7 +195,9 @@ if (typeof module !== 'undefined' && module.exports) {
             timeLeft -= 0.1;
             if (timeLeft <= 0) {
                 timeLeft = 0;
+                timeDisplay.textContent = '0.0';
                 endGame();
+                return;
             }
             timeDisplay.textContent = timeLeft.toFixed(1);
         }
@@ -208,6 +210,11 @@ if (typeof module !== 'undefined' && module.exports) {
             timeDisplay.textContent = timeLeft.toFixed(1);
             isPlaying = true;
             
+            // 前回のゲーム終了時に無効化した具材ボタンをプレイ開始時に再活性化
+            ingredientBtns.forEach(btn => {
+                btn.disabled = false;
+            });
+
             if (typeof CouponUI !== 'undefined') {
                 CouponUI.hide('coupon-section');
             }
@@ -220,7 +227,10 @@ if (typeof module !== 'undefined' && module.exports) {
         }
 
         function startGame() {
+            // カウントダウン中の多重タップによるタイマー重複を防ぐため無効化
+            startBtn.disabled = true;
             modal.classList.add('hidden');
+            countdownOverlay.classList.remove('time-up');
             countdownOverlay.classList.remove('hidden');
             
             let count = 3;
@@ -245,58 +255,83 @@ if (typeof module !== 'undefined' && module.exports) {
         }
 
         function endGame() {
+            if (!isPlaying) return;
             isPlaying = false;
             clearInterval(timerInterval);
             
-            modalTitle.textContent = "TIME UP!";
-            modalDesc.style.display = "none";
-            finalScore.classList.remove('hidden');
-            resultCount.textContent = score;
-            
-            // クーポン獲得セクションの制御（10本以上完成でクーポン表示）
-            if (typeof CouponUI !== 'undefined') {
-                CouponUI.renderResult({
-                    containerId: 'coupon-section',
-                    gameId: 'bbq',
-                    isEligible: GameLogic.isEligibleForCoupon(score),
-                    record: `${score}本`,
-                    conditionHint: '💡 <strong>10本以上</strong>完成させると限定クーポンGET！',
-                    successMsg: '🎉 <strong>10本以上達成！</strong><br>限定クーポンを獲得しました！',
-                    claimedMsg: '🎉 <strong>10本以上達成！お見事！</strong><br><span style="font-size: 12px; color: #777;">※ 本日のクーポンは獲得済みです（1日1回限定）</span>'
-                });
-            }
+            // 具材連打の慣性入力を即時シャットアウトするため、全具材ボタンを非活性化
+            ingredientBtns.forEach(btn => {
+                btn.disabled = true;
+            });
 
-            // 履歴を描画
-            const container = document.getElementById('completed-skewers-container');
-            const list = document.getElementById('completed-skewers-list');
-            list.innerHTML = '';
-            
-            if (completedSkewers.length > 0) {
-                completedSkewers.forEach((skewer, index) => {
-                    const miniSkewer = document.createElement('div');
-                    miniSkewer.className = 'mini-skewer';
-                    
-                    skewer.forEach(item => {
-                        const icon = document.createElement('div');
-                        icon.className = 'mini-skewer-item';
-                        icon.textContent = emojis[item];
-                        miniSkewer.appendChild(icon);
+            // プレイフェーズ終了を視覚的に認識させ連打を止めるため、TIME UP全画面演出を挟む
+            countdownOverlay.classList.add('time-up');
+            countdownText.textContent = "TIME UP!";
+            countdownText.style.animation = 'none';
+            void countdownText.offsetWidth;
+            countdownOverlay.classList.remove('hidden');
+
+            // TIME UP演出を800ms見せてからリザルト画面へスムーズに遷移
+            setTimeout(() => {
+                countdownOverlay.classList.add('hidden');
+                countdownOverlay.classList.remove('time-up');
+
+                modalTitle.textContent = "TIME UP!";
+                modalDesc.style.display = "none";
+                finalScore.classList.remove('hidden');
+                resultCount.textContent = score;
+                
+                // クーポン獲得セクションの制御（10本以上完成でクーポン表示）
+                if (typeof CouponUI !== 'undefined') {
+                    CouponUI.renderResult({
+                        containerId: 'coupon-section',
+                        gameId: 'bbq',
+                        isEligible: GameLogic.isEligibleForCoupon(score),
+                        record: `${score}本`,
+                        conditionHint: '💡 <strong>10本以上</strong>完成させると限定クーポンGET！',
+                        successMsg: '🎉 <strong>10本以上達成！</strong><br>限定クーポンを獲得しました！',
+                        claimedMsg: '🎉 <strong>10本以上達成！お見事！</strong><br><span style="font-size: 12px; color: #777;">※ 本日のクーポンは獲得済みです（1日1回限定）</span>'
                     });
-                    
-                    // 作った順番の番号を一番上に追加 (flex-direction: column-reverse のため最後にappendする)
-                    const numBadge = document.createElement('div');
-                    numBadge.className = 'skewer-number';
-                    numBadge.textContent = (index + 1);
-                    miniSkewer.appendChild(numBadge);
-                    
-                    list.appendChild(miniSkewer);
-                });
-                container.classList.remove('hidden');
-            }
-            
-            startBtn.textContent = "もう一度プレイ";
-            
-            modal.classList.remove('hidden');
+                }
+
+                // 履歴を描画
+                const container = document.getElementById('completed-skewers-container');
+                const list = document.getElementById('completed-skewers-list');
+                list.innerHTML = '';
+                
+                if (completedSkewers.length > 0) {
+                    completedSkewers.forEach((skewer, index) => {
+                        const miniSkewer = document.createElement('div');
+                        miniSkewer.className = 'mini-skewer';
+                        
+                        skewer.forEach(item => {
+                            const icon = document.createElement('div');
+                            icon.className = 'mini-skewer-item';
+                            icon.textContent = emojis[item];
+                            miniSkewer.appendChild(icon);
+                        });
+                        
+                        // 作った順番の番号を一番上に追加 (flex-direction: column-reverse のため最後にappendする)
+                        const numBadge = document.createElement('div');
+                        numBadge.className = 'skewer-number';
+                        numBadge.textContent = (index + 1);
+                        miniSkewer.appendChild(numBadge);
+                        
+                        list.appendChild(miniSkewer);
+                    });
+                    container.classList.remove('hidden');
+                }
+                
+                startBtn.textContent = "もう一度プレイ";
+                // モーダル出現直後のタップ抜けによる意図しない再スタートを防ぐため、ガード期間を設ける
+                startBtn.disabled = true;
+                modal.classList.remove('hidden');
+
+                // モーダル表示から0.5秒後にボタンを活性化して操作可能にする
+                setTimeout(() => {
+                    startBtn.disabled = false;
+                }, 500);
+            }, 800);
         }
 
         ingredientBtns.forEach(btn => {

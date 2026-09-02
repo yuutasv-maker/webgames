@@ -36,6 +36,17 @@ try {
     assert.strictEqual(GameLogic.isEligibleForCoupon(9), false, '9 skewers should not be eligible for coupon');
     assert.strictEqual(GameLogic.isEligibleForCoupon(10), true, '10 skewers must be eligible for coupon');
     assert.strictEqual(GameLogic.isEligibleForCoupon(15), true, '15 skewers must be eligible for coupon');
+    assert.strictEqual(GameLogic.isEligibleForCoupon(0), false, '0 skewers should not be eligible');
+    assert.strictEqual(GameLogic.isEligibleForCoupon(-5), false, 'Negative skewers should not be eligible');
+    assert.strictEqual(GameLogic.isEligibleForCoupon(null), false, 'null should not be eligible');
+    assert.strictEqual(GameLogic.isEligibleForCoupon(undefined), false, 'undefined should not be eligible');
+
+    // Test: checkInput with unknown clicked item
+    let testOrder = ['meat', 'onion'];
+    let testSkewer = [];
+    let unknownResult = GameLogic.checkInput(testOrder, testSkewer, 'fish');
+    assert.strictEqual(unknownResult, 'MISTAKE', 'Unknown item should return MISTAKE');
+    assert.strictEqual(testSkewer.length, 0);
 
     console.log("All tests passed!");
 } catch (e) {
