@@ -77,6 +77,8 @@ header p {
 .game-card:nth-child(1) { animation-delay: 0.1s; }
 .game-card:nth-child(2) { animation-delay: 0.2s; }
 .game-card:nth-child(3) { animation-delay: 0.3s; }
+.game-card:nth-child(4) { animation-delay: 0.4s; }
+.game-card:nth-child(5) { animation-delay: 0.5s; }
 
 .game-card:hover {
     transform: translateY(-8px) scale(1.02);

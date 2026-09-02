@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>海の家 ミニゲームコレクション</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
+    <!-- 運用設定ファイル: 本日のゲーム判定用 -->
+    <script src="config.js"></script>
+</head>
+<body>
+    <div class="page-bg"></div>
+    <div class="container">
+        <header>
+            <h1>海の家<br>ミニゲームコレクション 🏖️</h1>
+            <p>友人と一緒に楽しめる、ブラウザですぐに遊べるカジュアルゲーム！</p>
+        </header>
+
+        <div class="game-grid">
+            <!-- ゲーム1: アサイーボウル職人 -->
+            <a href="apps/acai-game/index.html" class="game-card" data-game-id="acai">
+                <div class="card-badge">本日のゲーム！</div>
+                <div class="card-icon" style="background: linear-gradient(135deg, #a18cd1, #fbc2eb);">🫐</div>
+                <div class="card-content">
+                    <h2>映えアサイー職人</h2>
+                    <p>一瞬だけ表示されるお手本を記憶して、完璧なアサイーボウルを再現！</p>
+                </div>
+            </a>
+
+            <!-- ゲーム2: アサイータワー -->
+            <a href="apps/acai-tower/index.html" class="game-card" data-game-id="acai-tower">
+                <div class="card-badge">本日のゲーム！</div>
+                <div class="card-icon" style="background: linear-gradient(135deg, #84fab0, #8fd3f4);">🥣</div>
+                <div class="card-content">
+                    <h2>30秒アサイータワー・スタック</h2>
+                    <p>カップをスライドしてフルーツをキャッチ！30秒で豪華な映えタワーを作ろう！</p>
+                </div>
+            </a>
+
+            <!-- ゲーム3: BBQ串メーカー -->
+            <a href="apps/bbq-game/index.html" class="game-card" data-game-id="bbq">
+                <div class="card-badge">本日のゲーム！</div>
+                <div class="card-icon" style="background: linear-gradient(135deg, #ff9a9e, #fecfef);">🍖</div>
+                <div class="card-content">
+                    <h2>爆速BBQ串メーカー</h2>
+                    <p>制限時間内にお手本通りの具材を串に刺しまくるスピード勝負！</p>
+                </div>
+            </a>
+
+            <!-- ゲーム4: スイカ割り -->
+            <a href="apps/watermelon-game/index.html" class="game-card" data-game-id="watermelon">
+                <div class="card-badge">本日のゲーム！</div>
+                <div class="card-icon" style="background: linear-gradient(135deg, #ff8b94, #ffaaa5);">🍉</div>
+                <div class="card-content">
+                    <h2>スイカ割りタイミングゲーム</h2>
+                    <p>タイミングを合わせてタップ！真ん中を狙って綺麗なスイカを割ろう！</p>
+                </div>
+            </a>
+
+            <!-- ゲーム5: 最後の一本フランクフルト -->
+            <a href="apps/frankfurt-game/index.html" class="game-card" data-game-id="frankfurt">
+                <div class="card-badge">本日のゲーム！</div>
+                <div class="card-icon" style="background: linear-gradient(135deg, #f6d365, #fda085);"><svg viewBox="0 0 16 16" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="13" width="2" height="2" fill="#b45309"/><rect x="2" y="12" width="2" height="2" fill="#d97706"/><rect x="3" y="11" width="2" height="2" fill="#f59e0b"/><rect x="3" y="6" width="8" height="6" rx="2" fill="#991b1b"/><rect x="5" y="4" width="8" height="6" rx="2" fill="#991b1b"/><rect x="4" y="6" width="7" height="5" fill="#dc2626"/><rect x="5" y="5" width="7" height="5" fill="#ef4444"/><rect x="5" y="8" width="1" height="2" fill="#7f1d1d"/><rect x="8" y="6" width="1" height="2" fill="#7f1d1d"/><rect x="10" y="5" width="1" height="2" fill="#7f1d1d"/><rect x="6" y="7" width="2" height="1" fill="#facc15"/><rect x="7" y="8" width="2" height="1" fill="#facc15"/><rect x="9" y="6" width="2" height="1" fill="#fde047"/><rect x="12" y="3" width="2" height="2" fill="#d97706"/><rect x="13" y="2" width="1" height="1" fill="#f59e0b"/></svg></div>
+                <div class="card-content">
+                    <h2>最後の一本フランクフルト</h2>
+                    <p>合図が出たら素早くタップ！ライバルから最後の一本を奪い取れ！</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // 本日のゲーム判定を行い、対象カードに強調バッジを付与する
+        (function() {
+            try {
+                if (typeof resolveActiveGame === 'function') {
+                    var target = resolveActiveGame();
+                    if (target && target.key) {
+                        var card = document.querySelector('.game-card[data-game-id="' + target.key + '"]');
+                        if (card) {
+                            card.classList.add('is-featured');
+                        }
+                    }
+                }
+            } catch (e) {
+                console.error('Portal active game error:', e);
+            }
+        })();
+    </script>
+</body>
+</html>
