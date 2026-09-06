@@ -3,8 +3,8 @@
     "id": "p01", 
     "name": "井上ヤスオバーガー", 
     "kana": "いのうえやすおばーがー",
-    "description": "ここに簡単な紹介文", 
-    "imageUrl": "", 
+    "description": "1974年4月4日\n尼崎育ち、京都在住\n趣味：生物、読書、銭湯、グルメ、お酒\n\n人間よりも人間臭い、シンガーソングライターという生き物。 \n爆笑と感泣を繰り返し、すべてを音楽にかえるライブマシーン。", 
+    "imageUrl": "./assets/images/inoue_yasuoburger.jpg", 
     "isMainGuest": true,
     "socialLinks": {
       "website": "http://yasuoburger.com/",
@@ -14,20 +14,32 @@
       "facebook": "https://www.facebook.com/inoue.yasuo.71"
     }
   },
-  { "id": "p02", "name": "エルレンジャー", "kana": "えるれんじゃー", "description": "ここに簡単な紹介文", "imageUrl": "" },
-  { "id": "p03", "name": "ナム＆ぶた", "kana": "なむあんどぶた", "description": "ここに簡単な紹介文", "imageUrl": "" },
-  { "id": "p04", "name": "真夜中のオウルと羊たち", "kana": "まよなかのおうるとひつじたち", "description": "ここに簡単な紹介文", "imageUrl": "" },
+  { "id": "p02", "name": "エルレンジャー", "kana": "えるれんじゃー", "description": "ここに簡単な紹介文", "imageUrl": "./assets/images/el_ranger.jpg" },
+  { "id": "p03", "name": "ナム＆ぶた", "kana": "なむあんどぶた", "description": "ボーカル「ぶた」の無駄に上手な歌と、10年前に拾ってきた子犬が立派に成長した「ナム」のウクレレ＆咆哮の2人によるエンターテイメントコメディーショー！", "imageUrl": "./assets/images/nam_and_buta.jpg" },
+  { "id": "p04", "name": "真夜中のオウルと羊たち", "kana": "まよなかのおうるとひつじたち", "description": "いつもお世話になっているスタジオowlのマスターと、その背中を追いかけてきた後輩3人によるスペシャルバンド。世代を超えて奏でる音で、アットホームながらも熱いステージをお届けします！", "imageUrl": "./assets/images/mayonaka_owl.jpg" },
   { "id": "p05", 
     "name": "Lettermore Lads", 
     "kana": "れたーもあらっず",
-    "description": "ここに簡単な紹介文", 
-    "imageUrl": "",
+    "description": "令和１年より松山近辺を中心に、アイルランド音楽やケルト音楽を演奏する、フルート／ホイッスル他：坪田とギター／ブズーキ他：山本の２人組ユニットです。\n女性ヴォーカルやパーカッションなどのゲストを迎えてアコースティックのバンド編成で演奏することもあります。初CD：Lettermore Lads feat. 友里之「マグマ ／ 月が綺麗ですね」10月以降発売予定。", 
+    "imageUrl": "./assets/images/lettermore_lads.jpg",
     "socialLinks": {
-      "twitter": "https://x.com/LadsLettermore"
+      "twitter": "https://x.com/LadsLettermore",
+      "instagram": "https://www.instagram.com/lettermore_lads/",
+      "facebook": "https://www.facebook.com/Lettermore.Lads/"
     }
   },
-  { "id": "p07", "name": "ユーチーコーチー", "kana": "ゆーちーこーちー", "description": "ここに簡単な紹介文", "imageUrl": "" },
-  { "id": "p08", "name": "ニシオシンジ", "kana": "にしおしんじ", "description": "ここに簡単な紹介文", "imageUrl": "" },
-  { "id": "p09", "name": "みつはまやき", "kana": "みつはまやき", "description": "ここに簡単な紹介文", "imageUrl": "" },
+  { "id": "p06", "name": "あーすけ", "kana": "あーすけ", "description": "ここに簡単な紹介文", "imageUrl": "" },
+  { "id": "p07", "name": "ユーチーコーチー", "kana": "ゆーちーこーちー", "description": "奥田民生さんをリスペクトしている二人組です。奥田民生さんの曲のカバーがメインですがオリジナルもやります！", "imageUrl": "./assets/images/yuchi_kochi.jpg" },
+  { 
+    "id": "p08", 
+    "name": "ニシオシンジ", 
+    "kana": "にしおしんじ", 
+    "description": "心に沁みる歌・切ない歌が大好きです。よろしくお願いします！", 
+    "imageUrl": "./assets/images/nishio_shinji.jpg",
+    "socialLinks": {
+      "instagram": "https://www.instagram.com/shinji4568/"
+    }
+  },
+  { "id": "p09", "name": "みつはまやき", "kana": "みつはまやき", "description": "昭和歌謡、ボサノバ、ロック…色々やってま〜す三津浜出身のDUOですが三津浜焼きは焼いてません！", "imageUrl": "./assets/images/mitsuhamayaki.jpg" },
   { "id": "p10", "name": "STREET STAR(飛び込み路上ライブ)", "kana": "すとりーとすたー", "description": "ここに簡単な紹介文", "imageUrl": "" }
 ]

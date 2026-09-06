@@ -39,6 +39,21 @@
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
+    .description-clamp {
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    details summary::-webkit-details-marker {
+      display: none;
+    }
+    details[open] .faq-arrow {
+      transform: rotate(180deg);
+    }
+    #share-toast {
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
   </style>
 </head>
 <body class="bg-gray-100 min-h-screen font-sans pt-12 md:pt-14">
@@ -52,6 +67,7 @@
         <li><a href="#timetable-section" class="hover:text-blue-400 transition whitespace-nowrap">TIME TABLE</a></li>
         <li><a href="#foods-section" class="hover:text-blue-400 transition whitespace-nowrap">FOOD</a></li>
         <li><a href="#notes-section" class="hover:text-blue-400 transition whitespace-nowrap">NOTICE</a></li>
+        <li><a href="#faq-section" class="hover:text-blue-400 transition whitespace-nowrap">FAQ</a></li>
         <li><a href="#reservation-section" class="hover:text-blue-400 transition whitespace-nowrap">TICKET</a></li>
       </ul>
     </div>
@@ -64,7 +80,9 @@
     
     <div class="relative z-10 w-full max-w-[300px] md:max-w-md mx-auto">
       <div class="bg-white/20 p-2 md:p-4 rounded-full backdrop-blur-sm shadow-2xl border border-white/30 transform transition duration-500 hover:scale-105">
-        <img src="./assets/images/logo.png" alt="井上ヤスオバーガー OWL-STARS FESTIVAL 2026" class="w-full h-auto rounded-full bg-white drop-shadow-md">
+        <h1 class="m-0 p-0 flex">
+          <img src="./assets/images/logo.png" alt="井上ヤスオバーガー OWL-STARS FESTIVAL 2026" class="w-full h-auto rounded-full bg-white drop-shadow-md">
+        </h1>
       </div>
     </div>
   </header>
@@ -72,35 +90,49 @@
   <main class="max-w-6xl mx-auto px-4 py-12 space-y-16">
     
     <!-- Info Section -->
-    <section id="info-section">
+    <section id="info-section" class="max-w-4xl mx-auto">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl font-black text-gray-800 border-b-4 border-blue-600 inline-block pb-2">
+          <span class="block text-sm text-blue-600 font-bold tracking-widest mb-1">INFO</span>
+          開催概要
+        </h2>
+      </div>
       <div id="info-content"></div>
     </section>
 
     <!-- Performers Section -->
     <section id="performers-section">
-      <h2 class="text-3xl font-black text-center text-gray-800 mb-8 border-b-4 border-blue-600 inline-block pb-2">LINE UP</h2>
+      <div class="text-center mb-8">
+        <h2 class="text-3xl font-black text-gray-800 border-b-4 border-blue-600 inline-block pb-2">
+          <span class="block text-sm text-blue-600 font-bold tracking-widest mb-1">LINE UP</span>
+          出演アーティスト
+        </h2>
+      </div>
       <div id="performers-content"></div>
     </section>
 
     <!-- Timetable Section -->
     <section id="timetable-section" class="bg-blue-50 p-6 md:p-10 rounded-2xl">
       <div class="text-center mb-8">
-        <h2 class="text-3xl font-black text-gray-800 border-b-4 border-blue-600 inline-block pb-2">TIME TABLE</h2>
+        <h2 class="text-3xl font-black text-gray-800 border-b-4 border-blue-600 inline-block pb-2">
+          <span class="block text-sm text-blue-600 font-bold tracking-widest mb-1">TIME TABLE</span>
+          タイムテーブル
+        </h2>
       </div>
       
       <!-- STAGE GUIDE -->
-      <div class="max-w-3xl mx-auto mb-10 grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="bg-white p-4 rounded-xl shadow-sm border-l-4 border-red-500 transform transition hover:-translate-y-1">
+      <div class="max-w-4xl mx-auto mb-10 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="bg-white p-4 rounded-xl shadow-md border-l-4 border-red-500 transform transition hover:-translate-y-1">
           <h3 class="font-black text-red-700 text-lg flex items-center mb-2">
-            STAR STAGE
+            OWL STAGE
           </h3>
           <p class="text-sm text-gray-600 leading-relaxed font-medium">
             音響・照明を完備した大迫力のメインステージ！フェスの主役たちが熱いパフォーマンスを繰り広げます。
           </p>
         </div>
-        <div class="bg-white p-4 rounded-xl shadow-sm border-l-4 border-blue-500 transform transition hover:-translate-y-1">
+        <div class="bg-white p-4 rounded-xl shadow-md border-l-4 border-blue-500 transform transition hover:-translate-y-1">
           <h3 class="font-black text-blue-700 text-lg flex items-center mb-2">
-            STREET LOFT
+            LOFT STREET
           </h3>
           <p class="text-sm text-gray-600 leading-relaxed font-medium">
             ロフトの奥に作られた簡易ステージ。生音や息遣いがダイレクトに伝わる、熱気あふれるゲリラ路上ライブエリア！
@@ -113,25 +145,138 @@
 
     <!-- Foods Section -->
     <section id="foods-section">
-      <h2 class="text-3xl font-black text-center text-gray-800 mb-8 border-b-4 border-blue-600 inline-block pb-2">FOOD & DRINK</h2>
+      <div class="text-center mb-8">
+        <h2 class="text-3xl font-black text-gray-800 border-b-4 border-blue-600 inline-block pb-2">
+          <span class="block text-sm text-blue-600 font-bold tracking-widest mb-1">FOOD & DRINK</span>
+          フード＆ドリンク
+        </h2>
+      </div>
       <div id="foods-content"></div>
     </section>
 
     <!-- Notes Section -->
-    <section id="notes-section" class="max-w-4xl mx-auto bg-gray-50 border border-gray-200 p-6 md:p-8 rounded-xl shadow-sm">
-      <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-        <svg class="w-6 h-6 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-        注意事項
-      </h2>
+    <section id="notes-section" class="max-w-4xl mx-auto bg-gray-50 border border-gray-200 p-6 md:p-8 rounded-xl shadow-md">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl font-black text-gray-800 border-b-4 border-blue-600 inline-block pb-2">
+          <span class="block text-sm text-blue-600 font-bold tracking-widest mb-1">NOTICE</span>
+          注意事項
+        </h2>
+      </div>
       <ul class="list-disc pl-6 space-y-3 text-gray-700">
-        <li>出入り自由</li>
+        <li>出入り自由（再入場の際は入場時にお配りする缶バッチをご提示ください）</li>
         <li>会場販売以外の飲食物持ち込み禁止</li>
       </ul>
     </section>
 
+    <!-- FAQ Section -->
+    <section id="faq-section" class="max-w-4xl mx-auto">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl font-black text-gray-800 border-b-4 border-blue-600 inline-block pb-2">
+          <span class="block text-sm text-blue-600 font-bold tracking-widest mb-1">FAQ</span>
+          よくあるご質問
+        </h2>
+      </div>
+      <div class="space-y-4">
+        <!-- Q1 -->
+        <details class="group bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden transition-all">
+          <summary class="flex justify-between items-center p-5 cursor-pointer font-bold text-gray-800 hover:text-blue-600 list-none select-none">
+            <span class="flex items-center">
+              <span class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center font-black text-sm mr-3 flex-shrink-0">Q</span>
+              途中退出や再入場はできますか？
+            </span>
+            <svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform duration-200 flex-shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="px-5 pb-5 pt-1 text-gray-600 border-t border-gray-100 flex items-start">
+            <span class="w-7 h-7 rounded-full bg-red-500 text-white flex items-center justify-center font-black text-sm mr-3 flex-shrink-0 mt-0.5">A</span>
+            <p class="leading-relaxed">はい、出入り自由です。再入場の際は、入場時にお渡しする記念缶バッチを受付スタッフへご提示ください。</p>
+          </div>
+        </details>
+
+        <!-- Q2 -->
+        <details class="group bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden transition-all">
+          <summary class="flex justify-between items-center p-5 cursor-pointer font-bold text-gray-800 hover:text-blue-600 list-none select-none">
+            <span class="flex items-center">
+              <span class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center font-black text-sm mr-3 flex-shrink-0">Q</span>
+              子供の入場料はどうなっていますか？
+            </span>
+            <svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform duration-200 flex-shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="px-5 pb-5 pt-1 text-gray-600 border-t border-gray-100 flex items-start">
+            <span class="w-7 h-7 rounded-full bg-red-500 text-white flex items-center justify-center font-black text-sm mr-3 flex-shrink-0 mt-0.5">A</span>
+            <p class="leading-relaxed">小学生以下のお子様は入場無料です。ご家族そろってお気軽にお越しください。</p>
+          </div>
+        </details>
+
+        <!-- Q3 -->
+        <details class="group bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden transition-all">
+          <summary class="flex justify-between items-center p-5 cursor-pointer font-bold text-gray-800 hover:text-blue-600 list-none select-none">
+            <span class="flex items-center">
+              <span class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center font-black text-sm mr-3 flex-shrink-0">Q</span>
+              チケットを持っていなくてもフードは購入できますか？また持ち込みは可能ですか？
+            </span>
+            <svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform duration-200 flex-shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="px-5 pb-5 pt-1 text-gray-600 border-t border-gray-100 flex items-start">
+            <span class="w-7 h-7 rounded-full bg-red-500 text-white flex items-center justify-center font-black text-sm mr-3 flex-shrink-0 mt-0.5">A</span>
+            <p class="leading-relaxed">「スタンドピクルス」は会場外にブースを設置しているため、入場券なしでもご購入いただけます。なお、会場内への飲食物（会場販売を除く）のお持ち込みはご遠慮ください。</p>
+          </div>
+        </details>
+
+        <!-- Q4 -->
+        <details class="group bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden transition-all">
+          <summary class="flex justify-between items-center p-5 cursor-pointer font-bold text-gray-800 hover:text-blue-600 list-none select-none">
+            <span class="flex items-center">
+              <span class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center font-black text-sm mr-3 flex-shrink-0">Q</span>
+              ライブ中の写真撮影や録音・録画は可能ですか？
+            </span>
+            <svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform duration-200 flex-shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="px-5 pb-5 pt-1 text-gray-600 border-t border-gray-100 flex items-start">
+            <span class="w-7 h-7 rounded-full bg-red-500 text-white flex items-center justify-center font-black text-sm mr-3 flex-shrink-0 mt-0.5">A</span>
+            <p class="leading-relaxed">写真撮影は可能ですが、フラッシュ撮影および動画撮影・録音はご遠慮ください。また、周囲のお客様の鑑賞の妨げにならないようご配慮をお願いいたします。</p>
+          </div>
+        </details>
+
+        <!-- Q5 -->
+        <details class="group bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden transition-all">
+          <summary class="flex justify-between items-center p-5 cursor-pointer font-bold text-gray-800 hover:text-blue-600 list-none select-none">
+            <span class="flex items-center">
+              <span class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center font-black text-sm mr-3 flex-shrink-0">Q</span>
+              座席は指定席ですか？入場順はどうなっていますか？
+            </span>
+            <svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform duration-200 flex-shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="px-5 pb-5 pt-1 text-gray-600 border-t border-gray-100 flex items-start">
+            <span class="w-7 h-7 rounded-full bg-red-500 text-white flex items-center justify-center font-black text-sm mr-3 flex-shrink-0 mt-0.5">A</span>
+            <p class="leading-relaxed">全席自由席となっております。当日はご来場順でのご案内となります。</p>
+          </div>
+        </details>
+
+        <!-- Q6 -->
+        <details class="group bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden transition-all">
+          <summary class="flex justify-between items-center p-5 cursor-pointer font-bold text-gray-800 hover:text-blue-600 list-none select-none">
+            <span class="flex items-center">
+              <span class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center font-black text-sm mr-3 flex-shrink-0">Q</span>
+              チケット代の支払いはいつ・どのように行いますか？
+            </span>
+            <svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform duration-200 flex-shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="px-5 pb-5 pt-1 text-gray-600 border-t border-gray-100 flex items-start">
+            <span class="w-7 h-7 rounded-full bg-red-500 text-white flex items-center justify-center font-black text-sm mr-3 flex-shrink-0 mt-0.5">A</span>
+            <p class="leading-relaxed">チケット代（2,500円＋ドリンク代）は、イベント当日に会場受付にて現金または指定の決済方法にてお支払いいただきます。</p>
+          </div>
+        </details>
+      </div>
+    </section>
+
     <!-- Reservation Form Section (Contact Form 7 互換) -->
-    <section id="reservation-section" class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-lg border-t-8 border-red-500">
-      <h2 class="text-3xl font-black text-center text-gray-800 mb-6">チケット予約</h2>
+    <section id="reservation-section" class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-md">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl font-black text-gray-800 border-b-4 border-blue-600 inline-block pb-2">
+          <span class="block text-sm text-blue-600 font-bold tracking-widest mb-1">TICKET</span>
+          チケット予約
+        </h2>
+      </div>
       <p class="text-center text-gray-600 mb-8">以下のフォームよりご予約をお願いいたします。予約完了後、確認メールが送信されます。</p>
       
       <!-- 
@@ -186,7 +331,7 @@
         </div>
         
         <div class="text-center pt-4">
-          <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-10 rounded-full shadow-lg transition transform hover:-translate-y-1 text-lg">
+          <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-10 rounded-full shadow-lg transition transform hover:-translate-y-1 text-lg">
             予約を送信する
           </button>
         </div>
@@ -196,11 +341,48 @@
   </main>
 
   <footer class="bg-gray-800 text-white py-8 text-center mt-12">
-    <p class="text-sm">&copy; 2026 スタジオOWL All Rights Reserved.</p>
+    <!-- Minimalist SNS Share Block in Footer -->
+    <div class="flex items-center justify-center space-x-3 mb-5">
+      <span class="text-xs font-bold tracking-wider text-gray-400">SHARE</span>
+      <!-- X (Twitter) -->
+      <a href="https://twitter.com/intent/tweet?text=2026%E5%B9%B411%E6%9C%881%E6%97%A5%E9%96%8B%E5%82%AC%EF%BC%81%E4%BA%95%E4%B8%8A%E3%83%A4%E3%82%B9%E3%82%AA%E3%83%90%E3%83%BC%E3%82%AC%E3%83%BC%20OWL-STARS%20FESTIVAL%202026%E7%89%B9%E8%A8%AD%E3%82%B5%E3%82%A4%E3%83%88%EF%BC%81%E3%82%BF%E3%82%A4%E3%83%A0%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB%E5%85%AC%E9%96%8B%E4%B8%AD%F0%9F%8E%B6%0Ahttps%3A%2F%2Fowl21.info%2Fowlstarsfes2026%2F%0A%23%E4%BA%95%E4%B8%8A%E3%83%A4%E3%82%B9%E3%82%AA%E3%83%90%E3%83%BC%E3%82%AC%E3%83%BC%20%23OWLSTAR%E3%83%95%E3%82%A7%E3%82%B92026%20%23%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%A4OWL" 
+         target="_blank" rel="noopener noreferrer" 
+         class="w-8 h-8 rounded-full bg-gray-700/80 hover:bg-black text-gray-300 hover:text-white flex items-center justify-center transition transform hover:scale-110" 
+         title="X (Twitter)でシェア">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 22.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <!-- Facebook -->
+      <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fowl21.info%2Fowlstarsfes2026%2F" 
+         target="_blank" rel="noopener noreferrer" 
+         class="w-8 h-8 rounded-full bg-gray-700/80 hover:bg-[#1877F2] text-gray-300 hover:text-white flex items-center justify-center transition transform hover:scale-110" 
+         title="Facebookでシェア">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
+      </a>
+      <!-- LINE -->
+      <a href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Fowl21.info%2Fowlstarsfes2026%2F" 
+         target="_blank" rel="noopener noreferrer" 
+         class="w-8 h-8 rounded-full bg-gray-700/80 hover:bg-[#06C755] text-gray-300 hover:text-white flex items-center justify-center transition transform hover:scale-110" 
+         title="LINEで送る">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 5.96 2 10.84c0 2.98 1.68 5.61 4.28 7.21-.18.66-.66 2.4-0.76 2.77-.12.46.17.45.36.33.15-.09 2.4-1.63 3.37-2.29.57.09 1.15.13 1.75.13 5.52 0 10-3.96 10-8.84S17.52 2 12 2z"/></svg>
+      </a>
+      <!-- URL Copy Button -->
+      <button type="button" onclick="copyShareUrl()" 
+              class="w-8 h-8 rounded-full bg-gray-700/80 hover:bg-blue-600 text-gray-300 hover:text-white flex items-center justify-center transition transform hover:scale-110" 
+              title="URLをコピー">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+      </button>
+    </div>
+    <p class="text-sm text-gray-400">&copy; 2026 スタジオOWL All Rights Reserved.</p>
   </footer>
 
+  <!-- Toast Notification for Copy URL -->
+  <div id="share-toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white px-5 py-2.5 rounded-full shadow-2xl text-xs md:text-sm font-bold opacity-0 pointer-events-none z-50 flex items-center space-x-2">
+    <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+    <span>URLをクリップボードにコピーしました！</span>
+  </div>
+
   <!-- Scripts -->
-  <script src="./assets/js/logic.js"></script>
-  <script src="./assets/js/ui.js"></script>
+  <script src="./assets/js/logic.js?v=20260906_02"></script>
+  <script src="./assets/js/ui.js?v=20260906_02"></script>
 </body>
 </html>

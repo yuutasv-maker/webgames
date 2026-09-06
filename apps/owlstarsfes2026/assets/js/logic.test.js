@@ -36,11 +36,12 @@ describe('FesLogic', () => {
 
       const result = FesLogic.formatTimetable(timetableData, performersData);
       
-      expect(result.sortedData[0].time).toBe('13:00');
-      expect(result.sortedData[0].performer.name).toBe('Artist A');
+      // formatTimetable の返り値スキーマ拡張（processedActs）に対応
+      expect(result.processedActs[0].time).toBe('13:00');
+      expect(result.processedActs[0].performer.name).toBe('Artist A');
       
-      expect(result.sortedData[1].time).toBe('13:30');
-      expect(result.sortedData[1].performer.name).toBe('Artist B');
+      expect(result.processedActs[1].time).toBe('13:30');
+      expect(result.processedActs[1].performer.name).toBe('Artist B');
     });
 
     it('すべてのステージがnullの場合、1ステージ制と判定する', () => {
@@ -61,6 +62,17 @@ describe('FesLogic', () => {
 
       const result = FesLogic.formatTimetable(timetableData, performersData);
       expect(result.isSingleStage).toBe(false);
+    });
+
+    it('ステージ順序はOWL STAGEが先頭（左）、LOFT STREETが次（右）になる', () => {
+      const timetableData = [
+        { time: '12:00', stage: 'LOFT STREET', performerId: 'p2' },
+        { time: '13:00', stage: 'OWL STAGE', performerId: 'p1' }
+      ];
+
+      const result = FesLogic.formatTimetable(timetableData, performersData);
+      expect(result.stages[0]).toBe('OWL STAGE');
+      expect(result.stages[1]).toBe('LOFT STREET');
     });
   });
 

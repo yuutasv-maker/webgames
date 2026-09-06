@@ -91,16 +91,24 @@ function renderInfo(data) {
   if (!el) return;
 
   const html = `
-    <div class="bg-white p-6 rounded-lg shadow-md mb-8">
-      <h3 class="text-2xl font-bold text-blue-600 mb-4">開催概要</h3>
+    <div class="bg-white p-6 rounded-xl shadow-md mb-8">
       <dl class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="col-span-1 md:col-span-2 pb-2 border-b">
           <dt class="font-semibold text-gray-600">イベント名</dt>
           <dd class="text-xl font-bold">${escapeHtml(data.festivalName)}</dd>
         </div>
         <div class="pb-2 md:pb-0 border-b md:border-b-0 md:border-r pr-0 md:pr-4 pt-2">
-          <dt class="font-semibold text-gray-600">日時</dt>
-          <dd class="text-lg">${escapeHtml(data.date).replace(/\n/g, '<br>')}</dd>
+          <dt class="font-semibold text-gray-600 flex items-center justify-between">
+            <span>日時</span>
+            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=%E4%BA%95%E4%B8%8A%E3%83%A4%E3%82%B9%E3%82%AA%E3%83%90%E3%83%BC%E3%82%AC%E3%83%BC%20OWL-STARS%20FESTIVAL%202026&dates=20261101T030000Z/20261101T103000Z&details=%E4%BC%9A%E5%A0%B4%EF%BC%9A%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AAOWL%0A%E8%A9%B3%E7%B4%B0%E3%83%BB%E3%82%BF%E3%82%A4%E3%83%A0%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB%EF%BC%9Ahttps%3A%2F%2Fowl21.info%2Fowlstarsfes2026%2F&location=%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AAOWL%EF%BC%88%E6%84%9B%E5%AA%9B%E7%9C%8C%E6%9D%BE%E5%B1%B1%E5%B8%82%E4%B8%89%E7%95%AA%E7%94%BA%E4%B8%89%E4%B8%81%E7%9B%AE6-2%20ab%E2%80%99s%20square%EF%BC%92%EF%BC%A6%EF%BC%89" 
+               target="_blank" rel="noopener noreferrer" 
+               class="text-xs font-normal text-gray-500 hover:text-blue-600 inline-flex items-center space-x-1 border border-gray-200 hover:border-blue-300 rounded px-2 py-0.5 transition bg-gray-50 hover:bg-white" 
+               title="Googleカレンダーに予定を登録">
+              <svg class="w-3.5 h-3.5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+              <span>カレンダーに追加</span>
+            </a>
+          </dt>
+          <dd class="text-lg mt-1">${escapeHtml(data.date).replace(/\n/g, '<br>')}</dd>
         </div>
         <div class="pt-2 pl-0 md:pl-4">
           <dt class="font-semibold text-gray-600">会場</dt>
@@ -114,7 +122,15 @@ function renderInfo(data) {
           <dt class="font-semibold text-gray-600">チケット</dt>
           <dd class="text-lg">
             ${data.tickets.price ? escapeHtml(data.tickets.price) : [data.tickets.advance, data.tickets.door].filter(Boolean).map(escapeHtml).join(' / ')}<br>
-            ${data.tickets.notes && data.tickets.notes.length > 0 ? `<ul class="text-sm text-gray-500 list-disc pl-5 mt-1">${data.tickets.notes.map(n => `<li>${escapeHtml(n)}</li>`).join('')}</ul>` : ''}
+            ${data.tickets.notes && data.tickets.notes.length > 0 ? `
+              <ul class="text-sm text-gray-500 mt-1 space-y-1">
+                ${data.tickets.notes.map(n => {
+                  const isNote = n.startsWith('※');
+                  return isNote 
+                    ? `<li class="list-none text-xs text-gray-400 mt-1">${escapeHtml(n)}</li>` 
+                    : `<li class="list-disc ml-5">${escapeHtml(n)}</li>`;
+                }).join('')}
+              </ul>` : ''}
           </dd>
         </div>
       </dl>
@@ -174,12 +190,31 @@ function renderPerformers(data) {
           socialHtml += '</div>';
         }
         
+        const imgPosition = p.imagePosition || 'object-top';
+        
+        const descriptionText = p.description || 'よろしくお願いします！';
+        const isLongText = !isMain && (descriptionText.length > 50 || descriptionText.includes('\n'));
+        
+        let descHtml = '';
+        if (isLongText) {
+          descHtml = `
+            <div class="relative mt-2 flex-grow">
+              <p class="text-sm md:text-base text-gray-600 description-clamp transition-all">${escapeHtml(descriptionText).replace(/\n/g, '<br>')}</p>
+              <button type="button" onclick="toggleDescription(this)" class="mt-1 text-xs text-blue-600 hover:text-blue-800 font-semibold focus:outline-none">続きを読む ▼</button>
+            </div>
+          `;
+        } else {
+          descHtml = `
+            <p class="text-sm md:text-base text-gray-600 mt-2 flex-grow">${escapeHtml(descriptionText).replace(/\n/g, '<br>')}</p>
+          `;
+        }
+
         return `
-        <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition hover:scale-[1.02] ${colClass} ${layoutClass}">
-          <img src="${p.imageUrl || CONSTANTS.NO_IMAGE}" alt="${escapeHtml(p.name)}" class="w-full ${imgHeight} object-cover" onerror="this.onerror=null;this.src='${CONSTANTS.NO_IMAGE}';">
+        <div class="bg-white rounded-xl shadow-md overflow-hidden transform transition hover:scale-[1.02] ${colClass} ${layoutClass}">
+          <img src="${p.imageUrl || CONSTANTS.NO_IMAGE}" alt="${escapeHtml(p.name)}" class="w-full ${imgHeight} object-cover ${imgPosition}" onerror="this.onerror=null;this.src='${CONSTANTS.NO_IMAGE}';">
           <div class="p-4 flex-grow flex flex-col justify-center ${isMain ? 'bg-blue-50' : ''}">
-            <h4 class="font-bold ${nameSize} text-gray-800">${escapeHtml(p.name)}</h4>
-            <p class="text-sm md:text-base text-gray-600 mt-2 line-clamp-3 flex-grow">${escapeHtml(p.description || 'よろしくお願いします！')}</p>
+            <h3 class="font-bold ${nameSize} text-gray-800">${escapeHtml(p.name)}</h3>
+            ${descHtml}
             ${socialHtml}
           </div>
         </div>
@@ -188,6 +223,19 @@ function renderPerformers(data) {
   `;
   el.innerHTML = html;
 }
+
+window.toggleDescription = function(btn) {
+  const p = btn.previousElementSibling;
+  if (!p) return;
+  const isClamped = p.classList.contains('description-clamp');
+  if (isClamped) {
+    p.classList.remove('description-clamp');
+    btn.textContent = '閉じる ▲';
+  } else {
+    p.classList.add('description-clamp');
+    btn.textContent = '続きを読む ▼';
+  }
+};
 
 function renderTimetable(formattedData) {
   const el = document.getElementById('timetable-content');
@@ -200,7 +248,7 @@ function renderTimetable(formattedData) {
   if (isSingleStage) {
     // 1ステージの場合もMVPスコープとしてリスト形式（既存まま）
     const html = `
-      <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-md p-6">
+      <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-md p-6">
         <ul class="divide-y divide-gray-200">
           ${processedActs.map(item => `
             <li class="py-4 flex items-center">
@@ -256,8 +304,8 @@ function renderTimetable(formattedData) {
       // このステージの出演者だけフィルタ
       const acts = processedActs.filter(a => a.stage === stage);
 
-      // 色の条件分岐 (STREET LOFTステージは青色系)
-      const isLoft = stage === 'STREET LOFT';
+      // 色の条件分岐 (LOFT STREET / LOFTステージは青色系、STAR STAGEは赤色系)
+      const isLoft = stage.includes('LOFT') || stage === 'LOFT STREET' || stage === 'STREET LOFT';
       const headerColorClasses = isLoft ? 'text-blue-800 bg-blue-100' : 'text-red-800 bg-red-100';
       const cardColorClasses = isLoft ? 'bg-gradient-to-br from-blue-400 to-blue-600 text-white' : 'bg-gradient-to-br from-red-500 to-red-700 text-white';
 
@@ -271,7 +319,7 @@ function renderTimetable(formattedData) {
           : `${cardColorClasses} border border-white shadow-sm`;
           
         return `
-          <div class="absolute left-0.5 right-0.5 md:left-1 md:right-1 ${finalCardClasses} rounded p-1 md:p-2 overflow-hidden flex flex-col justify-center z-10 transition transform hover:scale-105 hover:z-20" style="top: ${topPx}px; height: ${heightPx}px;">
+          <div class="absolute left-0.5 right-0.5 md:left-1 md:right-1 ${finalCardClasses} rounded-md p-1 md:p-2 overflow-hidden flex flex-col justify-center z-10 transition transform hover:scale-105 hover:z-20" style="top: ${topPx}px; height: ${heightPx}px;">
             <div class="text-[10px] md:text-xs font-bold bg-white/40 inline-block px-1 rounded self-start mb-0.5 md:mb-1">${escapeHtml(act.time)}</div>
             <div class="font-bold text-xs md:text-base leading-tight md:leading-normal">${escapeHtml(act.performer?.name || 'Unknown')}</div>
           </div>
@@ -293,7 +341,7 @@ function renderTimetable(formattedData) {
     }).join('');
 
     const html = `
-      <div class="bg-white rounded-lg shadow-md p-2 md:p-4 overflow-hidden">
+      <div class="bg-white rounded-xl shadow-md p-2 md:p-4 overflow-hidden">
         <div class="w-full flex">
           <!-- 時間軸 -->
           <div class="w-12 md:w-20 relative pt-[2.75rem] md:pt-[3.25rem]">
@@ -329,11 +377,11 @@ function renderFoods(data) {
         }
         
         return `
-        <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition hover:scale-105 flex flex-col">
+        <div class="bg-white rounded-xl shadow-md overflow-hidden transform transition hover:scale-105 flex flex-col">
           <!-- Logo & Name -->
           <div class="flex items-center p-4 border-b border-gray-100 bg-gray-50">
             <img src="${f.imageUrl || CONSTANTS.NO_IMAGE}" alt="${escapeHtml(f.name)} logo" class="w-12 h-12 rounded-full object-cover border border-gray-200 mr-3" onerror="this.onerror=null;this.src='${CONSTANTS.NO_IMAGE}';">
-            <h4 class="font-bold text-lg text-gray-800">${escapeHtml(f.name)}</h4>
+            <h3 class="font-bold text-lg text-gray-800">${escapeHtml(f.name)}</h3>
           </div>
           <!-- Menu Image -->
           <div class="relative bg-gray-200">
@@ -418,4 +466,44 @@ function escapeHtml(str) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
+}
+
+window.copyShareUrl = function() {
+  const shareUrl = window.location.origin + window.location.pathname;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(shareUrl).then(() => {
+      showToast();
+    }).catch(() => {
+      fallbackCopy(shareUrl);
+    });
+  } else {
+    fallbackCopy(shareUrl);
+  }
+};
+
+function fallbackCopy(text) {
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  textarea.style.position = 'fixed';
+  textarea.style.opacity = '0';
+  document.body.appendChild(textarea);
+  textarea.select();
+  try {
+    document.execCommand('copy');
+    showToast();
+  } catch (err) {
+    prompt('以下のURLをコピーしてください:', text);
+  }
+  document.body.removeChild(textarea);
+}
+
+function showToast() {
+  const toast = document.getElementById('share-toast');
+  if (!toast) return;
+  toast.classList.remove('opacity-0', 'pointer-events-none');
+  toast.classList.add('opacity-100');
+  setTimeout(() => {
+    toast.classList.remove('opacity-100');
+    toast.classList.add('opacity-0', 'pointer-events-none');
+  }, 2500);
 }

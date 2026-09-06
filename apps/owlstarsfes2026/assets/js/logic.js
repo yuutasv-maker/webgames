@@ -55,10 +55,14 @@ const FesLogic = {
    */
   formatTimetable(timetableData, performersData) {
     const isSingleStage = timetableData.every(item => !item.stage);
+    const STAGE_ORDER = ['OWL STAGE', 'STAR STAGE', 'LOFT STREET'];
     const stages = [...new Set(timetableData.map(item => item.stage).filter(Boolean))].sort((a, b) => {
-      if (a === 'STAR STAGE') return -1;
-      if (b === 'STAR STAGE') return 1;
-      return 0;
+      const indexA = STAGE_ORDER.indexOf(a);
+      const indexB = STAGE_ORDER.indexOf(b);
+      if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+      if (indexA !== -1) return -1;
+      if (indexB !== -1) return 1;
+      return a.localeCompare(b);
     });
 
     const performersMap = new Map();

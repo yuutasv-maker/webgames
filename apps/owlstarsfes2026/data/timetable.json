@@ -2,79 +2,85 @@
   {
     "time": "12:00",
     "duration": 50,
-    "stage": "STREET LOFT",
+    "stage": "LOFT STREET",
     "performerId": "p10"
   },
   {
     "time": "13:00",
     "duration": 10,
-    "stage": "STAR STAGE",
+    "stage": "OWL STAGE",
     "performerId": "p01"
   },
   {
-    "time": "13:15",
-    "duration": 25,
-    "stage": "STAR STAGE",
+    "time": "13:20",
+    "duration": 20,
+    "stage": "OWL STAGE",
     "performerId": "p02"
   },
   {
-    "time": "13:45",
-    "duration": 25,
-    "stage": "STAR STAGE",
+    "time": "13:50",
+    "duration": 20,
+    "stage": "OWL STAGE",
     "performerId": "p03"
   },
   {
-    "time": "14:15",
-    "duration": 25,
-    "stage": "STAR STAGE",
-    "performerId": "p04"
+    "time": "14:20",
+    "duration": 20,
+    "stage": "OWL STAGE",
+    "performerId": "p06"
   },
   {
-    "time": "14:45",
-    "duration": 25,
-    "stage": "STAR STAGE",
-    "performerId": "p05"
-  },
-  {
-    "time": "15:10",
-    "duration": 45,
-    "stage": "STREET LOFT",
+    "time": "14:40",
+    "duration": 40,
+    "stage": "LOFT STREET",
     "performerId": "p10"
   },
   {
-    "time": "15:55",
+    "time": "15:20",
     "duration": 15,
-    "stage": "STAR STAGE",
+    "stage": "OWL STAGE",
     "performerId": "p01"
   },
   {
-    "time": "16:30",
-    "duration": 25,
-    "stage": "STAR STAGE",
+    "time": "15:45",
+    "duration": 20,
+    "stage": "OWL STAGE",
+    "performerId": "p04"
+  },
+  {
+    "time": "16:15",
+    "duration": 20,
+    "stage": "OWL STAGE",
+    "performerId": "p05"
+  },
+  {
+    "time": "16:45",
+    "duration": 20,
+    "stage": "OWL STAGE",
     "performerId": "p07"
   },
   {
-    "time": "17:00",
-    "duration": 25,
-    "stage": "STAR STAGE",
-    "performerId": "p08"
-  },
-  {
-    "time": "17:30",
-    "duration": 25,
-    "stage": "STAR STAGE",
-    "performerId": "p09"
-  },
-  {
-    "time": "17:55",
-    "duration": 30,
-    "stage": "STREET LOFT",
+    "time": "17:05",
+    "duration": 40,
+    "stage": "LOFT STREET",
     "performerId": "p10"
   },
   {
-    "time": "18:25",
+    "time": "17:45",
+    "duration": 20,
+    "stage": "OWL STAGE",
+    "performerId": "p09"
+  },
+  {
+    "time": "18:15",
+    "duration": 20,
+    "stage": "OWL STAGE",
+    "performerId": "p08"
+  },
+  {
+    "time": "18:45",
     "duration": 40,
-    "stage": "STAR STAGE",
+    "stage": "OWL STAGE",
     "performerId": "p01"
   }
 ]
