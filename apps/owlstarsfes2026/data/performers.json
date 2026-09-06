@@ -14,7 +14,7 @@
       "facebook": "https://www.facebook.com/inoue.yasuo.71"
     }
   },
-  { "id": "p02", "name": "エルレンジャー", "kana": "えるれんじゃー", "description": "ここに簡単な紹介文", "imageUrl": "./assets/images/el_ranger.jpg" },
+  { "id": "p02", "name": "エルレンジャー", "kana": "えるれんじゃー", "description": "ELLEGARDENの楽曲を中心に演奏するアコースティックカバーユニット「エルレンジャー」。\n原曲へのリスペクトを大切にしながら、アコースティックならではの表現で、一曲一曲丁寧に届けています", "imageUrl": "./assets/images/el_ranger.jpg" },
   { "id": "p03", "name": "ナム＆ぶた", "kana": "なむあんどぶた", "description": "ボーカル「ぶた」の無駄に上手な歌と、10年前に拾ってきた子犬が立派に成長した「ナム」のウクレレ＆咆哮の2人によるエンターテイメントコメディーショー！", "imageUrl": "./assets/images/nam_and_buta.jpg" },
   { "id": "p04", "name": "真夜中のオウルと羊たち", "kana": "まよなかのおうるとひつじたち", "description": "いつもお世話になっているスタジオowlのマスターと、その背中を追いかけてきた後輩3人によるスペシャルバンド。世代を超えて奏でる音で、アットホームながらも熱いステージをお届けします！", "imageUrl": "./assets/images/mayonaka_owl.jpg" },
   { "id": "p05", 
