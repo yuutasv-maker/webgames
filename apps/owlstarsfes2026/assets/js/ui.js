@@ -231,8 +231,7 @@ function renderPerformers(data) {
       </h3>
       <p class="text-sm text-gray-600 leading-relaxed">
         ロフトの奥のスペースにて行われる飛び込みライブ！<br class="hidden sm:inline">
-        最低限の簡易アンプを使用し、熱気あふれるパフォーマンスをお届けします。<br>
-        <span class="text-xs text-blue-700 font-semibold mt-1 inline-block">※ フェスにご入場いただいた方（チケットをお持ちの方）のみご観覧いただけます。</span>
+        最低限の簡易アンプを使用し、熱気あふれるパフォーマンスをお届けします。
       </p>
     </div>
   `;
