@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>セッティングシート作成システム</title>
   <link rel="icon" href="data:,">
-  <link rel="stylesheet" href="style.css?v=3">
+  <link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
   <!-- 画像書き出しの対象となるコンテナ -->
@@ -35,8 +35,9 @@
         </label>
       </div>
       <div id="mode-hint" class="hint-text">
-        💡 機材タップで詳細設定（持込/備考）
+        💡 機材タップで詳細設定
       </div>
+      <button id="btn-tutorial" class="btn-tutorial-trigger" type="button" title="使い方動画を見る">🎬 使い方</button>
     </div>
     <!-- 機材一覧 -->
     <div id="palette" class="palette-area">
@@ -113,6 +114,24 @@
         </tbody>
       </table>
     </div>
+    </div>
+  </div>
+
+  <!-- 使い方チュートリアル動画モーダル -->
+  <div id="tutorial-modal" class="modal hidden">
+    <div class="modal-content tutorial-modal-content">
+      <div class="modal-header">
+        <h3>🎬 使い方（チュートリアル動画）</h3>
+        <button id="btn-close-tutorial" class="btn-close">×</button>
+      </div>
+      <div class="modal-body tutorial-modal-body">
+        <div class="video-wrapper">
+          <video id="tutorial-video" src="assets/tutorial.mp4" controls playsinline muted preload="metadata"></video>
+        </div>
+      </div>
+      <div class="modal-footer" style="margin-top: 10px;">
+        <button id="btn-dismiss-tutorial" class="btn btn-primary" style="width: 100%;">閉じる</button>
+      </div>
     </div>
   </div>
 
@@ -202,6 +221,6 @@
   <script src="html-to-image.min.js"></script>
   <!-- PDF出力用ライブラリ -->
   <script src="jspdf.umd.min.js"></script>
-  <script type="module" src="main.js?v=58"></script>
+  <script type="module" src="main.js?v=60"></script>
 </body>
 </html>

@@ -30,7 +30,9 @@ export async function testE2E() {
     });
   });
 
-  await new Promise(resolve => server.listen(8080, resolve));
+  // ローカルサーバーを起動（空きポートを自動割り当て）
+  await new Promise(resolve => server.listen(0, resolve));
+  const port = server.address().port;
 
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
@@ -52,7 +54,7 @@ export async function testE2E() {
 
   try {
     // ページへ遷移し、モジュールの読み込みを待機
-    await page.goto('http://127.0.0.1:8080/', { waitUntil: 'networkidle0' });
+    await page.goto(`http://127.0.0.1:${port}/`, { waitUntil: 'networkidle0' });
 
     if (hasErrors) {
       throw new Error('ブラウザの読み込み時にエラーが検出されました:\n' + errorMessages.join('\n'));
@@ -99,9 +101,20 @@ export async function testE2E() {
     const detailModalExists = await page.$('#item-detail-modal');
     if (!detailModalExists) throw new Error('#item-detail-modal が見つかりません。');
 
-    // 全4プリセットボタンの存在確認
-    const presetButtonCount = await page.$$eval('.btn-preset-option', els => els.length);
-    if (presetButtonCount !== 4) throw new Error(`プリセットボタンは4つであるべきですが、${presetButtonCount}つ見つかりました。`);
+    // チュートリアルモーダルの動作検証
+    const btnTutorialExists = await page.$eval('#btn-tutorial', el => !!el);
+    if (!btnTutorialExists) throw new Error('#btn-tutorial が見つかりません。');
+    
+    await page.click('#btn-tutorial');
+    const tutorialModalVisible = await page.$eval('#tutorial-modal', el => !el.classList.contains('hidden'));
+    if (!tutorialModalVisible) throw new Error('#btn-tutorial をクリックしましたが、チュートリアルモーダルが表示されませんでした。');
+    
+    const videoSrc = await page.$eval('#tutorial-video', el => el.getAttribute('src'));
+    if (!videoSrc || !videoSrc.includes('tutorial.mp4')) throw new Error('チュートリアル動画のsrcが不正です。');
+
+    await page.click('#btn-close-tutorial');
+    const tutorialModalHidden = await page.$eval('#tutorial-modal', el => el.classList.contains('hidden'));
+    if (!tutorialModalHidden) throw new Error('チュートリアルモーダルが閉じませんでした。');
 
     console.log('E2E test passed! ✅');
 

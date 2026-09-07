@@ -21,7 +21,7 @@ body {
   /* ページ全体の余計なスクロールやバウンスを防ぐ */
   overscroll-behavior-y: none;
   overflow-x: hidden;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -30,6 +30,15 @@ body {
 #export-container {
   background-color: var(--bg-color);
   padding-bottom: 10px;
+  /* 
+   * [Why] スマホ操作時に下部のパレットやフォームへスクロールしても、
+   * ステージ図を常に画面最上部に固定表示させることで、
+   * 上下スワイプの手間をなくし、パレットからの機材配置も常に視界内でスムーズに行えるようにする。
+   */
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .form-header {
@@ -164,10 +173,11 @@ body {
 }
 
 .palette-header {
-  padding: 10px;
+  padding: 8px 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 12px;
   border-bottom: 1px solid var(--border-color);
   font-weight: bold;
   background-color: #f8f9fa;
@@ -358,6 +368,62 @@ body {
   font-weight: bold;
 }
 
+/* 使い方ボタン（控えめで上品なサブボタンスタイル） */
+.btn-tutorial-trigger {
+  background: #ffffff;
+  color: #4b5563;
+  border: 1px solid #d1d5db;
+  border-radius: 5px;
+  padding: 3px 7px;
+  font-size: 11.5px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  white-space: nowrap;
+  box-shadow: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  flex-shrink: 0;
+}
+.btn-tutorial-trigger:hover {
+  background: #f9fafb;
+  border-color: #9ca3af;
+  color: #1f2937;
+}
+.btn-tutorial-trigger:active {
+  background: #f3f4f6;
+}
+
+/* チュートリアル動画モーダル */
+.tutorial-modal-content {
+  max-width: 360px;
+  max-height: 92vh;
+  box-sizing: border-box;
+}
+.tutorial-modal-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 4px 0;
+}
+.video-wrapper {
+  width: 100%;
+  max-height: 65vh;
+  display: flex;
+  justify-content: center;
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+#tutorial-video {
+  width: 100%;
+  max-height: 65vh;
+  object-fit: contain;
+}
+
 /* 持ち込み機材テーブル */
 #bring-in-table-container {
   margin-top: 15px;
@@ -426,11 +492,13 @@ body {
 
 /* ヒントテキスト */
 .hint-text {
-  font-size: 13px;
+  font-size: 12px;
   color: #666;
   margin-left: auto;
+  margin-right: 6px;
   display: flex;
   align-items: center;
+  white-space: nowrap;
 }
 
 /* モーダル内のフォーム・ボタンの調整 */
@@ -489,7 +557,6 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
   width: 100%;
 }
 
@@ -501,6 +568,7 @@ body {
     border-left: 1px solid var(--border-color);
     border-right: 1px solid var(--border-color);
     box-shadow: 0 0 20px rgba(0,0,0,0.05);
+    overflow: hidden;
   }
 
   #export-container {
@@ -511,6 +579,8 @@ body {
     justify-content: flex-start;
     padding: 20px;
     background-color: #f0f2f5;
+    position: static; /* PCでは左右分割のためsticky解除 */
+    box-shadow: none;
   }
 
   .stage-area {

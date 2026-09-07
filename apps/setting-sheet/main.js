@@ -141,6 +141,41 @@ if (btnPresetOptions) {
   });
 }
 
+// チュートリアル動画モーダル制御
+const btnTutorial = document.getElementById('btn-tutorial');
+const tutorialModal = document.getElementById('tutorial-modal');
+const btnCloseTutorial = document.getElementById('btn-close-tutorial');
+const btnDismissTutorial = document.getElementById('btn-dismiss-tutorial');
+const tutorialVideo = document.getElementById('tutorial-video');
+
+function openTutorialModal() {
+  if (tutorialModal) {
+    tutorialModal.classList.remove('hidden');
+    if (tutorialVideo) {
+      tutorialVideo.currentTime = 0;
+      tutorialVideo.play().catch(() => {});
+    }
+  }
+}
+
+function closeTutorialModal() {
+  if (tutorialModal) {
+    tutorialModal.classList.add('hidden');
+    if (tutorialVideo) {
+      tutorialVideo.pause();
+    }
+  }
+}
+
+if (btnTutorial) btnTutorial.addEventListener('click', openTutorialModal);
+if (btnCloseTutorial) btnCloseTutorial.addEventListener('click', closeTutorialModal);
+if (btnDismissTutorial) btnDismissTutorial.addEventListener('click', closeTutorialModal);
+if (tutorialModal) {
+  tutorialModal.addEventListener('click', (e) => {
+    if (e.target === tutorialModal) closeTutorialModal();
+  });
+}
+
 const formatModal = document.getElementById('format-modal');
 const btnCloseFormat = document.getElementById('btn-close-format');
 const btnExportImage = document.getElementById('btn-export-image');

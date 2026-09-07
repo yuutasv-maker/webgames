@@ -9,6 +9,7 @@
     "node-ssh": "^13.2.1"
   },
   "scripts": {
-    "test": "node test.js"
+    "test": "node test.js",
+    "generate-tutorial": "node scripts/generate_tutorial.js"
   }
 }

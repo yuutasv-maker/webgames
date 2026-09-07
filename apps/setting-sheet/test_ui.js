@@ -210,5 +210,8 @@ export function runTests() {
   const nameCell = phantomRows[0].querySelectorAll('td')[0];
   assert.ok(nameCell.textContent.includes('*'), 'Phantom bringIn item name should include * mark');
 
+  // ⑯ CSSで #export-container に position: sticky が設定されていること（スマホ時の上部固定担保）
+  assert.ok(/#export-container\s*\{[^}]*position:\s*sticky/s.test(cssContent), '#export-container must have position: sticky in CSS');
+
   console.log('ui.js tests passed! ✅');
 }
