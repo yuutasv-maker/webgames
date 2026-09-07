@@ -224,14 +224,15 @@ function renderPerformers(data) {
     <!-- STREET STAR（飛び込み路上ライブ） 特集紹介 -->
     <div class="mt-6 md:mt-8 bg-white border border-blue-100 rounded-xl p-6 md:p-8 shadow-md">
       <div class="inline-block bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full mb-2">
-        LOFT STREET 路上ライブ
+        LOFT STREET
       </div>
       <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-2">
         STREET STAR（飛び込み路上ライブ）
       </h3>
       <p class="text-sm text-gray-600 leading-relaxed">
-        スタジオOWLが入居するロフトの1F屋外スペースにて、熱狂の路上飛び込みライブを決行！<br class="hidden sm:inline">
-        通りを行き交う街の人々も巻き込み、生の歌声を響かせます。路上ならではの一期一会のグルーヴをお見逃しなく。
+        ロフトの奥のスペースにて行われる飛び込みライブ！<br class="hidden sm:inline">
+        最低限の簡易アンプを使用し、熱気あふれるパフォーマンスをお届けします。<br>
+        <span class="text-xs text-blue-700 font-semibold mt-1 inline-block">※ フェスにご入場いただいた方（チケットをお持ちの方）のみご観覧いただけます。</span>
       </p>
     </div>
   `;
