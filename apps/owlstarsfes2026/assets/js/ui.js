@@ -223,23 +223,16 @@ function renderPerformers(data) {
 
     <!-- STREET STAR（飛び込み路上ライブ） 特集紹介 -->
     <div class="mt-6 md:mt-8 bg-white border border-blue-100 rounded-xl p-6 md:p-8 shadow-md">
-      <div class="flex flex-col sm:flex-row items-center sm:items-start gap-5">
-        <div class="flex-shrink-0 w-16 h-16 rounded-2xl bg-blue-600 text-white flex items-center justify-center text-3xl shadow-sm">
-          🎸
-        </div>
-        <div class="flex-grow text-center sm:text-left">
-          <div class="inline-block bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full mb-2">
-            LOFT STREET 路上ライブ
-          </div>
-          <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-2">
-            STREET STAR（飛び込み路上ライブ）
-          </h3>
-          <p class="text-sm text-gray-600 leading-relaxed">
-            スタジオOWLが入居するロフトの1F屋外スペースにて、熱狂の路上飛び込みライブを決行！<br class="hidden sm:inline">
-            通りを行き交う街の人々も巻き込み、生の歌声を響かせます。路上ならではの一期一会のグルーヴをお見逃しなく。
-          </p>
-        </div>
+      <div class="inline-block bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full mb-2">
+        LOFT STREET 路上ライブ
       </div>
+      <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-2">
+        STREET STAR（飛び込み路上ライブ）
+      </h3>
+      <p class="text-sm text-gray-600 leading-relaxed">
+        スタジオOWLが入居するロフトの1F屋外スペースにて、熱狂の路上飛び込みライブを決行！<br class="hidden sm:inline">
+        通りを行き交う街の人々も巻き込み、生の歌声を響かせます。路上ならではの一期一会のグルーヴをお見逃しなく。
+      </p>
     </div>
   `;
   el.innerHTML = html;
