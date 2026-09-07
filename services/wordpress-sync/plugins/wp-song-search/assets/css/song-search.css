@@ -1,0 +1,463 @@
+/* =========================================================
+ * イベント用・曲リスト検索システム — スタイル
+ * #song-search-app スコープで閉じ込め（WPテーマと競合防止）
+ * デザイン: 白ベース + コーラル(#d9654c)アクセント
+ * ========================================================= */
+
+/* --- Google Fonts読み込みはHTMLの<link>で行う --- */
+
+/* =========================================================
+ * リセット・ベース（スコープ内のみ）
+ * ========================================================= */
+#song-search-app {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  background: #fff;
+  box-sizing: border-box;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+#song-search-app *,
+#song-search-app *::before,
+#song-search-app *::after {
+  box-sizing: border-box;
+}
+
+/* =========================================================
+ * ヘッダーバナー（コーラル背景）
+ * ========================================================= */
+#song-search-app .ssa-header {
+  background: #d9654c;
+  color: #fff;
+  text-align: center;
+  padding: 18px 16px;
+  margin-bottom: 0;
+}
+
+#song-search-app .ssa-header h1 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+#song-search-app .ssa-header h1::before {
+  content: '🎵 ';
+}
+
+/* =========================================================
+ * 区切り線（HPスタイル再現）
+ * ========================================================= */
+#song-search-app .ssa-divider {
+  border: none;
+  border-top: 2px solid #d9654c;
+  margin: 0;
+}
+
+/* =========================================================
+ * 検索エリア
+ * ========================================================= */
+#song-search-app .ssa-search-area {
+  padding: 20px 16px 0;
+}
+
+#song-search-app .ssa-search-input-wrap {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+#song-search-app .ssa-search-input-wrap::before {
+  content: '🔍';
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.1rem;
+  pointer-events: none;
+}
+
+#song-search-app .ssa-search-input {
+  width: 100%;
+  padding: 14px 14px 14px 44px;
+  font-size: 1rem;
+  font-family: 'Noto Sans JP', sans-serif;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s;
+  /* シニア向け: 大きめのタップ領域 */
+  min-height: 50px;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+#song-search-app .ssa-search-input:focus {
+  border-color: #d9654c;
+}
+
+#song-search-app .ssa-search-input::placeholder {
+  color: #aaa;
+}
+
+/* =========================================================
+ * フィルターセクション（アコーディオン）
+ * ========================================================= */
+#song-search-app .ssa-filter-accordion {
+  margin: 0 16px 16px;
+  background: #fdfdfd;
+  border: 1px solid #eee;
+  border-radius: 8px;
+}
+
+#song-search-app .ssa-filter-summary {
+  padding: 12px 16px;
+  font-weight: 700;
+  color: #555;
+  cursor: pointer;
+  list-style: none; /* Hide default marker */
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.2s, color 0.2s;
+  border-radius: 8px;
+}
+
+#song-search-app .ssa-filter-summary::-webkit-details-marker {
+  display: none; /* Hide default marker in Safari */
+}
+
+#song-search-app .ssa-filter-summary:hover {
+  background: #f5f5f5;
+  color: #d9654c;
+}
+
+#song-search-app .ssa-filter-accordion[open] .ssa-filter-summary {
+  border-bottom: 1px solid #eee;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  color: #d9654c;
+}
+
+#song-search-app .ssa-filter-accordion-content {
+  padding: 16px 0 0;
+}
+
+#song-search-app .ssa-filter-section {
+  padding: 0 16px;
+  margin-bottom: 8px;
+}
+
+#song-search-app .ssa-filter-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #777;
+  margin-bottom: 8px;
+  display: block;
+}
+
+#song-search-app .ssa-filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+#song-search-app .ssa-filter-btn {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-family: 'Noto Sans JP', sans-serif;
+  background: #f0eded;
+  color: #555;
+  border: 1.5px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  /* シニア向け: 最低44px角 */
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+#song-search-app .ssa-filter-btn:hover {
+  background: #f5e6e2;
+  color: #d9654c;
+}
+
+#song-search-app .ssa-filter-btn.active {
+  background: #d9654c;
+  color: #fff;
+  border-color: #d9654c;
+}
+
+/* =========================================================
+ * リセットボタン
+ * ========================================================= */
+#song-search-app .ssa-reset-area {
+  padding: 0 16px 4px;
+  text-align: right;
+}
+
+#song-search-app .ssa-reset-btn {
+  background: none;
+  border: none;
+  color: #999;
+  font-size: 0.85rem;
+  font-family: 'Noto Sans JP', sans-serif;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: color 0.15s, background 0.15s;
+  min-height: 44px;
+}
+
+#song-search-app .ssa-reset-btn:hover {
+  color: #d9654c;
+  background: #f5e6e2;
+}
+
+/* =========================================================
+ * 結果ヘッダー
+ * ========================================================= */
+#song-search-app .ssa-results-header {
+  padding: 12px 16px 8px;
+  font-size: 0.85rem;
+  color: #999;
+}
+
+#song-search-app .ssa-results-count {
+  font-weight: 700;
+  color: #d9654c;
+}
+
+/* =========================================================
+ * 曲リスト
+ * ========================================================= */
+#song-search-app .ssa-song-list {
+  list-style: none;
+  margin: 0;
+  padding: 0 16px 24px;
+}
+
+#song-search-app .ssa-song-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid #eee;
+}
+
+#song-search-app .ssa-song-item:last-child {
+  border-bottom: none;
+}
+
+/* No番号 — コーラル色で目立たせる */
+#song-search-app .ssa-song-no {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fdf0ed;
+  color: #d9654c;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 8px;
+  border-left: 3px solid #d9654c;
+}
+
+#song-search-app .ssa-song-info {
+  flex: 1;
+  min-width: 0;
+}
+
+#song-search-app .ssa-song-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 4px;
+  /* 長いタイトルの折り返し */
+  word-break: break-word;
+}
+
+#song-search-app .ssa-youtube-link {
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 0.75rem;
+  color: #c4302b; /* YouTube Red */
+  text-decoration: none;
+  border: 1px solid #c4302b;
+  border-radius: 4px;
+  padding: 2px 8px;
+  vertical-align: middle;
+  font-weight: normal;
+  transition: all 0.2s;
+}
+
+#song-search-app .ssa-youtube-link:hover {
+  background: #c4302b;
+  color: #fff;
+}
+
+#song-search-app .ssa-lyrics-link {
+  display: inline-block;
+  margin-left: 8px;
+  font-size: 0.75rem;
+  color: #4285F4; /* Google Blue */
+  text-decoration: none;
+  border: 1px solid #4285F4;
+  border-radius: 4px;
+  padding: 2px 8px;
+  vertical-align: middle;
+  font-weight: normal;
+  transition: all 0.2s;
+}
+
+#song-search-app .ssa-lyrics-link:hover {
+  background: #4285F4;
+  color: #fff;
+}
+
+#song-search-app .ssa-song-meta {
+  font-size: 0.82rem;
+  color: #888;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+}
+
+#song-search-app .ssa-song-meta-sep {
+  color: #ccc;
+}
+
+/* =========================================================
+ * 0件メッセージ・エラー表示
+ * ========================================================= */
+#song-search-app .ssa-empty-message {
+  text-align: center;
+  padding: 40px 16px;
+  color: #999;
+  font-size: 0.95rem;
+}
+
+#song-search-app .ssa-error-message {
+  text-align: center;
+  padding: 40px 16px;
+  color: #d9654c;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+/* =========================================================
+ * ローディング
+ * ========================================================= */
+#song-search-app .ssa-loading {
+  text-align: center;
+  padding: 40px 16px;
+  color: #aaa;
+}
+
+#song-search-app .ssa-loading::after {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-left: 8px;
+  border: 2px solid #ddd;
+  border-top-color: #d9654c;
+  border-radius: 50%;
+  animation: ssa-spin 0.8s linear infinite;
+  vertical-align: middle;
+}
+
+@keyframes ssa-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* =========================================================
+ * 非活性状態（CSV取得失敗時）
+ * ========================================================= */
+#song-search-app.ssa-disabled .ssa-search-input,
+#song-search-app.ssa-disabled .ssa-filter-btn,
+#song-search-app.ssa-disabled .ssa-reset-btn {
+  opacity: 0.4;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+/* =========================================================
+ * ページネーション
+ * ========================================================= */
+#song-search-app .ssa-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px;
+  margin-top: 8px;
+}
+
+#song-search-app .ssa-page-btn {
+  background: #fff;
+  border: 1px solid #ddd;
+  color: #555;
+  font-size: 0.9rem;
+  font-family: 'Noto Sans JP', sans-serif;
+  min-width: 40px;
+  min-height: 40px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+  transition: all 0.2s;
+  user-select: none;
+}
+
+#song-search-app .ssa-page-btn:hover:not(:disabled) {
+  background: #fdf0ed;
+  color: #d9654c;
+  border-color: #d9654c;
+}
+
+#song-search-app .ssa-page-btn.active {
+  background: #d9654c;
+  color: #fff;
+  border-color: #d9654c;
+  font-weight: 700;
+  pointer-events: none;
+}
+
+#song-search-app .ssa-page-btn:disabled {
+  background: #f9f9f9;
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+/* =========================================================
+ * レスポンシブ（タブレット以上）
+ * ========================================================= */
+@media (min-width: 600px) {
+  #song-search-app {
+    font-size: 17px;
+  }
+
+  #song-search-app .ssa-header h1 {
+    font-size: 1.5rem;
+  }
+
+  #song-search-app .ssa-song-no {
+    width: 56px;
+    height: 56px;
+    font-size: 1.2rem;
+  }
+}

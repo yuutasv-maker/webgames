@@ -1,0 +1,143 @@
+==================================================
+ スタジオOWL イベント登録フォーム
+ PC:     http://localhost:5001
+ スマホ:  http://192.168.3.17:5001
+ 終了するには Ctrl+C を押してください
+==================================================
+ * Serving Flask app 'event_form_app'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.3.17:5001
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [10/Jun/2026 01:01:30] "HEAD / HTTP/1.1" 200 -
+127.0.0.1 - - [10/Jun/2026 01:01:30] "HEAD /ticket-form HTTP/1.1" 200 -
+127.0.0.1 - - [10/Jun/2026 01:01:30] "HEAD /export-events HTTP/1.1" 200 -
+100.85.116.52 - - [10/Jun/2026 01:02:38] "GET / HTTP/1.1" 200 -
+100.85.116.52 - - [10/Jun/2026 01:02:39] "GET /api/recurring-events HTTP/1.1" 200 -
+100.85.116.52 - - [10/Jun/2026 04:00:22] "[33mGET /apple-touch-icon-precomposed.png HTTP/1.1[0m" 404 -
+100.85.116.52 - - [10/Jun/2026 04:00:22] "GET / HTTP/1.1" 200 -
+100.85.116.52 - - [10/Jun/2026 04:00:22] "[33mGET /apple-touch-icon.png HTTP/1.1[0m" 404 -
+100.85.116.52 - - [10/Jun/2026 04:00:22] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+100.85.116.52 - - [12/Jun/2026 07:05:41] "[33mGET /apple-touch-icon-precomposed.png HTTP/1.1[0m" 404 -
+100.85.116.52 - - [12/Jun/2026 07:05:41] "[33mGET /apple-touch-icon.png HTTP/1.1[0m" 404 -
+100.85.116.52 - - [12/Jun/2026 07:05:41] "GET / HTTP/1.1" 200 -
+100.85.116.52 - - [12/Jun/2026 07:05:41] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+100.85.116.52 - - [12/Jun/2026 08:57:17] "GET / HTTP/1.1" 200 -
+100.85.116.52 - - [12/Jun/2026 08:57:18] "GET /api/recurring-events HTTP/1.1" 200 -
+100.85.116.52 - - [13/Jun/2026 14:31:22] "GET / HTTP/1.1" 200 -
+100.85.116.52 - - [13/Jun/2026 14:31:23] "GET /api/recurring-events HTTP/1.1" 200 -
+100.85.116.52 - - [14/Jun/2026 12:53:27] "[33mGET /apple-touch-icon-precomposed.png HTTP/1.1[0m" 404 -
+100.85.116.52 - - [14/Jun/2026 12:53:27] "GET / HTTP/1.1" 200 -
+100.85.116.52 - - [14/Jun/2026 12:53:27] "[33mGET /apple-touch-icon.png HTTP/1.1[0m" 404 -
+100.85.116.52 - - [14/Jun/2026 12:53:27] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+100.85.116.52 - - [14/Jun/2026 18:05:23] "GET / HTTP/1.1" 200 -
+100.85.116.52 - - [14/Jun/2026 18:05:25] "GET /api/recurring-events HTTP/1.1" 200 -
+成功: 生オケ！フォーク酒場 [publish]  (ID: 2260)
+100.85.116.52 - - [14/Jun/2026 18:05:43] "POST /api/submit HTTP/1.1" 200 -
+100.85.116.52 - - [14/Jun/2026 18:11:05] "GET / HTTP/1.1" 200 -
+100.85.116.52 - - [14/Jun/2026 18:11:05] "GET /api/recurring-events HTTP/1.1" 200 -
+100.85.116.52 - - [14/Jun/2026 18:25:12] "GET / HTTP/1.1" 200 -
+100.85.116.52 - - [14/Jun/2026 18:25:12] "GET /api/recurring-events HTTP/1.1" 200 -
+100.85.116.52 - - [16/Jun/2026 13:53:41] "[33mGET /apple-touch-icon-precomposed.png HTTP/1.1[0m" 404 -
+100.85.116.52 - - [16/Jun/2026 13:53:41] "GET / HTTP/1.1" 200 -
+100.85.116.52 - - [16/Jun/2026 13:53:41] "[33mGET /apple-touch-icon.png HTTP/1.1[0m" 404 -
+100.85.116.52 - - [16/Jun/2026 13:53:41] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+100.85.116.52 - - [18/Jun/2026 09:53:36] "GET / HTTP/1.1" 200 -
+100.85.116.52 - - [18/Jun/2026 09:53:37] "GET /api/recurring-events HTTP/1.1" 200 -
+画像アップロード成功: IMG_6668.jpeg (Media ID: 2261)
+100.85.116.52 - - [18/Jun/2026 09:56:32] "POST /api/upload-image HTTP/1.1" 200 -
+成功: SPECIAL 2MAN SHOW ニシオシンジ × 聞間拓 [publish] [PickUp] (ID: 2262)
+  > アイキャッチ画像を設定しました (Media ID: 2261)
+100.85.116.52 - - [18/Jun/2026 09:56:40] "POST /api/submit HTTP/1.1" 200 -
+100.85.116.52 - - [18/Jun/2026 14:42:41] "[33mGET /apple-touch-icon-precomposed.png HTTP/1.1[0m" 404 -
+100.85.116.52 - - [18/Jun/2026 14:42:41] "[33mGET /apple-touch-icon.png HTTP/1.1[0m" 404 -
+100.85.116.52 - - [18/Jun/2026 14:42:41] "GET / HTTP/1.1" 200 -
+100.85.116.52 - - [18/Jun/2026 14:42:41] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+100.85.116.52 - - [18/Jun/2026 19:31:19] "GET / HTTP/1.1" 200 -
+100.85.116.52 - - [18/Jun/2026 19:31:19] "GET /api/recurring-events HTTP/1.1" 200 -
+画像アップロード成功: 260712.jpeg (Media ID: 2264)
+100.85.116.52 - - [18/Jun/2026 19:33:21] "POST /api/upload-image HTTP/1.1" 200 -
+成功: KEEWO20周年続「赤いリンゴ」ツアー松山編 [publish] [PickUp] (ID: 2265)
+  > アイキャッチ画像を設定しました (Media ID: 2264)
+100.85.116.52 - - [18/Jun/2026 19:33:28] "POST /api/submit HTTP/1.1" 200 -
+100.85.116.52 - - [18/Jun/2026 19:35:38] "GET / HTTP/1.1" 200 -
+100.85.116.52 - - [18/Jun/2026 19:35:38] "GET /api/recurring-events HTTP/1.1" 200 -
+成功: リセッツナイト [publish]  (ID: 2267)
+100.85.116.52 - - [18/Jun/2026 19:37:23] "POST /api/submit HTTP/1.1" 200 -
+100.85.116.52 - - [20/Jun/2026 07:51:36] "GET / HTTP/1.1" 200 -
+100.85.116.52 - - [20/Jun/2026 07:51:36] "GET /api/recurring-events HTTP/1.1" 200 -
+100.85.116.52 - - [20/Jun/2026 20:37:45] "[33mGET /apple-touch-icon-precomposed.png HTTP/1.1[0m" 404 -
+100.85.116.52 - - [20/Jun/2026 20:37:45] "GET / HTTP/1.1" 200 -
+100.85.116.52 - - [20/Jun/2026 20:37:45] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+100.85.116.52 - - [20/Jun/2026 20:37:45] "[33mGET /apple-touch-icon.png HTTP/1.1[0m" 404 -
+100.85.116.52 - - [20/Jun/2026 21:00:35] "GET / HTTP/1.1" 200 -
+100.85.116.52 - - [20/Jun/2026 21:00:36] "GET /api/recurring-events HTTP/1.1" 200 -
+画像アップロード成功: 71B7E599-EE1E-429C-B083-3EF61EF9F74D.png (Media ID: 2268)
+100.85.116.52 - - [20/Jun/2026 21:01:49] "POST /api/upload-image HTTP/1.1" 200 -
+成功: ロックンロール叫ぶ vol.2 [publish] [PickUp] (ID: 2269)
+  > アイキャッチ画像を設定しました (Media ID: 2268)
+100.85.116.52 - - [20/Jun/2026 21:02:24] "POST /api/submit HTTP/1.1" 200 -
+100.85.116.52 - - [20/Jun/2026 22:59:06] "GET / HTTP/1.1" 200 -
+100.85.116.52 - - [20/Jun/2026 22:59:06] "GET /api/recurring-events HTTP/1.1" 200 -
+100.85.116.52 - - [21/Jun/2026 06:12:59] "GET / HTTP/1.1" 200 -
+100.85.116.52 - - [21/Jun/2026 06:12:59] "GET /api/recurring-events HTTP/1.1" 200 -
+100.85.116.52 - - [23/Jun/2026 04:06:21] "[33mGET /apple-touch-icon-precomposed.png HTTP/1.1[0m" 404 -
+100.85.116.52 - - [23/Jun/2026 04:06:21] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+100.85.116.52 - - [23/Jun/2026 04:06:21] "[33mGET /apple-touch-icon.png HTTP/1.1[0m" 404 -
+100.85.116.52 - - [23/Jun/2026 04:06:21] "GET / HTTP/1.1" 200 -
+100.85.116.52 - - [23/Jun/2026 08:37:43] "GET / HTTP/1.1" 200 -
+100.85.116.52 - - [23/Jun/2026 08:37:44] "GET /api/recurring-events HTTP/1.1" 200 -
+100.85.116.52 - - [23/Jun/2026 08:38:02] "GET / HTTP/1.1" 200 -
+100.85.116.52 - - [23/Jun/2026 08:38:03] "GET /api/recurring-events HTTP/1.1" 200 -
+100.85.116.52 - - [23/Jun/2026 08:38:03] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+100.85.116.52 - - [23/Jun/2026 08:38:03] "[33mGET /apple-touch-icon-precomposed.png HTTP/1.1[0m" 404 -
+100.85.116.52 - - [23/Jun/2026 08:38:03] "[33mGET /apple-touch-icon.png HTTP/1.1[0m" 404 -
+100.85.116.52 - - [23/Jun/2026 08:38:03] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+100.85.116.52 - - [23/Jun/2026 08:49:29] "GET / HTTP/1.1" 200 -
+100.85.116.52 - - [23/Jun/2026 08:49:30] "GET /api/recurring-events HTTP/1.1" 200 -
+100.85.116.52 - - [23/Jun/2026 13:59:14] "GET / HTTP/1.1" 200 -
+100.85.116.52 - - [23/Jun/2026 13:59:15] "GET /api/recurring-events HTTP/1.1" 200 -
+画像アップロード成功: IMG_6755.jpeg (Media ID: 2271)
+100.85.116.52 - - [23/Jun/2026 14:00:16] "POST /api/upload-image HTTP/1.1" 200 -
+成功: TIMELESS VOICES [publish] [PickUp] (ID: 2272)
+  > アイキャッチ画像を設定しました (Media ID: 2271)
+100.85.116.52 - - [23/Jun/2026 14:00:25] "POST /api/submit HTTP/1.1" 200 -
+100.85.116.52 - - [24/Jun/2026 19:12:50] "GET / HTTP/1.1" 200 -
+100.85.116.52 - - [24/Jun/2026 19:12:50] "GET /api/recurring-events HTTP/1.1" 200 -
+100.85.116.52 - - [24/Jun/2026 19:13:04] "GET / HTTP/1.1" 200 -
+100.85.116.52 - - [24/Jun/2026 19:13:04] "GET /api/recurring-events HTTP/1.1" 200 -
+成功: お昼間フリーライブ(ドラムOK) [publish]  (ID: 2277)
+100.85.116.52 - - [24/Jun/2026 19:13:32] "POST /api/submit HTTP/1.1" 200 -
+100.85.116.52 - - [24/Jun/2026 19:58:44] "GET /api/recurring-events HTTP/1.1" 200 -
+100.85.116.52 - - [24/Jun/2026 21:02:58] "GET /api/recurring-events HTTP/1.1" 200 -
+100.85.116.52 - - [25/Jun/2026 03:54:23] "GET /api/recurring-events HTTP/1.1" 200 -
+100.85.116.52 - - [25/Jun/2026 11:08:11] "[33mGET /apple-touch-icon-precomposed.png HTTP/1.1[0m" 404 -
+100.85.116.52 - - [25/Jun/2026 11:08:11] "GET / HTTP/1.1" 200 -
+100.85.116.52 - - [25/Jun/2026 11:08:11] "[33mGET /apple-touch-icon.png HTTP/1.1[0m" 404 -
+100.85.116.52 - - [25/Jun/2026 11:08:11] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+100.85.116.52 - - [25/Jun/2026 21:10:19] "GET / HTTP/1.1" 200 -
+100.85.116.52 - - [25/Jun/2026 21:10:20] "GET /api/recurring-events HTTP/1.1" 200 -
+画像アップロード成功: IMG_6789.jpeg (Media ID: 2278)
+100.85.116.52 - - [25/Jun/2026 21:13:28] "POST /api/upload-image HTTP/1.1" 200 -
+成功: ワタナベマモル 〜 R&R July 〜 TOUR 2026 [publish] [PickUp] (ID: 2279)
+  > アイキャッチ画像を設定しました (Media ID: 2278)
+100.85.116.52 - - [25/Jun/2026 21:13:39] "POST /api/submit HTTP/1.1" 200 -
+100.85.116.52 - - [25/Jun/2026 21:31:07] "GET / HTTP/1.1" 200 -
+100.85.116.52 - - [25/Jun/2026 21:31:08] "GET /api/recurring-events HTTP/1.1" 200 -
+成功: 沖縄ナイト [publish]  (ID: 2281)
+100.85.116.52 - - [25/Jun/2026 21:42:23] "POST /api/submit HTTP/1.1" 200 -
+成功: ゆずdeナイト [publish] [PickUp] (ID: 2282)
+100.85.116.52 - - [25/Jun/2026 21:43:00] "POST /api/submit HTTP/1.1" 200 -
+100.85.116.52 - - [25/Jun/2026 23:31:27] "GET / HTTP/1.1" 200 -
+100.85.116.52 - - [25/Jun/2026 23:31:28] "GET /api/recurring-events HTTP/1.1" 200 -
+100.85.116.52 - - [25/Jun/2026 23:37:28] "GET / HTTP/1.1" 200 -
+100.85.116.52 - - [25/Jun/2026 23:37:29] "GET /api/recurring-events HTTP/1.1" 200 -
+100.85.116.52 - - [25/Jun/2026 23:37:40] "GET / HTTP/1.1" 200 -
+100.85.116.52 - - [25/Jun/2026 23:37:40] "GET /api/recurring-events HTTP/1.1" 200 -
+100.85.116.52 - - [25/Jun/2026 23:44:19] "GET / HTTP/1.1" 200 -
+100.85.116.52 - - [25/Jun/2026 23:44:20] "GET /api/recurring-events HTTP/1.1" 200 -
+127.0.0.1 - - [25/Jun/2026 23:44:57] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [25/Jun/2026 23:44:57] "GET /api/recurring-events HTTP/1.1" 200 -
+127.0.0.1 - - [25/Jun/2026 23:44:58] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
