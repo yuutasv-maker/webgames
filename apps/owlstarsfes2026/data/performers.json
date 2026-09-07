@@ -28,7 +28,7 @@
       "facebook": "https://www.facebook.com/Lettermore.Lads/"
     }
   },
-  { "id": "p06", "name": "あーすけ", "kana": "あーすけ", "description": "ここに簡単な紹介文", "imageUrl": "" },
+  { "id": "p06", "name": "TAS!", "kana": "たす", "description": "ここに簡単な紹介文", "imageUrl": "" },
   { "id": "p07", "name": "ユーチーコーチー", "kana": "ゆーちーこーちー", "description": "奥田民生さんをリスペクトしている二人組です。奥田民生さんの曲のカバーがメインですがオリジナルもやります！", "imageUrl": "./assets/images/yuchi_kochi.jpg" },
   { 
     "id": "p08", 
