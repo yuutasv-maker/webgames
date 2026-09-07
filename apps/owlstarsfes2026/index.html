@@ -19,6 +19,16 @@
   <link rel="icon" type="image/png" href="./assets/images/logo.png">
   <link rel="apple-touch-icon" href="./assets/images/logo.png">
 
+  <!-- Google Analytics 4 (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    // 本番環境の測定ID（G-XXXXXXXXXX）に置き換えて使用
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
   <!-- Tailwind CSS (Play CDN for MVP without build step) -->
   <script src="https://cdn.tailwindcss.com"></script>
   
@@ -286,7 +296,7 @@
         actionには既存フォームが送信されるエンドポイント（/チケット予約/#wpcf7-fXXXX-pXXXX-o1）を指定します。
         今回はMVPのため、一般的なCF7のPOST先を仮置きしています。
       -->
-      <form action="https://owl21.info/チケット予約/#wpcf7-f123-p456-o1" method="post" class="wpcf7-form space-y-6">
+      <form id="ticket-form" action="https://owl21.info/チケット予約/#wpcf7-f123-p456-o1" method="post" class="wpcf7-form space-y-6">
         <div class="hidden">
           <input type="hidden" name="_wpcf7" value="123">
           <input type="hidden" name="_wpcf7_version" value="5.7">

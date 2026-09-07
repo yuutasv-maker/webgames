@@ -106,6 +106,22 @@ const FesLogic = {
       baseHour,
       totalHours
     };
+  },
+
+  /**
+   * GA4チケット予約完了カスタムイベントを送信します。
+   * @param {Function} gtagFn - gtag関数
+   * @param {string} [eventName='inoue_yasuo_burger_fes_2026'] - イベントパラメータ event_name
+   * @returns {boolean} - 送信成功可否
+   */
+  trackReserveTicket(gtagFn, eventName = 'inoue_yasuo_burger_fes_2026') {
+    if (typeof gtagFn === 'function') {
+      gtagFn('event', 'reserve_ticket', {
+        event_name: eventName
+      });
+      return true;
+    }
+    return false;
   }
 };
 

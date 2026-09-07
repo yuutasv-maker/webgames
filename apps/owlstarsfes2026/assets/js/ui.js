@@ -440,6 +440,15 @@ function renderForm(infoData) {
         const result = await response.json();
 
         if (result.status === 'mail_sent') {
+          // GA4 カスタムイベント送信 (spec.md 要件)
+          if (typeof FesLogic !== 'undefined' && typeof gtag === 'function') {
+            FesLogic.trackReserveTicket(gtag);
+          } else if (typeof gtag === 'function') {
+            gtag('event', 'reserve_ticket', {
+              event_name: 'inoue_yasuo_burger_fes_2026'
+            });
+          }
+
           alert('予約申し込みを受け付けました。');
           form.reset();
         } else {

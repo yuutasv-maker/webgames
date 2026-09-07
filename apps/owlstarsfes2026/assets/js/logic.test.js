@@ -118,4 +118,31 @@ describe('FesLogic', () => {
       await expect(FesLogic.fetchEventData('./data/404.json')).rejects.toThrow('HTTP error! status: 404');
     });
   });
+
+  describe('trackReserveTicket', () => {
+    it('gtag関数が存在する場合、reserve_ticketカスタムイベントを送信する', () => {
+      const mockGtag = jest.fn();
+      const result = FesLogic.trackReserveTicket(mockGtag);
+
+      expect(result).toBe(true);
+      expect(mockGtag).toHaveBeenCalledTimes(1);
+      const callArgs = mockGtag.mock.calls[0];
+      expect(callArgs[0]).toBe('event');
+      expect(callArgs[1]).toBe('reserve_ticket');
+      expect(callArgs[2].event_name).toBe('inoue_yasuo_burger_fes_2026');
+    });
+
+    it('カスタムイベント名を指定して送信できる', () => {
+      const mockGtag = jest.fn();
+      const result = FesLogic.trackReserveTicket(mockGtag, 'custom_event_name');
+
+      expect(result).toBe(true);
+      expect(mockGtag.mock.calls[0][2].event_name).toBe('custom_event_name');
+    });
+
+    it('gtag関数が渡されない場合はfalseを返し例外をスローしない', () => {
+      expect(FesLogic.trackReserveTicket(null)).toBe(false);
+      expect(FesLogic.trackReserveTicket(undefined)).toBe(false);
+    });
+  });
 });
