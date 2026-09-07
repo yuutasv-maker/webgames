@@ -289,7 +289,35 @@
           チケット予約
         </h2>
       </div>
-      <p class="text-center text-gray-600 mb-8">以下のフォームよりご予約をお願いいたします。予約完了後、確認メールが送信されます。</p>
+      <!-- ご予約前のご案内 -->
+      <div class="bg-blue-50/80 border border-blue-200 rounded-xl p-6 mb-8 max-w-2xl mx-auto text-left">
+        <h3 class="text-base font-bold text-blue-900 mb-3 flex items-center gap-2">
+          <svg class="w-5 h-5 text-blue-600 inline-block flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          チケット予約・ご来場のご案内
+        </h3>
+        <ul class="text-sm text-gray-700 space-y-2 leading-relaxed">
+          <li class="flex items-start gap-2">
+            <span class="text-blue-600 font-bold">●</span>
+            <span><strong>チケット料金：</strong>2,500円（ドリンク代別）</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-blue-600 font-bold">●</span>
+            <span><strong>お支払い方法：</strong>公演当日、会場受付にてご精算いただきます（事前決済不要）。</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-blue-600 font-bold">●</span>
+            <span><strong>来場特典：</strong>チケットご予約者全員に「入場券を兼ねたFES特製缶バッジ」をプレゼント！</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-blue-600 font-bold">●</span>
+            <span><strong>お子様のご入場：</strong>小学生以下のお子様は入場無料です。</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-blue-600 font-bold">●</span>
+            <span><strong>フード出店：</strong>スタンドピクルスは屋外特設ブースのため、チケット不要でどなたでもご利用いただけます。</span>
+          </li>
+        </ul>
+      </div>
       
       <!-- 
         NOTE: 既存のWordPressのContact Form 7に送信するためのHTMLフォームを直接記述。
@@ -329,23 +357,24 @@
         <div>
           <label for="ticket-count" class="block text-sm font-bold text-gray-700 mb-2">予約枚数 (必須)</label>
           <select id="ticket-count" name="ticket-count" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-            <option value="1">1枚</option>
-            <option value="2">2枚</option>
-            <option value="3">3枚</option>
-            <option value="4">4枚</option>
+            <option value="1">1枚（2,500円）</option>
+            <option value="2">2枚（5,000円）</option>
+            <option value="3">3枚（7,500円）</option>
+            <option value="4">4枚（10,000円）</option>
             <option value="5">5枚以上（備考欄にご記入ください）</option>
           </select>
         </div>
         
         <div>
           <label for="your-message" class="block text-sm font-bold text-gray-700 mb-2">備考・メッセージ</label>
-          <textarea id="your-message" name="your-message" rows="4" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+          <textarea id="your-message" name="your-message" rows="4" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="お目当てのアーティストやご質問など"></textarea>
         </div>
         
         <div class="text-center pt-4">
           <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-10 rounded-full shadow-lg transition transform hover:-translate-y-1 text-lg">
-            予約を送信する
+            チケットを予約する（当日会場精算）
           </button>
+          <p class="text-xs text-gray-500 mt-3">※ 送信後、ご入力いただいたメールアドレスに受付確認メールが届きます。</p>
         </div>
       </form>
     </section>
