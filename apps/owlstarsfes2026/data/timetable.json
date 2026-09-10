@@ -1,6 +1,12 @@
 [
   {
     "time": "12:00",
+    "duration": 60,
+    "stage": "OWL STAGE",
+    "performerId": "p00"
+  },
+  {
+    "time": "12:00",
     "duration": 50,
     "stage": "LOFT STREET",
     "performerId": "p10"

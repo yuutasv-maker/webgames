@@ -160,9 +160,9 @@ function renderPerformers(data) {
   const el = document.getElementById('performers-content');
   if (!el) return;
 
-  // ソート処理: メインゲスト優先、以降はkana（50音）順
+  // ソート処理: メインゲスト優先、以降はkana（50音）順（飛び込み路上ライブp10と開場p00は除外）
   const sortedData = [...data]
-    .filter(p => p.id !== 'p10')
+    .filter(p => p.id !== 'p10' && p.id !== 'p00')
     .sort((a, b) => {
     if (a.isMainGuest && !b.isMainGuest) return -1;
     if (!a.isMainGuest && b.isMainGuest) return 1;
@@ -332,15 +332,22 @@ function renderTimetable(formattedData) {
         const topPx = act.startMins * MINUTE_HEIGHT;
         const heightPx = act.durationMins * MINUTE_HEIGHT;
         const isMainGuest = act.performerId === 'p01';
+        const isDoorsOpen = act.performerId === 'p00';
         
-        const finalCardClasses = isMainGuest 
-          ? 'bg-gradient-to-br from-yellow-300 via-yellow-400 to-yellow-600 text-yellow-900 border-2 border-yellow-200 shadow-[0_0_15px_rgba(250,204,21,0.6)]' 
-          : `${cardColorClasses} border border-white shadow-sm`;
+        let finalCardClasses = `${cardColorClasses} border border-white shadow-sm`;
+        if (isMainGuest) {
+          finalCardClasses = 'bg-gradient-to-br from-yellow-300 via-yellow-400 to-yellow-600 text-yellow-900 border-2 border-yellow-200 shadow-[0_0_15px_rgba(250,204,21,0.6)]';
+        } else if (isDoorsOpen) {
+          finalCardClasses = 'bg-slate-100 text-slate-700 border border-slate-300 shadow-2xs';
+        }
           
+        const timeBadgeClasses = isDoorsOpen ? 'bg-slate-200 text-slate-700' : 'bg-white/40';
+        const titleClasses = isDoorsOpen ? 'text-slate-800' : '';
+
         return `
           <div class="absolute left-0.5 right-0.5 md:left-1 md:right-1 ${finalCardClasses} rounded-md p-1 md:p-2 overflow-hidden flex flex-col justify-center z-10 transition transform hover:scale-105 hover:z-20" style="top: ${topPx}px; height: ${heightPx}px;">
-            <div class="text-[10px] md:text-xs font-bold bg-white/40 inline-block px-1 rounded self-start mb-0.5 md:mb-1">${escapeHtml(act.time)}</div>
-            <div class="font-bold text-xs md:text-base leading-tight md:leading-normal">${escapeHtml(act.performer?.name || 'Unknown')}</div>
+            <div class="text-[10px] md:text-xs font-bold ${timeBadgeClasses} inline-block px-1 rounded self-start mb-0.5 md:mb-1">${escapeHtml(act.time)}</div>
+            <div class="font-bold text-xs md:text-base leading-tight md:leading-normal ${titleClasses}">${escapeHtml(act.performer?.name || '開場')}</div>
           </div>
         `;
       }).join('');
