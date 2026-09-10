@@ -7,7 +7,6 @@ const ssh = new NodeSSH();
 
 const deployFiles = [
   'index.html',
-  'flyer_mockup.html',
   'assets',
   'data'
 ];
@@ -33,6 +32,9 @@ async function deploy() {
     });
 
     console.log('✅ SSH接続に成功しました！ファイルの転送を開始します...');
+
+    // フライヤーやモックアップ等の非公開ファイルをリモートサーバーから確実にクリーンアップ
+    await ssh.execCommand(`rm -f ${DEPLOY_PATH}/flyer_mockup.html ${DEPLOY_PATH}/hero_mockups.html`);
 
     for (const item of deployFiles) {
       const localPath = path.resolve(__dirname, item);
