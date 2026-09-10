@@ -92,48 +92,55 @@ function renderInfo(data) {
 
   const html = `
     <div class="bg-white p-6 rounded-xl shadow-md mb-8">
-      <dl class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="col-span-1 md:col-span-2 pb-2 border-b">
-          <dt class="font-semibold text-gray-600">イベント名</dt>
-          <dd class="text-xl font-bold">${escapeHtml(data.festivalName)}</dd>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- イベント名 -->
+        <div class="col-span-1 md:col-span-2 pb-3 border-b border-gray-100">
+          <h3 class="text-xl md:text-2xl font-black text-gray-900 leading-tight">${escapeHtml(data.festivalName)}</h3>
         </div>
-        <div class="pb-2 md:pb-0 border-b md:border-b-0 md:border-r pr-0 md:pr-4 pt-2">
-          <dt class="font-semibold text-gray-600 flex items-center justify-between">
-            <span>日時</span>
+
+        <!-- 日時 -->
+        <div class="pb-4 md:pb-0 border-b md:border-b-0 md:border-r pr-0 md:pr-4">
+          <div class="flex items-start justify-between gap-2">
+            <div class="text-base md:text-lg font-bold text-gray-800 leading-snug">
+              ${escapeHtml(data.date).replace(/\n/g, '<br>')}
+            </div>
             <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=%E4%BA%95%E4%B8%8A%E3%83%A4%E3%82%B9%E3%82%AA%E3%83%90%E3%83%BC%E3%82%AC%E3%83%BC%20OWL-STARS%20FESTIVAL%202026&dates=20261101T030000Z/20261101T103000Z&details=%E4%BC%9A%E5%A0%B4%EF%BC%9A%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AAOWL%0A%E8%A9%B3%E7%B4%B0%E3%83%BB%E3%82%BF%E3%82%A4%E3%83%A0%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB%EF%BC%9Ahttps%3A%2F%2Fowl21.info%2Fowlstarsfes2026%2F&location=%E3%82%B9%E3%82%BF%E3%82%B8%E3%82%AAOWL%EF%BC%88%E6%84%9B%E5%AA%9B%E7%9C%8C%E6%9D%BE%E5%B1%B1%E5%B8%82%E4%B8%89%E7%95%AA%E7%94%BA%E4%B8%89%E4%B8%81%E7%9B%AE6-2%20ab%E2%80%99s%20square%EF%BC%92%EF%BC%A6%EF%BC%89" 
                target="_blank" rel="noopener noreferrer" 
-               class="text-xs font-normal text-gray-500 hover:text-blue-600 inline-flex items-center space-x-1 border border-gray-200 hover:border-blue-300 rounded px-2 py-0.5 transition bg-gray-50 hover:bg-white" 
+               class="text-xs font-normal text-gray-500 hover:text-blue-600 inline-flex items-center space-x-1 border border-gray-200 hover:border-blue-300 rounded px-2 py-1 transition bg-gray-50 hover:bg-white flex-shrink-0" 
                title="Googleカレンダーに予定を登録">
               <svg class="w-3.5 h-3.5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
               <span>カレンダーに追加</span>
             </a>
-          </dt>
-          <dd class="text-lg mt-1">${escapeHtml(data.date).replace(/\n/g, '<br>')}</dd>
+          </div>
         </div>
-        <div class="pt-2 pl-0 md:pl-4">
-          <dt class="font-semibold text-gray-600">会場</dt>
-          <dd class="text-lg">
-            ${escapeHtml(data.venue.name)}<br>
-            <span class="text-sm text-gray-500">${escapeHtml(data.venue.address)}</span>
-            ${data.venue.mapUrl ? `<br><a href="${escapeHtml(data.venue.mapUrl)}" target="_blank" class="text-blue-500 text-sm hover:underline">Google Maps</a>` : ''}
-          </dd>
+
+        <!-- 会場 -->
+        <div class="pl-0 md:pl-4">
+          <div class="text-base md:text-lg font-bold text-gray-800">
+            ${escapeHtml(data.venue.name)}
+          </div>
+          <div class="text-sm text-gray-500 mt-0.5">
+            ${escapeHtml(data.venue.address)}
+          </div>
+          ${data.venue.mapUrl ? `<div class="mt-1"><a href="${escapeHtml(data.venue.mapUrl)}" target="_blank" rel="noopener noreferrer" class="text-blue-500 text-sm hover:underline inline-flex items-center gap-1"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>Google Maps</a></div>` : ''}
         </div>
+
+        <!-- チケット -->
         <div class="col-span-1 md:col-span-2 pt-4 border-t border-gray-100">
-          <dt class="font-semibold text-gray-600">チケット</dt>
-          <dd class="text-lg">
-            ${data.tickets.price ? escapeHtml(data.tickets.price) : [data.tickets.advance, data.tickets.door].filter(Boolean).map(escapeHtml).join(' / ')}<br>
-            ${data.tickets.notes && data.tickets.notes.length > 0 ? `
-              <ul class="text-sm text-gray-500 mt-1 space-y-1">
-                ${data.tickets.notes.map(n => {
-                  const isNote = n.startsWith('※');
-                  return isNote 
-                    ? `<li class="list-none text-xs text-gray-400 mt-1">${escapeHtml(n)}</li>` 
-                    : `<li class="list-disc ml-5">${escapeHtml(n)}</li>`;
-                }).join('')}
-              </ul>` : ''}
-          </dd>
+          <div class="text-base md:text-lg font-bold text-gray-900">
+            ${data.tickets.price ? escapeHtml(data.tickets.price) : [data.tickets.advance, data.tickets.door].filter(Boolean).map(escapeHtml).join(' / ')}
+          </div>
+          ${data.tickets.notes && data.tickets.notes.length > 0 ? `
+            <ul class="text-sm text-gray-500 mt-2 space-y-1">
+              ${data.tickets.notes.map(n => {
+                const isNote = n.startsWith('※');
+                return isNote 
+                  ? `<li class="list-none text-xs text-gray-400 mt-1">${escapeHtml(n)}</li>` 
+                  : `<li class="list-disc ml-5">${escapeHtml(n)}</li>`;
+              }).join('')}
+            </ul>` : ''}
         </div>
-      </dl>
+      </div>
     </div>
   `;
   el.innerHTML = html;
