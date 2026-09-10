@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>フライヤーモックアップ - 井上ヤスオバーガー OWL-STARS FESTIVAL 2026</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Noto+Sans+JP:wght@500;700;900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background-color: #0f172a;
+    }
+    .font-en {
+      font-family: 'Montserrat', sans-serif;
+    }
+    .a4-sheet {
+      width: 794px;
+      height: 1123px;
+      margin: 20px auto;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+      position: relative;
+      overflow: hidden;
+      background: #ffffff;
+    }
+    @media print {
+      body { background: none; margin: 0; padding: 0; }
+      .a4-sheet { margin: 0; box-shadow: none; page-break-after: always; }
+      .no-print { display: none; }
+    }
+  </style>
+</head>
+<body class="py-10 text-gray-800">
+
+  <div class="max-w-4xl mx-auto mb-6 text-center text-white no-print">
+    <h1 class="text-2xl font-bold mb-2">A4フライヤー デザインモックアップ（案A：フェス・トリコロール）</h1>
+    <p class="text-sm text-gray-400">HPのデザイン・カラー・アセットと完全連動した印刷・告知用デザインです。</p>
+  </div>
+
+  <!-- ==================== 表面 (FRONT) ==================== -->
+  <div class="a4-sheet flex flex-col justify-between p-8 relative">
+    
+    <!-- 背景装飾グラデーションヘッダー -->
+    <div class="absolute top-0 left-0 right-0 h-44 bg-gradient-to-r from-blue-700 via-indigo-600 to-red-600"></div>
+    <div class="absolute top-44 left-0 right-0 h-3 bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-500 shadow-sm"></div>
+
+    <!-- ヘッダーエリア -->
+    <div class="relative z-10 text-white text-center pt-2">
+      <!-- キャッチコピー -->
+      <div class="inline-block bg-black/40 backdrop-blur-sm px-6 py-1.5 rounded-full border border-white/30 text-amber-300 font-bold tracking-widest text-sm mb-3 shadow-md">
+        ★ スタジオOWL 24周年イベント第一弾！ ★
+      </div>
+
+      <div class="flex items-center justify-center gap-6">
+        <!-- ロゴマーク -->
+        <img src="./assets/images/logo.png" alt="OWL-STARS FES Logo" class="w-28 h-28 drop-shadow-xl">
+        <div class="text-left">
+          <p class="font-en font-black text-amber-300 text-xs tracking-widest uppercase mb-0.5">Studio OWL 24th Anniversary Special Fes</p>
+          <h2 class="text-2xl font-black tracking-tight leading-none text-white drop-shadow">井上ヤスオバーガー</h2>
+          <h1 class="font-en text-3xl font-black tracking-tighter text-white drop-shadow-md">OWL-STARS FESTIVAL 2026</h1>
+        </div>
+      </div>
+    </div>
+
+    <!-- 開催日時 & 会場バナー -->
+    <div class="relative z-10 mt-6 bg-slate-900 text-white rounded-xl p-4 shadow-lg flex items-center justify-between border-2 border-slate-700">
+      <div class="flex items-center gap-4">
+        <div class="bg-red-600 text-white font-black px-3 py-1 rounded text-center leading-none">
+          <span class="block text-xs uppercase">2026</span>
+          <span class="text-2xl font-en">11.1</span>
+          <span class="block text-xs">SUN</span>
+        </div>
+        <div>
+          <div class="text-base font-bold text-gray-100 flex items-center gap-2">
+            <span>開場 12:00 / 開演 13:00</span>
+            <span class="text-xs bg-slate-800 text-gray-300 px-2 py-0.5 rounded">19:00過ぎ終演予定</span>
+          </div>
+          <div class="text-sm font-bold text-amber-400 mt-0.5">
+            会場：スタジオOWL <span class="text-xs text-gray-300 font-normal">（愛媛県松山市三番町3-6-2 ab’s square 2F）</span>
+          </div>
+        </div>
+      </div>
+      <div class="text-right border-l border-slate-700 pl-4">
+        <span class="text-xs text-gray-400 block">入場券兼用</span>
+        <span class="text-xs bg-amber-400 text-slate-900 font-bold px-2 py-0.5 rounded-full inline-block">記念缶バッジ付</span>
+      </div>
+    </div>
+
+    <!-- メインコンテンツ：出演アーティスト (LINE UP) -->
+    <div class="my-4">
+      <div class="text-center mb-3">
+        <span class="text-xs font-en font-black text-blue-600 tracking-widest uppercase">LINE UP</span>
+        <h3 class="text-xl font-black text-gray-900 flex items-center justify-center gap-3">
+          <span class="h-0.5 w-12 bg-blue-600"></span>
+          出演アーティスト
+          <span class="h-0.5 w-12 bg-blue-600"></span>
+        </h3>
+      </div>
+
+      <!-- アーティストグリッド -->
+      <div class="grid grid-cols-4 gap-2.5">
+        
+        <!-- メインゲスト：井上ヤスオバーガー (2x2の大枠) -->
+        <div class="col-span-2 row-span-2 relative rounded-xl overflow-hidden shadow-md border-2 border-red-500 bg-slate-900 flex flex-col">
+          <img src="./assets/images/inoue_yasuoburger.jpg" alt="井上ヤスオバーガー" class="w-full h-44 object-cover object-top">
+          <div class="p-3 bg-gradient-to-t from-slate-900 via-slate-900 to-transparent flex-grow flex flex-col justify-end text-white">
+            <span class="bg-red-600 text-white text-[10px] font-black px-2 py-0.5 rounded w-max mb-1">MAIN GUEST</span>
+            <h4 class="text-lg font-black leading-tight">井上ヤスオバーガー</h4>
+            <p class="text-[10px] text-gray-300 line-clamp-2 mt-1 leading-snug">
+              爆笑と感泣を繰り返し、すべてを音楽にかえるライブマシーン！
+            </p>
+          </div>
+        </div>
+
+        <!-- 他の出演者カード -->
+        <div class="rounded-lg overflow-hidden shadow border border-gray-200 bg-white flex flex-col">
+          <img src="./assets/images/mayonaka_owl.jpg" alt="真夜中のオウルと羊たち" class="w-full h-16 object-cover object-top">
+          <div class="p-1.5 text-center flex-grow flex items-center justify-center">
+            <h5 class="text-xs font-bold leading-tight text-gray-800">真夜中のオウル<br>と羊たち</h5>
+          </div>
+        </div>
+
+        <div class="rounded-lg overflow-hidden shadow border border-gray-200 bg-white flex flex-col">
+          <img src="./assets/images/mitsuhamayaki.jpg" alt="みつはまやき" class="w-full h-16 object-cover object-top">
+          <div class="p-1.5 text-center flex-grow flex items-center justify-center">
+            <h5 class="text-xs font-bold leading-tight text-gray-800">みつはまやき</h5>
+          </div>
+        </div>
+
+        <div class="rounded-lg overflow-hidden shadow border border-gray-200 bg-white flex flex-col">
+          <img src="./assets/images/tas.jpg" alt="TAS!" class="w-full h-16 object-cover object-top">
+          <div class="p-1.5 text-center flex-grow flex items-center justify-center">
+            <h5 class="text-xs font-bold leading-tight text-gray-800">TAS!</h5>
+          </div>
+        </div>
+
+        <div class="rounded-lg overflow-hidden shadow border border-gray-200 bg-white flex flex-col">
+          <img src="./assets/images/nam_and_buta.jpg" alt="ナム＆ぶた" class="w-full h-16 object-cover object-top">
+          <div class="p-1.5 text-center flex-grow flex items-center justify-center">
+            <h5 class="text-xs font-bold leading-tight text-gray-800">ナム＆ぶた</h5>
+          </div>
+        </div>
+
+        <div class="rounded-lg overflow-hidden shadow border border-gray-200 bg-white flex flex-col">
+          <img src="./assets/images/el_ranger.jpg" alt="エルレンジャー" class="w-full h-16 object-cover object-top">
+          <div class="p-1.5 text-center flex-grow flex items-center justify-center">
+            <h5 class="text-xs font-bold leading-tight text-gray-800">エルレンジャー</h5>
+          </div>
+        </div>
+
+        <div class="rounded-lg overflow-hidden shadow border border-gray-200 bg-white flex flex-col">
+          <img src="./assets/images/lettermore_lads.jpg" alt="Lettermore Lads" class="w-full h-16 object-cover object-top">
+          <div class="p-1.5 text-center flex-grow flex items-center justify-center">
+            <h5 class="text-xs font-bold leading-tight text-gray-800">Lettermore<br>Lads</h5>
+          </div>
+        </div>
+
+        <div class="rounded-lg overflow-hidden shadow border border-gray-200 bg-white flex flex-col">
+          <img src="./assets/images/yuchi_kochi.jpg" alt="ユーチーコーチー" class="w-full h-16 object-cover object-top">
+          <div class="p-1.5 text-center flex-grow flex items-center justify-center">
+            <h5 class="text-xs font-bold leading-tight text-gray-800">ユーチーコーチー</h5>
+          </div>
+        </div>
+
+        <div class="rounded-lg overflow-hidden shadow border border-gray-200 bg-white flex flex-col">
+          <img src="./assets/images/nishio_shinji.jpg" alt="ニシオシンジ" class="w-full h-16 object-cover object-top">
+          <div class="p-1.5 text-center flex-grow flex items-center justify-center">
+            <h5 class="text-xs font-bold leading-tight text-gray-800">ニシオシンジ</h5>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 特設ストリート＆フードのバナー -->
+      <div class="mt-3 grid grid-cols-2 gap-2.5">
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-2 flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">
+            路上
+          </div>
+          <div>
+            <span class="text-[9px] bg-blue-600 text-white px-1.5 py-0.5 rounded font-bold">LOFT STREET</span>
+            <h5 class="text-[11px] font-black text-gray-800">STREET STAR (飛び込み路上ライブ)</h5>
+            <p class="text-[9px] text-gray-600 leading-tight">飛び入り参加OK！誰が何をするかは当日のお楽しみ！</p>
+          </div>
+        </div>
+
+        <div class="bg-amber-50 border border-amber-200 rounded-lg p-2 flex items-center gap-2.5">
+          <img src="./assets/images/standpickles_logo.jpg" alt="スタンドピクルス" class="w-8 h-8 rounded-full object-cover border border-amber-300 flex-shrink-0">
+          <div>
+            <span class="text-[9px] bg-amber-600 text-white px-1.5 py-0.5 rounded font-bold">FOOD 出店</span>
+            <h5 class="text-[11px] font-black text-gray-800">スタンドピクルス (キッチンカー)</h5>
+            <p class="text-[9px] text-gray-600 leading-tight">名物台湾すい餃子・おつまみ ★入場券なしでも購入可</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- フッター：チケット料金・予約QRコード -->
+    <div class="border-t-2 border-slate-800 pt-3 flex items-center justify-between">
+      <div class="space-y-1">
+        <div class="flex items-baseline gap-2">
+          <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">TICKET</span>
+          <span class="text-xl font-black text-red-600">一般 2,500円</span>
+          <span class="text-lg font-black text-blue-600">/ 中高生 1,000円</span>
+          <span class="text-xs text-gray-600">(ドリンク別)</span>
+        </div>
+        <div class="text-xs text-gray-600 font-bold flex items-center gap-3">
+          <span>● 小学生以下無料</span>
+          <span>● 入場記念缶バッジ付き</span>
+          <span>● 出入り自由（要缶バッジ提示）</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3 bg-gray-50 border border-gray-200 p-2 rounded-lg">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://owl21.info/owlstarsfes2026/" alt="予約QRコード" class="w-12 h-12">
+        <div class="text-left">
+          <span class="text-[9px] bg-red-600 text-white font-bold px-1.5 py-0.5 rounded block text-center mb-0.5">WEB予約受付中</span>
+          <span class="text-[10px] font-bold text-gray-800 block leading-tight">スマホで簡単予約</span>
+          <span class="text-[8px] text-gray-500">事前決済不要・当日精算</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ==================== 裏面 (BACK) ==================== -->
+  <div class="a4-sheet flex flex-col justify-between p-8 relative">
+
+    <!-- ヘッダー -->
+    <div class="border-b-2 border-slate-900 pb-2.5 flex items-center justify-between">
+      <div>
+        <span class="text-[10px] font-en font-black text-red-600 tracking-widest uppercase">STAGE & TIMETABLE GUIDE</span>
+        <h2 class="text-lg font-black text-gray-900">タイムテーブル ＆ ステージ案内</h2>
+      </div>
+      <div class="text-right">
+        <span class="text-[11px] font-bold text-gray-500 block">井上ヤスオバーガー OWL-STARS FESTIVAL 2026</span>
+        <span class="text-[11px] font-bold text-slate-800 block">2026.11.1 (SUN) @スタジオOWL</span>
+      </div>
+    </div>
+
+    <!-- 2ステージ紹介カード -->
+    <div class="grid grid-cols-2 gap-3 my-2">
+      <div class="bg-red-50 border-l-4 border-red-600 p-2.5 rounded-r-lg">
+        <h4 class="font-black text-red-700 text-xs flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-red-600 inline-block"></span>
+          OWL STAGE（メインステージ）
+        </h4>
+        <p class="text-[10px] text-gray-700 mt-1 leading-relaxed">
+          音響・照明を完備した大迫力のメインステージ！フェスの主役たちが熱いパフォーマンスを繰り広げます。
+        </p>
+      </div>
+
+      <div class="bg-blue-50 border-l-4 border-blue-600 p-2.5 rounded-r-lg">
+        <h4 class="font-black text-blue-700 text-xs flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-blue-600 inline-block"></span>
+          LOFT STREET（路上ステージ）
+        </h4>
+        <p class="text-[10px] text-gray-700 mt-1 leading-relaxed">
+          ロフト奥のスペースに作られた簡易ステージ。熱気あふれる飛び込みライブ！誰が何をするかは当日のお楽しみ！
+        </p>
+      </div>
+    </div>
+
+    <!-- タイムテーブル表 -->
+    <div class="border border-gray-300 rounded-xl overflow-hidden shadow-sm my-1">
+      <div class="grid grid-cols-12 bg-slate-900 text-white text-center font-bold text-[11px] py-1">
+        <div class="col-span-2">時間</div>
+        <div class="col-span-5 bg-red-700 py-0.5 rounded-sm mx-1">OWL STAGE</div>
+        <div class="col-span-5 bg-blue-700 py-0.5 rounded-sm mx-1">LOFT STREET</div>
+      </div>
+
+      <div class="divide-y divide-gray-200 text-xs">
+        <!-- 12:00 -->
+        <div class="grid grid-cols-12 items-center py-1 bg-white">
+          <div class="col-span-2 text-center font-bold text-gray-500 text-[10px]">12:00〜</div>
+          <div class="col-span-5 text-center text-gray-400 text-[9px]">—</div>
+          <div class="col-span-5 px-2">
+            <div class="bg-blue-100 text-blue-900 font-bold py-0.5 px-1 rounded text-center border border-blue-200 text-[10px]">
+              STREET STAR (50分)
+            </div>
+          </div>
+        </div>
+
+        <!-- 13:00 -->
+        <div class="grid grid-cols-12 items-center py-1 bg-gray-50">
+          <div class="col-span-2 text-center font-bold text-gray-700 text-[10px]">13:00〜</div>
+          <div class="col-span-5 px-2">
+            <div class="bg-amber-100 text-amber-900 font-black py-0.5 px-1 rounded text-center border border-amber-300 text-[10px]">
+              井上ヤスオバーガー (10分)
+            </div>
+          </div>
+          <div class="col-span-5 text-center text-gray-400 text-[9px]">—</div>
+        </div>
+
+        <!-- 13:20 -->
+        <div class="grid grid-cols-12 items-center py-1 bg-white">
+          <div class="col-span-2 text-center font-bold text-gray-700 text-[10px]">13:20〜</div>
+          <div class="col-span-5 px-2">
+            <div class="bg-red-100 text-red-900 font-bold py-0.5 px-1 rounded text-center border border-red-200 text-[10px]">
+              真夜中のオウルと羊たち (20分)
+            </div>
+          </div>
+          <div class="col-span-5 text-center text-gray-400 text-[9px]">—</div>
+        </div>
+
+        <!-- 13:50 -->
+        <div class="grid grid-cols-12 items-center py-1 bg-gray-50">
+          <div class="col-span-2 text-center font-bold text-gray-700 text-[10px]">13:50〜</div>
+          <div class="col-span-5 px-2">
+            <div class="bg-red-100 text-red-900 font-bold py-0.5 px-1 rounded text-center border border-red-200 text-[10px]">
+              みつはまやき (20分)
+            </div>
+          </div>
+          <div class="col-span-5 text-center text-gray-400 text-[9px]">—</div>
+        </div>
+
+        <!-- 14:20 -->
+        <div class="grid grid-cols-12 items-center py-1 bg-white">
+          <div class="col-span-2 text-center font-bold text-gray-700 text-[10px]">14:20〜</div>
+          <div class="col-span-5 px-2">
+            <div class="bg-red-100 text-red-900 font-bold py-0.5 px-1 rounded text-center border border-red-200 text-[10px]">
+              TAS! (20分)
+            </div>
+          </div>
+          <div class="col-span-5 text-center text-gray-400 text-[9px]">—</div>
+        </div>
+
+        <!-- 14:40 ★自由時間 -->
+        <div class="grid grid-cols-12 items-center py-1 bg-amber-50/70 border-y border-amber-200">
+          <div class="col-span-2 text-center font-bold text-amber-800 text-[10px]">14:40〜</div>
+          <div class="col-span-5 text-center text-amber-800 font-bold text-[10px]">
+            ★ 自由時間（フード・休憩・路上）
+          </div>
+          <div class="col-span-5 px-2">
+            <div class="bg-blue-600 text-white font-bold py-0.5 px-1 rounded text-center shadow-xs text-[10px]">
+              STREET STAR (40分)
+            </div>
+          </div>
+        </div>
+
+        <!-- 15:20 -->
+        <div class="grid grid-cols-12 items-center py-1 bg-white">
+          <div class="col-span-2 text-center font-bold text-gray-700 text-[10px]">15:20〜</div>
+          <div class="col-span-5 px-2">
+            <div class="bg-amber-100 text-amber-900 font-black py-0.5 px-1 rounded text-center border border-amber-300 text-[10px]">
+              井上ヤスオバーガー (15分)
+            </div>
+          </div>
+          <div class="col-span-5 text-center text-gray-400 text-[9px]">—</div>
+        </div>
+
+        <!-- 15:45 -->
+        <div class="grid grid-cols-12 items-center py-1 bg-gray-50">
+          <div class="col-span-2 text-center font-bold text-gray-700 text-[10px]">15:45〜</div>
+          <div class="col-span-5 px-2">
+            <div class="bg-red-100 text-red-900 font-bold py-0.5 px-1 rounded text-center border border-red-200 text-[10px]">
+              ナム＆ぶた (20分)
+            </div>
+          </div>
+          <div class="col-span-5 text-center text-gray-400 text-[9px]">—</div>
+        </div>
+
+        <!-- 16:15 -->
+        <div class="grid grid-cols-12 items-center py-1 bg-white">
+          <div class="col-span-2 text-center font-bold text-gray-700 text-[10px]">16:15〜</div>
+          <div class="col-span-5 px-2">
+            <div class="bg-red-100 text-red-900 font-bold py-0.5 px-1 rounded text-center border border-red-200 text-[10px]">
+              エルレンジャー (20分)
+            </div>
+          </div>
+          <div class="col-span-5 text-center text-gray-400 text-[9px]">—</div>
+        </div>
+
+        <!-- 16:45 -->
+        <div class="grid grid-cols-12 items-center py-1 bg-gray-50">
+          <div class="col-span-2 text-center font-bold text-gray-700 text-[10px]">16:45〜</div>
+          <div class="col-span-5 px-2">
+            <div class="bg-red-100 text-red-900 font-bold py-0.5 px-1 rounded text-center border border-red-200 text-[10px]">
+              Lettermore Lads (20分)
+            </div>
+          </div>
+          <div class="col-span-5 text-center text-gray-400 text-[9px]">—</div>
+        </div>
+
+        <!-- 17:05 ★自由時間 -->
+        <div class="grid grid-cols-12 items-center py-1 bg-amber-50/70 border-y border-amber-200">
+          <div class="col-span-2 text-center font-bold text-amber-800 text-[10px]">17:05〜</div>
+          <div class="col-span-5 text-center text-amber-800 font-bold text-[10px]">
+            ★ 自由時間（フード・休憩・路上）
+          </div>
+          <div class="col-span-5 px-2">
+            <div class="bg-blue-600 text-white font-bold py-0.5 px-1 rounded text-center shadow-xs text-[10px]">
+              STREET STAR (40分)
+            </div>
+          </div>
+        </div>
+
+        <!-- 17:45 -->
+        <div class="grid grid-cols-12 items-center py-1 bg-white">
+          <div class="col-span-2 text-center font-bold text-gray-700 text-[10px]">17:45〜</div>
+          <div class="col-span-5 px-2">
+            <div class="bg-red-100 text-red-900 font-bold py-0.5 px-1 rounded text-center border border-red-200 text-[10px]">
+              ユーチーコーチー (20分)
+            </div>
+          </div>
+          <div class="col-span-5 text-center text-gray-400 text-[9px]">—</div>
+        </div>
+
+        <!-- 18:15 -->
+        <div class="grid grid-cols-12 items-center py-1 bg-gray-50">
+          <div class="col-span-2 text-center font-bold text-gray-700 text-[10px]">18:15〜</div>
+          <div class="col-span-5 px-2">
+            <div class="bg-red-100 text-red-900 font-bold py-0.5 px-1 rounded text-center border border-red-200 text-[10px]">
+              ニシオシンジ (20分)
+            </div>
+          </div>
+          <div class="col-span-5 text-center text-gray-400 text-[9px]">—</div>
+        </div>
+
+        <!-- 18:45 トリ -->
+        <div class="grid grid-cols-12 items-center py-1.5 bg-gradient-to-r from-amber-100 via-yellow-100 to-amber-100 border-t-2 border-amber-400">
+          <div class="col-span-2 text-center font-black text-amber-900 text-[11px]">18:45〜</div>
+          <div class="col-span-5 px-2">
+            <div class="bg-gradient-to-r from-red-600 to-amber-600 text-white font-black py-1 px-1 rounded text-center shadow text-[11px]">
+              井上ヤスオバーガー (トリ / 40分)
+            </div>
+          </div>
+          <div class="col-span-5 text-center text-gray-400 text-[9px]">—</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- フード紹介 & 会場案内 & 注意事項 -->
+    <div class="grid grid-cols-12 gap-3 mt-1.5">
+      <!-- フード紹介 -->
+      <div class="col-span-6 bg-amber-50/70 border border-amber-200 rounded-lg p-2.5 flex gap-2.5 items-center">
+        <img src="./assets/images/standpickles_menu.jpg" alt="スタンドピクルス" class="w-16 h-16 rounded-md object-cover border border-amber-300 shadow-xs flex-shrink-0">
+        <div>
+          <span class="text-[8px] bg-amber-600 text-white px-1.5 py-0.2 rounded font-bold">SPECIAL FOOD</span>
+          <h5 class="text-[11px] font-black text-gray-800 mt-0.5">スタンドピクルス (キッチンカー)</h5>
+          <p class="text-[9px] text-gray-600 leading-tight mt-0.5">
+            名物「台湾すい餃子」や絶品おつまみメニュー！屋外特設ブースのため、チケット不要でどなたでもご利用いただけます。
+          </p>
+        </div>
+      </div>
+
+      <!-- アクセス＆注意事項 -->
+      <div class="col-span-6 bg-slate-50 border border-slate-200 rounded-lg p-2.5 flex flex-col justify-between text-[10px] text-gray-700">
+        <div>
+          <h5 class="font-black text-slate-800 mb-0.5 flex items-center gap-1 text-[11px]">
+            <svg class="w-3 h-3 text-red-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
+            会場：スタジオOWL (松山市三番町3-6-2 2F)
+          </h5>
+          <p class="text-[9px] text-gray-500">※近隣のコインパーキングをご利用ください。</p>
+        </div>
+        <div class="border-t border-slate-200 pt-1 mt-1 space-y-0.5 text-[9px] text-gray-600">
+          <p>● 再入場自由（受付でお配りする記念缶バッジをご提示ください）</p>
+          <p>● 会場外からの飲食物の持ち込みはご遠慮ください。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 最下部クレジット -->
+    <div class="text-center text-[9px] text-gray-400 mt-1.5 border-t border-gray-100 pt-1">
+      &copy; 2026 スタジオOWL / 特設サイト: https://owl21.info/owlstarsfes2026/
+    </div>
+
+  </div>
+
+</body>
+</html>

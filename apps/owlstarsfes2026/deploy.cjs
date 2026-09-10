@@ -7,6 +7,7 @@ const ssh = new NodeSSH();
 
 const deployFiles = [
   'index.html',
+  'flyer_mockup.html',
   'assets',
   'data'
 ];
