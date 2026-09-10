@@ -209,13 +209,13 @@
           <summary class="flex justify-between items-center p-5 cursor-pointer font-bold text-gray-800 hover:text-blue-600 list-none select-none">
             <span class="flex items-center">
               <span class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center font-black text-sm mr-3 flex-shrink-0">Q</span>
-              子供の入場料はどうなっていますか？
+              子供や中高生の入場料はどうなっていますか？
             </span>
             <svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform duration-200 flex-shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
           </summary>
           <div class="px-5 pb-5 pt-1 text-gray-600 border-t border-gray-100 flex items-start">
             <span class="w-7 h-7 rounded-full bg-red-500 text-white flex items-center justify-center font-black text-sm mr-3 flex-shrink-0 mt-0.5">A</span>
-            <p class="leading-relaxed">小学生以下のお子様は入場無料です。ご家族そろってお気軽にお越しください。</p>
+            <p class="leading-relaxed">小学生以下のお子様は入場無料です。中学生・高校生は1,000円（＋1ドリンク代）となります。ご家族そろってお気軽にお越しください。</p>
           </div>
         </details>
 
@@ -245,7 +245,7 @@
           </summary>
           <div class="px-5 pb-5 pt-1 text-gray-600 border-t border-gray-100 flex items-start">
             <span class="w-7 h-7 rounded-full bg-red-500 text-white flex items-center justify-center font-black text-sm mr-3 flex-shrink-0 mt-0.5">A</span>
-            <p class="leading-relaxed">写真撮影は可能ですが、フラッシュ撮影および動画撮影・録音はご遠慮ください。また、周囲のお客様の鑑賞の妨げにならないようご配慮をお願いいたします。</p>
+            <p class="leading-relaxed">公演中の録音・録画はご遠慮ください。写真撮影に関しては、各アーティストの意向やアナウンスに従っていただきますようお願いいたします。</p>
           </div>
         </details>
 
@@ -275,7 +275,7 @@
           </summary>
           <div class="px-5 pb-5 pt-1 text-gray-600 border-t border-gray-100 flex items-start">
             <span class="w-7 h-7 rounded-full bg-red-500 text-white flex items-center justify-center font-black text-sm mr-3 flex-shrink-0 mt-0.5">A</span>
-            <p class="leading-relaxed">チケット代（2,500円＋ドリンク代）は、イベント当日に会場受付にて現金または指定の決済方法にてお支払いいただきます。</p>
+            <p class="leading-relaxed">チケット代（一般2,500円／中高生1,000円＋ドリンク代）は、イベント当日に会場受付にて現金または指定の決済方法にてお支払いいただきます。</p>
           </div>
         </details>
       </div>
@@ -298,7 +298,7 @@
         <ul class="text-sm text-gray-700 space-y-2 leading-relaxed">
           <li class="flex items-start gap-2">
             <span class="text-blue-600 font-bold">●</span>
-            <span><strong>チケット料金：</strong>2,500円（ドリンク代別）</span>
+            <span><strong>チケット料金：</strong>一般 2,500円 / 中高生 1,000円（ドリンク代別）</span>
           </li>
           <li class="flex items-start gap-2">
             <span class="text-blue-600 font-bold">●</span>
@@ -310,7 +310,7 @@
           </li>
           <li class="flex items-start gap-2">
             <span class="text-blue-600 font-bold">●</span>
-            <span><strong>お子様のご入場：</strong>小学生以下のお子様は入場無料です。</span>
+            <span><strong>お子様・学生のご入場：</strong>小学生以下のお子様は入場無料、中学生・高校生は1,000円（ドリンク代別）です。</span>
           </li>
           <li class="flex items-start gap-2">
             <span class="text-blue-600 font-bold">●</span>
@@ -357,17 +357,17 @@
         <div>
           <label for="ticket-count" class="block text-sm font-bold text-gray-700 mb-2">予約枚数 (必須)</label>
           <select id="ticket-count" name="ticket-count" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-            <option value="1">1枚（2,500円）</option>
-            <option value="2">2枚（5,000円）</option>
-            <option value="3">3枚（7,500円）</option>
-            <option value="4">4枚（10,000円）</option>
+            <option value="1">1枚</option>
+            <option value="2">2枚</option>
+            <option value="3">3枚</option>
+            <option value="4">4枚</option>
             <option value="5">5枚以上（備考欄にご記入ください）</option>
           </select>
         </div>
         
         <div>
           <label for="your-message" class="block text-sm font-bold text-gray-700 mb-2">備考・メッセージ</label>
-          <textarea id="your-message" name="your-message" rows="4" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="お目当てのアーティストやご質問など"></textarea>
+          <textarea id="your-message" name="your-message" rows="4" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="お目当てのアーティストや、中高生チケット・5枚以上ご予約の内訳など"></textarea>
         </div>
         
         <div class="text-center pt-4">
@@ -424,6 +424,6 @@
 
   <!-- Scripts -->
   <script src="./assets/js/logic.js?v=20260907_01"></script>
-  <script src="./assets/js/ui.js?v=20260910_03"></script>
+  <script src="./assets/js/ui.js?v=20260910_04"></script>
 </body>
 </html>
