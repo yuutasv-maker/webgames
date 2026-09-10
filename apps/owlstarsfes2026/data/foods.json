@@ -4,7 +4,7 @@
     "name": "スタンドピクルス",
     "description": "ここに簡単な紹介文",
     "imageUrl": "./assets/images/standpickles_logo.jpg",
-    "menuImageUrl": "",
+    "menuImageUrl": "./assets/images/standpickles_menu.jpg",
     "socialLinks": {
       "instagram": "https://www.instagram.com/standpickles/"
     }
