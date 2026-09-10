@@ -223,16 +223,20 @@ function renderPerformers(data) {
 
     <!-- STREET STAR（飛び込み路上ライブ） 特集紹介 -->
     <div class="mt-6 md:mt-8 bg-white border border-blue-100 rounded-xl p-6 md:p-8 shadow-md">
-      <div class="inline-block bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full mb-2">
-        LOFT STREET
+      <div class="flex flex-wrap items-center gap-2 mb-2">
+        <span class="inline-block bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full">
+          LOFT STREET
+        </span>
+        <span class="inline-block bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full">
+          飛び入り参加OK / 自由時間
+        </span>
       </div>
       <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-2">
         STREET STAR（飛び込み路上ライブ）
       </h3>
-      <p class="text-sm text-gray-600 leading-relaxed">
-        ロフトの奥のスペースにて行われる飛び込みライブ！<br class="hidden sm:inline">
-        最低限の簡易アンプを使用し、熱気あふれるパフォーマンスをお届けします。<br>
-        出演者以外のご入場者様も飛び入り参加可能です！
+      <p class="text-sm md:text-base text-gray-600 leading-relaxed">
+        誰でも主役になれるオープンマイク形式の飛び込み路上ライブ！出演アーティストはもちろん、ご来場のお客様の飛び入り参加・セッションも大歓迎です。<br class="hidden sm:inline">
+        また、この時間はメインステージ転換に伴う【自由時間（フリータイム）】でもあります。熱気あふれる路上ライブを楽しみながら、トイレ休憩やフード、ドリンクの追加注文など、思い思いのペースで自由にお過ごしください！
       </p>
     </div>
   `;
