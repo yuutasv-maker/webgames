@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>フライヤーモックアップ - 井上ヤスオバーガー OWL-STARS FESTIVAL 2026</title>
+  <title>フライヤー - 井上ヤスオバーガー OWL-STARS FESTIVAL 2026</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -80,9 +80,9 @@
   <!-- ==================== 表面 (FRONT) ==================== -->
   <div class="a4-sheet flex flex-col justify-between p-8 relative">
     
-    <!-- 背景装飾グラデーションヘッダー -->
-    <div class="absolute top-0 left-0 right-0 h-72 bg-gradient-to-r from-blue-700 via-indigo-600 to-red-600"></div>
-    <div class="absolute top-72 left-0 right-0 h-3 bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-500 shadow-sm"></div>
+    <!-- 背景装飾ヘッダー（深みのあるトーンで上質感を演出） -->
+    <div class="absolute top-0 left-0 right-0 h-72 bg-gradient-to-br from-[#0c1b33] via-[#1a234a] to-[#3b1220]"></div>
+    <div class="absolute top-72 left-0 right-0 h-1.5 bg-amber-400 shadow-sm"></div>
 
     <!-- 上部ヘッダーブロック（ヘッダー＋開催バナー） -->
     <div class="relative z-10">
@@ -157,7 +157,7 @@
           </p>
           
           <p class="text-xs text-slate-600 leading-relaxed mb-3">
-            圧倒的な歌唱力と胸を打つ言葉、笑いと涙に満ちた唯一無二のパフォーマンスで全国のライブハウス・フェスを熱狂させるシンガーソングライター。スタジオOWLの24周年を祝う熱いステージをお見逃しなく！
+            熱く優しい太陽の歌声と強烈なライブパフォーマンスで、毎年150本以上の全国ツアーを展開。不器用に頑なに歌い続け、全国のミュージシャンやファンから深く愛される”ホンモノのライブシンガー”。
           </p>
 
           <!-- SNS & Web QRコード群 (中央アイコン付き) -->
@@ -235,13 +235,12 @@
         </div>
       </div>
 
-      <!-- 区切り線 -->
+      <!-- LINE UP 見出し（装飾ドットを排しタイポグラフィで引き締める） -->
       <div class="relative flex items-center justify-center my-3">
-        <div class="border-t-2 border-slate-200 w-full"></div>
-        <div class="absolute bg-white px-5 text-xs font-en font-black text-blue-600 tracking-widest uppercase flex items-center gap-2">
-          <span class="w-2 h-2 rounded-full bg-blue-600"></span>
-          OWL-STARS LINE UP <span class="font-sans text-slate-500 font-bold text-xs">（50音順）</span>
-          <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+        <div class="border-t border-slate-200 w-full"></div>
+        <div class="absolute bg-white px-4 text-xs font-en font-black tracking-widest uppercase flex items-center gap-2">
+          <span class="text-blue-700">OWL-STARS LINE UP</span>
+          <span class="font-sans text-slate-400 font-bold text-[11px] tracking-normal">（50音順）</span>
         </div>
       </div>
 
@@ -272,7 +271,7 @@
             <h5 class="text-sm font-black text-gray-800">スタンドピクルス (キッチンカー)</h5>
             <span class="text-xs text-amber-700 font-bold">★入場券なしでも購入可</span>
           </div>
-          <p class="text-xs text-gray-500 leading-tight mt-0.5">名物「台湾すい餃子」や絶品おつまみメニュー！屋外特設ブースにてお楽しみいただけます</p>
+          <p class="text-xs text-gray-500 leading-tight mt-0.5">名物「台湾すい餃子」をはじめ、ライブと楽しむ特製おつまみをご用意！屋外特設ブースにて出店</p>
         </div>
       </div>
 
@@ -287,17 +286,17 @@
           <span class="text-xl font-black text-blue-600">/ 中高生 1,000円</span>
           <span class="text-xs text-gray-600 font-bold">(ドリンク別)</span>
         </div>
-        <div class="text-xs text-gray-600 font-bold flex items-center gap-3">
-          <span>● 小学生以下無料</span>
-          <span>● 入場記念缶バッジ付き</span>
-          <span>● 出入り自由（要缶バッジ提示）</span>
+        <div class="text-xs text-gray-600 font-bold flex items-center gap-3.5">
+          <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>小学生以下無料</span>
+          <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>入場記念缶バッジ付き</span>
+          <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>出入り自由（要缶バッジ提示）</span>
         </div>
       </div>
 
       <div class="flex items-center gap-3 bg-gray-50 border border-gray-200 p-2.5 rounded-xl shadow-xs">
         <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://owl21.info/owlstarsfes2026/" alt="予約QRコード" class="w-12 h-12">
         <div class="text-left">
-          <span class="text-[9px] bg-red-600 text-white font-bold px-1.5 py-0.5 rounded block text-center mb-0.5">WEB予約受付中</span>
+          <span class="text-[9px] bg-red-600 text-white font-black px-2 py-0.5 rounded-full inline-block tracking-wider mb-0.5">WEB予約受付中</span>
           <span class="text-[11px] font-bold text-gray-800 block leading-tight">スマホで簡単予約</span>
           <span class="text-[8px] text-gray-500">事前決済不要・当日精算</span>
         </div>
@@ -502,11 +501,11 @@
           <div class="col-span-5 text-center text-gray-400 text-xs">—</div>
         </div>
 
-        <!-- 18:45 オオトリ -->
-        <div class="grid grid-cols-12 items-center py-4 bg-gradient-to-r from-amber-100 via-yellow-100 to-amber-100 border-t-2 border-amber-400">
+        <!-- 18:45 オオトリ（力強いソリッドレッドでメインアクトを際立たせる） -->
+        <div class="grid grid-cols-12 items-center py-4 bg-amber-50/90 border-t-2 border-amber-400">
           <div class="col-span-2 text-center font-black text-amber-950 text-sm">18:45〜</div>
           <div class="col-span-5 px-3">
-            <div class="bg-gradient-to-r from-red-600 via-red-500 to-amber-600 text-white font-black py-3 px-4 rounded-xl flex items-center justify-center gap-3.5 shadow-lg border border-amber-300/50">
+            <div class="bg-red-600 text-white font-black py-3 px-4 rounded-xl flex items-center justify-center gap-3.5 shadow-md border-2 border-red-500">
               <img src="./assets/images/inoue_yasuoburger.jpg" alt="井上ヤスオバーガー" class="w-14 h-14 rounded-md object-cover object-top border-2 border-white shadow-md flex-shrink-0">
               <span class="text-base font-black tracking-wide">井上ヤスオバーガー</span>
             </div>
@@ -522,10 +521,10 @@
       <div class="col-span-6 bg-amber-50/70 border border-amber-200 rounded-lg p-2.5 flex gap-2.5 items-center">
         <img src="./assets/images/standpickles_menu.jpg" alt="スタンドピクルス" class="w-16 h-16 rounded-md object-cover border border-amber-300 shadow-xs flex-shrink-0">
         <div>
-          <span class="text-[8px] bg-amber-600 text-white px-1.5 py-0.2 rounded font-bold">SPECIAL FOOD</span>
+          <span class="text-[8px] bg-amber-600 text-white px-2 py-0.5 rounded-full font-bold inline-block tracking-wider">SPECIAL FOOD</span>
           <h5 class="text-[11px] font-black text-gray-800 mt-0.5">スタンドピクルス (キッチンカー)</h5>
           <p class="text-[9px] text-gray-600 leading-tight mt-0.5">
-            名物「台湾すい餃子」や絶品おつまみメニュー！屋外特設ブースのため、チケット不要でどなたでもご利用いただけます。
+            屋外特設ブースのためチケット不要でどなたでもご利用いただけます。ライブの合間のフード＆ドリンクにぜひ！
           </p>
         </div>
       </div>
@@ -539,9 +538,9 @@
           </h5>
           <p class="text-[9px] text-gray-500">※車でお越しの方は近隣のコインパーキングをご利用ください。</p>
         </div>
-        <div class="border-t border-slate-200 pt-1 mt-1 space-y-0.5 text-[9px] text-gray-600">
-          <p>● 再入場自由（受付でお配りする記念缶バッジをご提示ください）</p>
-          <p>● 会場外からの飲食物の持ち込みはご遠慮ください。</p>
+        <div class="border-t border-slate-200 pt-1 mt-1 space-y-1 text-[9px] text-gray-600">
+          <p class="flex items-center gap-1.5"><span class="w-1 h-1 rounded-full bg-slate-400 flex-shrink-0"></span>再入場自由（受付でお配りする記念缶バッジをご提示ください）</p>
+          <p class="flex items-center gap-1.5"><span class="w-1 h-1 rounded-full bg-slate-400 flex-shrink-0"></span>会場外からの飲食物の持ち込みはご遠慮ください。</p>
         </div>
       </div>
     </div>
