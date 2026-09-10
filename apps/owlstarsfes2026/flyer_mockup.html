@@ -25,18 +25,56 @@
       overflow: hidden;
       background: #ffffff;
     }
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
     @media print {
-      body { background: none; margin: 0; padding: 0; }
-      .a4-sheet { margin: 0; box-shadow: none; page-break-after: always; }
-      .no-print { display: none; }
+      html, body {
+        width: 210mm;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #ffffff !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .a4-sheet {
+        width: 210mm !important;
+        height: 297mm !important;
+        max-height: 297mm !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        overflow: hidden !important;
+      }
+      .a4-sheet:last-of-type {
+        page-break-after: auto !important;
+        break-after: auto !important;
+      }
     }
   </style>
 </head>
 <body class="py-10 text-gray-800">
 
   <div class="max-w-4xl mx-auto mb-6 text-center text-white no-print">
-    <h1 class="text-2xl font-bold mb-2">A4フライヤー デザインモックアップ（案A：フェス・トリコロール）</h1>
-    <p class="text-sm text-gray-400">HPのデザイン・カラー・アセットと完全連動した印刷・告知用デザインです。</p>
+    <h1 class="text-2xl font-bold mb-2">A4フライヤー デザイン（本番用 A4両面）</h1>
+    <p class="text-sm text-gray-400 mb-4">HPのデザイン・カラー・アセットと連動した印刷・告知用フライヤーです。</p>
+    <div class="flex justify-center gap-4 flex-wrap">
+      <a href="./assets/owlstarsfes2026_flyer.pdf" download="owlstarsfes2026_flyer.pdf" class="bg-gradient-to-r from-red-600 to-amber-500 hover:from-red-500 hover:to-amber-400 text-white font-black px-6 py-2.5 rounded-full shadow-lg flex items-center gap-2 cursor-pointer transition transform hover:scale-105 text-sm">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+        完成版PDFを直接ダウンロード（A4・計2ページ）
+      </a>
+      <button onclick="window.print()" class="bg-slate-700 hover:bg-slate-600 text-white font-bold px-6 py-2.5 rounded-full shadow-lg flex items-center gap-2 cursor-pointer transition transform hover:scale-105 text-sm">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+        ブラウザから印刷 / PDF保存
+      </button>
+    </div>
   </div>
 
   <!-- ==================== 表面 (FRONT) ==================== -->
