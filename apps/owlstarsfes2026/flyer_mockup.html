@@ -89,88 +89,104 @@
     </div>
 
     <!-- メインコンテンツ：出演アーティスト (LINE UP) -->
-    <div class="my-4">
-      <div class="text-center mb-3">
-        <span class="text-xs font-en font-black text-blue-600 tracking-widest uppercase">LINE UP</span>
-        <h3 class="text-xl font-black text-gray-900 flex items-center justify-center gap-3">
-          <span class="h-0.5 w-12 bg-blue-600"></span>
-          出演アーティスト
-          <span class="h-0.5 w-12 bg-blue-600"></span>
-        </h3>
-      </div>
-
-      <!-- アーティストグリッド -->
-      <div class="grid grid-cols-4 gap-2.5">
+    <div class="my-3 flex-grow flex flex-col justify-center">
+      
+      <!-- メインゲスト：井上ヤスオバーガー 特集カード -->
+      <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 rounded-2xl overflow-hidden shadow-xl border-2 border-red-500/80 mb-4 text-white flex">
+        <!-- 左側：写真 -->
+        <div class="w-5/12 relative flex-shrink-0 min-h-[220px]">
+          <img src="./assets/images/inoue_yasuoburger.jpg" alt="井上ヤスオバーガー" class="w-full h-full object-cover object-top">
+          <div class="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-slate-900/40"></div>
+          <div class="absolute top-2.5 left-2.5">
+            <span class="bg-red-600 text-white font-en text-[10px] font-black px-2 py-0.5 rounded shadow tracking-wider uppercase">
+              MAIN GUEST
+            </span>
+          </div>
+        </div>
         
-        <!-- メインゲスト：井上ヤスオバーガー (2x2の大枠) -->
-        <div class="col-span-2 row-span-2 relative rounded-xl overflow-hidden shadow-md border-2 border-red-500 bg-slate-900 flex flex-col">
-          <img src="./assets/images/inoue_yasuoburger.jpg" alt="井上ヤスオバーガー" class="w-full h-44 object-cover object-top">
-          <div class="p-3 bg-gradient-to-t from-slate-900 via-slate-900 to-transparent flex-grow flex flex-col justify-end text-white">
-            <span class="bg-red-600 text-white text-[10px] font-black px-2 py-0.5 rounded w-max mb-1">MAIN GUEST</span>
-            <h4 class="text-lg font-black leading-tight">井上ヤスオバーガー</h4>
-            <p class="text-[10px] text-gray-300 line-clamp-2 mt-1 leading-snug">
+        <!-- 右側：紹介文 -->
+        <div class="w-7/12 p-4 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-[11px] font-bold text-amber-400">スペシャルゲスト</span>
+              <span class="text-[10px] text-gray-400">（尼崎育ち、京都在住）</span>
+            </div>
+            <h4 class="text-2xl font-black tracking-tight text-white mb-1.5 leading-tight">
+              井上ヤスオバーガー
+            </h4>
+            
+            <p class="text-xs font-bold text-amber-300 mb-2 leading-snug">
+              人間よりも人間臭い、シンガーソングライターという生き物。<br>
               爆笑と感泣を繰り返し、すべてを音楽にかえるライブマシーン！
             </p>
+            
+            <p class="text-[11px] text-gray-300 leading-relaxed">
+              圧倒的な歌唱力と胸を打つ言葉、笑いと涙に満ちた唯一無二のパフォーマンスで全国のライブハウス・フェスを熱狂させるシンガーソングライター。スタジオOWLの24周年を祝う熱いステージをお見逃しなく！
+            </p>
+          </div>
+
+          <div class="pt-2 mt-2 border-t border-slate-700/80 flex items-center justify-between text-[10px] text-gray-400">
+            <span>Official: yasuoburger.com</span>
+            <span class="text-red-400 font-bold">★ OWL STAGE トリで出演！</span>
           </div>
         </div>
+      </div>
 
-        <!-- 他の出演者カード -->
-        <div class="rounded-lg overflow-hidden shadow border border-gray-200 bg-white flex flex-col">
-          <img src="./assets/images/mayonaka_owl.jpg" alt="真夜中のオウルと羊たち" class="w-full h-16 object-cover object-top">
-          <div class="p-1.5 text-center flex-grow flex items-center justify-center">
-            <h5 class="text-xs font-bold leading-tight text-gray-800">真夜中のオウル<br>と羊たち</h5>
+      <!-- 50音順 出演アーティスト一覧 -->
+      <div>
+        <div class="flex items-center justify-between mb-2">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-blue-600"></span>
+            <h4 class="text-sm font-black text-slate-800 tracking-wider">
+              出演アーティスト <span class="text-xs text-gray-500 font-normal">（50音順）</span>
+            </h4>
           </div>
+          <span class="text-[10px] font-en font-bold text-blue-600 tracking-widest uppercase">OWL-STARS PERFORMERS</span>
         </div>
 
-        <div class="rounded-lg overflow-hidden shadow border border-gray-200 bg-white flex flex-col">
-          <img src="./assets/images/mitsuhamayaki.jpg" alt="みつはまやき" class="w-full h-16 object-cover object-top">
-          <div class="p-1.5 text-center flex-grow flex items-center justify-center">
-            <h5 class="text-xs font-bold leading-tight text-gray-800">みつはまやき</h5>
+        <!-- 50音順 4列×2行 グリッド -->
+        <div class="grid grid-cols-4 gap-2">
+          <!-- 1. エルレンジャー (え) -->
+          <div class="bg-slate-50 border border-slate-300 hover:border-blue-500 rounded-lg p-2 text-center shadow-xs flex flex-col items-center justify-center min-h-[46px]">
+            <span class="text-[9px] text-blue-600 font-bold leading-none mb-0.5">え</span>
+            <span class="text-xs font-black text-slate-900 tracking-tight">エルレンジャー</span>
+          </div>
+          <!-- 2. TAS! (た) -->
+          <div class="bg-slate-50 border border-slate-300 hover:border-blue-500 rounded-lg p-2 text-center shadow-xs flex flex-col items-center justify-center min-h-[46px]">
+            <span class="text-[9px] text-blue-600 font-bold leading-none mb-0.5">た</span>
+            <span class="text-xs font-black text-slate-900 tracking-tight">TAS!</span>
+          </div>
+          <!-- 3. ナム＆ぶた (な) -->
+          <div class="bg-slate-50 border border-slate-300 hover:border-blue-500 rounded-lg p-2 text-center shadow-xs flex flex-col items-center justify-center min-h-[46px]">
+            <span class="text-[9px] text-blue-600 font-bold leading-none mb-0.5">な</span>
+            <span class="text-xs font-black text-slate-900 tracking-tight">ナム＆ぶた</span>
+          </div>
+          <!-- 4. ニシオシンジ (に) -->
+          <div class="bg-slate-50 border border-slate-300 hover:border-blue-500 rounded-lg p-2 text-center shadow-xs flex flex-col items-center justify-center min-h-[46px]">
+            <span class="text-[9px] text-blue-600 font-bold leading-none mb-0.5">に</span>
+            <span class="text-xs font-black text-slate-900 tracking-tight">ニシオシンジ</span>
+          </div>
+          <!-- 5. 真夜中のオウルと羊たち (ま) -->
+          <div class="bg-slate-50 border border-slate-300 hover:border-blue-500 rounded-lg p-2 text-center shadow-xs flex flex-col items-center justify-center min-h-[46px]">
+            <span class="text-[9px] text-blue-600 font-bold leading-none mb-0.5">ま</span>
+            <span class="text-xs font-black text-slate-900 tracking-tight">真夜中のオウルと羊たち</span>
+          </div>
+          <!-- 6. みつはまやき (み) -->
+          <div class="bg-slate-50 border border-slate-300 hover:border-blue-500 rounded-lg p-2 text-center shadow-xs flex flex-col items-center justify-center min-h-[46px]">
+            <span class="text-[9px] text-blue-600 font-bold leading-none mb-0.5">み</span>
+            <span class="text-xs font-black text-slate-900 tracking-tight">みつはまやき</span>
+          </div>
+          <!-- 7. ユーチーコーチー (ゆ) -->
+          <div class="bg-slate-50 border border-slate-300 hover:border-blue-500 rounded-lg p-2 text-center shadow-xs flex flex-col items-center justify-center min-h-[46px]">
+            <span class="text-[9px] text-blue-600 font-bold leading-none mb-0.5">ゆ</span>
+            <span class="text-xs font-black text-slate-900 tracking-tight">ユーチーコーチー</span>
+          </div>
+          <!-- 8. Lettermore Lads (れ) -->
+          <div class="bg-slate-50 border border-slate-300 hover:border-blue-500 rounded-lg p-2 text-center shadow-xs flex flex-col items-center justify-center min-h-[46px]">
+            <span class="text-[9px] text-blue-600 font-bold leading-none mb-0.5">れ</span>
+            <span class="text-xs font-black text-slate-900 tracking-tight">Lettermore Lads</span>
           </div>
         </div>
-
-        <div class="rounded-lg overflow-hidden shadow border border-gray-200 bg-white flex flex-col">
-          <img src="./assets/images/tas.jpg" alt="TAS!" class="w-full h-16 object-cover object-top">
-          <div class="p-1.5 text-center flex-grow flex items-center justify-center">
-            <h5 class="text-xs font-bold leading-tight text-gray-800">TAS!</h5>
-          </div>
-        </div>
-
-        <div class="rounded-lg overflow-hidden shadow border border-gray-200 bg-white flex flex-col">
-          <img src="./assets/images/nam_and_buta.jpg" alt="ナム＆ぶた" class="w-full h-16 object-cover object-top">
-          <div class="p-1.5 text-center flex-grow flex items-center justify-center">
-            <h5 class="text-xs font-bold leading-tight text-gray-800">ナム＆ぶた</h5>
-          </div>
-        </div>
-
-        <div class="rounded-lg overflow-hidden shadow border border-gray-200 bg-white flex flex-col">
-          <img src="./assets/images/el_ranger.jpg" alt="エルレンジャー" class="w-full h-16 object-cover object-top">
-          <div class="p-1.5 text-center flex-grow flex items-center justify-center">
-            <h5 class="text-xs font-bold leading-tight text-gray-800">エルレンジャー</h5>
-          </div>
-        </div>
-
-        <div class="rounded-lg overflow-hidden shadow border border-gray-200 bg-white flex flex-col">
-          <img src="./assets/images/lettermore_lads.jpg" alt="Lettermore Lads" class="w-full h-16 object-cover object-top">
-          <div class="p-1.5 text-center flex-grow flex items-center justify-center">
-            <h5 class="text-xs font-bold leading-tight text-gray-800">Lettermore<br>Lads</h5>
-          </div>
-        </div>
-
-        <div class="rounded-lg overflow-hidden shadow border border-gray-200 bg-white flex flex-col">
-          <img src="./assets/images/yuchi_kochi.jpg" alt="ユーチーコーチー" class="w-full h-16 object-cover object-top">
-          <div class="p-1.5 text-center flex-grow flex items-center justify-center">
-            <h5 class="text-xs font-bold leading-tight text-gray-800">ユーチーコーチー</h5>
-          </div>
-        </div>
-
-        <div class="rounded-lg overflow-hidden shadow border border-gray-200 bg-white flex flex-col">
-          <img src="./assets/images/nishio_shinji.jpg" alt="ニシオシンジ" class="w-full h-16 object-cover object-top">
-          <div class="p-1.5 text-center flex-grow flex items-center justify-center">
-            <h5 class="text-xs font-bold leading-tight text-gray-800">ニシオシンジ</h5>
-          </div>
-        </div>
-
       </div>
 
       <!-- 特設ストリート＆フードのバナー -->
