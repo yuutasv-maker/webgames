@@ -404,7 +404,7 @@ function renderFoods(data) {
           </div>
           <!-- Menu Image -->
           <div class="relative bg-gray-200">
-            <img src="${f.menuImageUrl || CONSTANTS.NO_IMAGE}" alt="Menu image" class="w-full h-56 md:h-64 object-cover" onerror="this.onerror=null;this.src='${CONSTANTS.NO_IMAGE}';">
+            <img src="${f.menuImageUrl || CONSTANTS.NO_IMAGE}" alt="Menu image" class="w-full aspect-square object-cover" onerror="this.onerror=null;this.src='${CONSTANTS.NO_IMAGE}';">
             ${!f.menuImageUrl ? '<div class="absolute inset-0 flex items-center justify-center text-gray-500 font-bold bg-gray-100/80 backdrop-blur-sm">メニュー画像スペース</div>' : ''}
           </div>
           <!-- Description -->
