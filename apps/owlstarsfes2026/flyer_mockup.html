@@ -320,9 +320,9 @@
   <!-- ==================== 裏面 (BACK) ==================== -->
   <div class="a4-sheet flex flex-col justify-between p-8 relative">
 
-    <!-- タイムテーブル表（ステージ案内を列ヘッダーに統合） -->
-    <div class="border border-gray-300 rounded-xl overflow-hidden shadow-sm my-auto">
-      <div class="grid grid-cols-12 bg-slate-900 text-white text-center font-bold text-xs py-2.5 items-center">
+    <!-- タイムテーブル表（ステージ案内を列ヘッダーに統合・上下の余白を詰めて写真を大型化） -->
+    <div class="border border-gray-300 rounded-xl overflow-hidden shadow-sm flex-shrink-0">
+      <div class="grid grid-cols-12 bg-slate-900 text-white text-center font-bold text-xs py-2 items-center">
         <div class="col-span-2 text-slate-300 font-black">時間</div>
         <div class="col-span-5 bg-red-700 py-1.5 px-3 rounded-md mx-2 text-center">
           <div class="font-black text-[13px] tracking-wider">OWL STAGE</div>
@@ -336,24 +336,24 @@
 
       <div class="divide-y divide-gray-200">
         <!-- 12:00 -->
-        <div class="grid grid-cols-12 items-center py-1.5 bg-white">
-          <div class="col-span-2 text-center font-bold text-gray-500 text-[11px]">12:00〜</div>
+        <div class="grid grid-cols-12 items-center py-1 bg-white">
+          <div class="col-span-2 text-center font-bold text-gray-500 text-xs">12:00〜</div>
           <div class="col-span-5 text-center text-gray-400 text-xs">—</div>
           <div class="col-span-5 px-3">
-            <div class="bg-blue-50 text-blue-900 font-bold py-1 px-2.5 rounded-lg flex items-center justify-center gap-1.5 border border-blue-200 shadow-2xs">
-              <span class="w-5 h-5 rounded-sm bg-blue-600 text-white flex items-center justify-center text-[9px] font-black flex-shrink-0">★</span>
-              <span class="text-[10.5px] font-black tracking-tight whitespace-nowrap">STREET STAR <span class="text-[9.5px] font-bold text-blue-800">（飛び込み路上ライブ）</span></span>
+            <div class="bg-blue-50 text-blue-900 font-bold py-1.5 px-3 rounded-lg flex items-center justify-center gap-2 border border-blue-200 shadow-2xs">
+              <span class="w-5 h-5 rounded bg-blue-600 text-white flex items-center justify-center text-[9px] font-black flex-shrink-0">★</span>
+              <span class="text-xs font-black tracking-tight whitespace-nowrap">STREET STAR <span class="text-[9.5px] font-bold text-blue-800">（飛び込み路上ライブ）</span></span>
             </div>
           </div>
         </div>
 
         <!-- 13:00 -->
         <div class="grid grid-cols-12 items-center py-1.5 bg-gray-50">
-          <div class="col-span-2 text-center font-bold text-gray-700 text-[11px]">13:00〜</div>
+          <div class="col-span-2 text-center font-bold text-gray-700 text-xs">13:00〜</div>
           <div class="col-span-5 px-3">
-            <div class="bg-amber-50 text-amber-950 font-bold py-1 px-2.5 rounded-lg flex items-center justify-center gap-2 border border-amber-300 shadow-2xs">
-              <img src="./assets/images/inoue_yasuoburger.jpg" alt="井上ヤスオバーガー" class="w-7 h-7 rounded-sm object-cover object-top border border-amber-400 shadow-2xs flex-shrink-0">
-              <span class="text-[11px] font-black tracking-tight">井上ヤスオバーガー</span>
+            <div class="bg-amber-50 text-amber-950 font-bold py-1 px-3 rounded-lg flex items-center justify-center gap-2.5 border border-amber-300 shadow-2xs">
+              <img src="./assets/images/inoue_yasuoburger.jpg" alt="井上ヤスオバーガー" class="w-11 h-11 rounded-md object-cover object-top border border-amber-400 shadow-2xs flex-shrink-0">
+              <span class="text-[12px] font-black tracking-tight">井上ヤスオバーガー</span>
             </div>
           </div>
           <div class="col-span-5 text-center text-gray-400 text-xs">—</div>
@@ -361,11 +361,11 @@
 
         <!-- 13:20 -->
         <div class="grid grid-cols-12 items-center py-1.5 bg-white">
-          <div class="col-span-2 text-center font-bold text-gray-700 text-[11px]">13:20〜</div>
+          <div class="col-span-2 text-center font-bold text-gray-700 text-xs">13:20〜</div>
           <div class="col-span-5 px-3">
-            <div class="bg-red-50 text-red-950 font-bold py-1 px-2.5 rounded-lg flex items-center justify-center gap-2 border border-red-200 shadow-2xs">
-              <img src="./assets/images/mayonaka_owl.jpg" alt="真夜中のオウルと羊たち" class="w-7 h-7 rounded-sm object-cover object-top border border-white shadow-2xs flex-shrink-0">
-              <span class="text-[11px] font-black tracking-tight">真夜中のオウルと羊たち</span>
+            <div class="bg-red-50 text-red-950 font-bold py-1 px-3 rounded-lg flex items-center justify-center gap-2.5 border border-red-200 shadow-2xs">
+              <img src="./assets/images/mayonaka_owl.jpg" alt="真夜中のオウルと羊たち" class="w-11 h-11 rounded-md object-cover object-top border border-white shadow-2xs flex-shrink-0">
+              <span class="text-[12px] font-black tracking-tight">真夜中のオウルと羊たち</span>
             </div>
           </div>
           <div class="col-span-5 text-center text-gray-400 text-xs">—</div>
@@ -373,11 +373,11 @@
 
         <!-- 13:50 -->
         <div class="grid grid-cols-12 items-center py-1.5 bg-gray-50">
-          <div class="col-span-2 text-center font-bold text-gray-700 text-[11px]">13:50〜</div>
+          <div class="col-span-2 text-center font-bold text-gray-700 text-xs">13:50〜</div>
           <div class="col-span-5 px-3">
-            <div class="bg-red-50 text-red-950 font-bold py-1 px-2.5 rounded-lg flex items-center justify-center gap-2 border border-red-200 shadow-2xs">
-              <img src="./assets/images/mitsuhamayaki.jpg" alt="みつはまやき" class="w-7 h-7 rounded-sm object-cover object-top border border-white shadow-2xs flex-shrink-0">
-              <span class="text-[11px] font-black tracking-tight">みつはまやき</span>
+            <div class="bg-red-50 text-red-950 font-bold py-1 px-3 rounded-lg flex items-center justify-center gap-2.5 border border-red-200 shadow-2xs">
+              <img src="./assets/images/mitsuhamayaki.jpg" alt="みつはまやき" class="w-11 h-11 rounded-md object-cover object-top border border-white shadow-2xs flex-shrink-0">
+              <span class="text-[12px] font-black tracking-tight">みつはまやき</span>
             </div>
           </div>
           <div class="col-span-5 text-center text-gray-400 text-xs">—</div>
@@ -385,37 +385,37 @@
 
         <!-- 14:20 -->
         <div class="grid grid-cols-12 items-center py-1.5 bg-white">
-          <div class="col-span-2 text-center font-bold text-gray-700 text-[11px]">14:20〜</div>
+          <div class="col-span-2 text-center font-bold text-gray-700 text-xs">14:20〜</div>
           <div class="col-span-5 px-3">
-            <div class="bg-red-50 text-red-950 font-bold py-1 px-2.5 rounded-lg flex items-center justify-center gap-2 border border-red-200 shadow-2xs">
-              <img src="./assets/images/tas.jpg" alt="TAS!" class="w-7 h-7 rounded-sm object-cover object-top border border-white shadow-2xs flex-shrink-0">
-              <span class="text-[11px] font-black tracking-tight">TAS!</span>
+            <div class="bg-red-50 text-red-950 font-bold py-1 px-3 rounded-lg flex items-center justify-center gap-2.5 border border-red-200 shadow-2xs">
+              <img src="./assets/images/tas.jpg" alt="TAS!" class="w-11 h-11 rounded-md object-cover object-top border border-white shadow-2xs flex-shrink-0">
+              <span class="text-[12px] font-black tracking-tight">TAS!</span>
             </div>
           </div>
           <div class="col-span-5 text-center text-gray-400 text-xs">—</div>
         </div>
 
         <!-- 14:40 ★自由時間 -->
-        <div class="grid grid-cols-12 items-center py-1.5 bg-amber-50/70 border-y border-amber-200">
-          <div class="col-span-2 text-center font-bold text-amber-800 text-[11px]">14:40〜</div>
-          <div class="col-span-5 text-center text-amber-800 font-bold text-[11px]">
+        <div class="grid grid-cols-12 items-center py-1 bg-amber-50/70 border-y border-amber-200">
+          <div class="col-span-2 text-center font-bold text-amber-800 text-xs">14:40〜</div>
+          <div class="col-span-5 text-center text-amber-800 font-black text-xs">
             ★ 自由時間（フード・休憩・ロフトステージ）
           </div>
           <div class="col-span-5 px-3">
-            <div class="bg-blue-50 text-blue-900 font-bold py-1 px-2.5 rounded-lg flex items-center justify-center gap-1.5 border border-blue-200 shadow-2xs">
-              <span class="w-5 h-5 rounded-sm bg-blue-600 text-white flex items-center justify-center text-[9px] font-black flex-shrink-0">★</span>
-              <span class="text-[10.5px] font-black tracking-tight whitespace-nowrap">STREET STAR <span class="text-[9.5px] font-bold text-blue-800">（飛び込み路上ライブ）</span></span>
+            <div class="bg-blue-50 text-blue-900 font-bold py-1.5 px-3 rounded-lg flex items-center justify-center gap-2 border border-blue-200 shadow-2xs">
+              <span class="w-5 h-5 rounded bg-blue-600 text-white flex items-center justify-center text-[9px] font-black flex-shrink-0">★</span>
+              <span class="text-xs font-black tracking-tight whitespace-nowrap">STREET STAR <span class="text-[9.5px] font-bold text-blue-800">（飛び込み路上ライブ）</span></span>
             </div>
           </div>
         </div>
 
         <!-- 15:20 -->
         <div class="grid grid-cols-12 items-center py-1.5 bg-white">
-          <div class="col-span-2 text-center font-bold text-gray-700 text-[11px]">15:20〜</div>
+          <div class="col-span-2 text-center font-bold text-gray-700 text-xs">15:20〜</div>
           <div class="col-span-5 px-3">
-            <div class="bg-amber-50 text-amber-950 font-bold py-1 px-2.5 rounded-lg flex items-center justify-center gap-2 border border-amber-300 shadow-2xs">
-              <img src="./assets/images/inoue_yasuoburger.jpg" alt="井上ヤスオバーガー" class="w-7 h-7 rounded-sm object-cover object-top border border-amber-400 shadow-2xs flex-shrink-0">
-              <span class="text-[11px] font-black tracking-tight">井上ヤスオバーガー</span>
+            <div class="bg-amber-50 text-amber-950 font-bold py-1 px-3 rounded-lg flex items-center justify-center gap-2.5 border border-amber-300 shadow-2xs">
+              <img src="./assets/images/inoue_yasuoburger.jpg" alt="井上ヤスオバーガー" class="w-11 h-11 rounded-md object-cover object-top border border-amber-400 shadow-2xs flex-shrink-0">
+              <span class="text-[12px] font-black tracking-tight">井上ヤスオバーガー</span>
             </div>
           </div>
           <div class="col-span-5 text-center text-gray-400 text-xs">—</div>
@@ -423,11 +423,11 @@
 
         <!-- 15:45 -->
         <div class="grid grid-cols-12 items-center py-1.5 bg-gray-50">
-          <div class="col-span-2 text-center font-bold text-gray-700 text-[11px]">15:45〜</div>
+          <div class="col-span-2 text-center font-bold text-gray-700 text-xs">15:45〜</div>
           <div class="col-span-5 px-3">
-            <div class="bg-red-50 text-red-950 font-bold py-1 px-2.5 rounded-lg flex items-center justify-center gap-2 border border-red-200 shadow-2xs">
-              <img src="./assets/images/nam_and_buta.jpg" alt="ナム＆ぶた" class="w-7 h-7 rounded-sm object-cover object-top border border-white shadow-2xs flex-shrink-0">
-              <span class="text-[11px] font-black tracking-tight">ナム＆ぶた</span>
+            <div class="bg-red-50 text-red-950 font-bold py-1 px-3 rounded-lg flex items-center justify-center gap-2.5 border border-red-200 shadow-2xs">
+              <img src="./assets/images/nam_and_buta.jpg" alt="ナム＆ぶた" class="w-11 h-11 rounded-md object-cover object-top border border-white shadow-2xs flex-shrink-0">
+              <span class="text-[12px] font-black tracking-tight">ナム＆ぶた</span>
             </div>
           </div>
           <div class="col-span-5 text-center text-gray-400 text-xs">—</div>
@@ -435,11 +435,11 @@
 
         <!-- 16:15 -->
         <div class="grid grid-cols-12 items-center py-1.5 bg-white">
-          <div class="col-span-2 text-center font-bold text-gray-700 text-[11px]">16:15〜</div>
+          <div class="col-span-2 text-center font-bold text-gray-700 text-xs">16:15〜</div>
           <div class="col-span-5 px-3">
-            <div class="bg-red-50 text-red-950 font-bold py-1 px-2.5 rounded-lg flex items-center justify-center gap-2 border border-red-200 shadow-2xs">
-              <img src="./assets/images/el_ranger.jpg" alt="エルレンジャー" class="w-7 h-7 rounded-sm object-cover object-top border border-white shadow-2xs flex-shrink-0">
-              <span class="text-[11px] font-black tracking-tight">エルレンジャー</span>
+            <div class="bg-red-50 text-red-950 font-bold py-1 px-3 rounded-lg flex items-center justify-center gap-2.5 border border-red-200 shadow-2xs">
+              <img src="./assets/images/el_ranger.jpg" alt="エルレンジャー" class="w-11 h-11 rounded-md object-cover object-top border border-white shadow-2xs flex-shrink-0">
+              <span class="text-[12px] font-black tracking-tight">エルレンジャー</span>
             </div>
           </div>
           <div class="col-span-5 text-center text-gray-400 text-xs">—</div>
@@ -447,37 +447,37 @@
 
         <!-- 16:45 -->
         <div class="grid grid-cols-12 items-center py-1.5 bg-gray-50">
-          <div class="col-span-2 text-center font-bold text-gray-700 text-[11px]">16:45〜</div>
+          <div class="col-span-2 text-center font-bold text-gray-700 text-xs">16:45〜</div>
           <div class="col-span-5 px-3">
-            <div class="bg-red-50 text-red-950 font-bold py-1 px-2.5 rounded-lg flex items-center justify-center gap-2 border border-red-200 shadow-2xs">
-              <img src="./assets/images/lettermore_lads.jpg" alt="Lettermore Lads" class="w-7 h-7 rounded-sm object-cover object-top border border-white shadow-2xs flex-shrink-0">
-              <span class="text-[11px] font-black tracking-tight">Lettermore Lads</span>
+            <div class="bg-red-50 text-red-950 font-bold py-1 px-3 rounded-lg flex items-center justify-center gap-2.5 border border-red-200 shadow-2xs">
+              <img src="./assets/images/lettermore_lads.jpg" alt="Lettermore Lads" class="w-11 h-11 rounded-md object-cover object-top border border-white shadow-2xs flex-shrink-0">
+              <span class="text-[12px] font-black tracking-tight">Lettermore Lads</span>
             </div>
           </div>
           <div class="col-span-5 text-center text-gray-400 text-xs">—</div>
         </div>
 
         <!-- 17:05 ★自由時間 -->
-        <div class="grid grid-cols-12 items-center py-1.5 bg-amber-50/70 border-y border-amber-200">
-          <div class="col-span-2 text-center font-bold text-amber-800 text-[11px]">17:05〜</div>
-          <div class="col-span-5 text-center text-amber-800 font-bold text-[11px]">
+        <div class="grid grid-cols-12 items-center py-1 bg-amber-50/70 border-y border-amber-200">
+          <div class="col-span-2 text-center font-bold text-amber-800 text-xs">17:05〜</div>
+          <div class="col-span-5 text-center text-amber-800 font-black text-xs">
             ★ 自由時間（フード・休憩・ロフトステージ）
           </div>
           <div class="col-span-5 px-3">
-            <div class="bg-blue-50 text-blue-900 font-bold py-1 px-2.5 rounded-lg flex items-center justify-center gap-1.5 border border-blue-200 shadow-2xs">
-              <span class="w-5 h-5 rounded-sm bg-blue-600 text-white flex items-center justify-center text-[9px] font-black flex-shrink-0">★</span>
-              <span class="text-[10.5px] font-black tracking-tight whitespace-nowrap">STREET STAR <span class="text-[9.5px] font-bold text-blue-800">（飛び込み路上ライブ）</span></span>
+            <div class="bg-blue-50 text-blue-900 font-bold py-1.5 px-3 rounded-lg flex items-center justify-center gap-2 border border-blue-200 shadow-2xs">
+              <span class="w-5 h-5 rounded bg-blue-600 text-white flex items-center justify-center text-[9px] font-black flex-shrink-0">★</span>
+              <span class="text-xs font-black tracking-tight whitespace-nowrap">STREET STAR <span class="text-[9.5px] font-bold text-blue-800">（飛び込み路上ライブ）</span></span>
             </div>
           </div>
         </div>
 
         <!-- 17:45 -->
         <div class="grid grid-cols-12 items-center py-1.5 bg-white">
-          <div class="col-span-2 text-center font-bold text-gray-700 text-[11px]">17:45〜</div>
+          <div class="col-span-2 text-center font-bold text-gray-700 text-xs">17:45〜</div>
           <div class="col-span-5 px-3">
-            <div class="bg-red-50 text-red-950 font-bold py-1 px-2.5 rounded-lg flex items-center justify-center gap-2 border border-red-200 shadow-2xs">
-              <img src="./assets/images/yuchi_kochi.jpg" alt="ユーチーコーチー" class="w-7 h-7 rounded-sm object-cover object-top border border-white shadow-2xs flex-shrink-0">
-              <span class="text-[11px] font-black tracking-tight">ユーチーコーチー</span>
+            <div class="bg-red-50 text-red-950 font-bold py-1 px-3 rounded-lg flex items-center justify-center gap-2.5 border border-red-200 shadow-2xs">
+              <img src="./assets/images/yuchi_kochi.jpg" alt="ユーチーコーチー" class="w-11 h-11 rounded-md object-cover object-top border border-white shadow-2xs flex-shrink-0">
+              <span class="text-[12px] font-black tracking-tight">ユーチーコーチー</span>
             </div>
           </div>
           <div class="col-span-5 text-center text-gray-400 text-xs">—</div>
@@ -485,22 +485,22 @@
 
         <!-- 18:15 -->
         <div class="grid grid-cols-12 items-center py-1.5 bg-gray-50">
-          <div class="col-span-2 text-center font-bold text-gray-700 text-[11px]">18:15〜</div>
+          <div class="col-span-2 text-center font-bold text-gray-700 text-xs">18:15〜</div>
           <div class="col-span-5 px-3">
-            <div class="bg-red-50 text-red-950 font-bold py-1 px-2.5 rounded-lg flex items-center justify-center gap-2 border border-red-200 shadow-2xs">
-              <img src="./assets/images/nishio_shinji.jpg" alt="ニシオシンジ" class="w-7 h-7 rounded-sm object-cover object-top border border-white shadow-2xs flex-shrink-0">
-              <span class="text-[11px] font-black tracking-tight">ニシオシンジ</span>
+            <div class="bg-red-50 text-red-950 font-bold py-1 px-3 rounded-lg flex items-center justify-center gap-2.5 border border-red-200 shadow-2xs">
+              <img src="./assets/images/nishio_shinji.jpg" alt="ニシオシンジ" class="w-11 h-11 rounded-md object-cover object-top border border-white shadow-2xs flex-shrink-0">
+              <span class="text-[12px] font-black tracking-tight">ニシオシンジ</span>
             </div>
           </div>
           <div class="col-span-5 text-center text-gray-400 text-xs">—</div>
         </div>
 
         <!-- 18:45 オオトリ（力強いソリッドレッドでメインアクトを際立たせる） -->
-        <div class="grid grid-cols-12 items-center py-4 bg-amber-50/90 border-t-2 border-amber-400">
+        <div class="grid grid-cols-12 items-center py-2 bg-amber-50/90 border-t-2 border-amber-400">
           <div class="col-span-2 text-center font-black text-amber-950 text-sm">18:45〜</div>
           <div class="col-span-5 px-3">
-            <div class="bg-red-600 text-white font-black py-3 px-4 rounded-xl flex items-center justify-center gap-3.5 shadow-md border-2 border-red-500">
-              <img src="./assets/images/inoue_yasuoburger.jpg" alt="井上ヤスオバーガー" class="w-14 h-14 rounded-md object-cover object-top border-2 border-white shadow-md flex-shrink-0">
+            <div class="bg-red-600 text-white font-black py-1.5 px-4 rounded-xl flex items-center justify-center gap-3 shadow-md border-2 border-red-500">
+              <img src="./assets/images/inoue_yasuoburger.jpg" alt="井上ヤスオバーガー" class="w-[52px] h-[52px] rounded-md object-cover object-top border-2 border-white shadow-md flex-shrink-0">
               <span class="text-base font-black tracking-wide">井上ヤスオバーガー</span>
             </div>
           </div>
@@ -510,7 +510,7 @@
     </div>
 
     <!-- フード紹介 & 会場案内 & 注意事項 -->
-    <div class="grid grid-cols-12 gap-3 mt-2">
+    <div class="grid grid-cols-12 gap-3 mt-3 flex-shrink-0">
       <!-- フード紹介 -->
       <div class="col-span-6 bg-amber-50/70 border border-amber-200 rounded-lg p-2.5 flex gap-2.5 items-center">
         <img src="./assets/images/standpickles_menu.jpg" alt="スタンドピクルス" class="w-16 h-16 rounded-md object-cover border border-amber-300 shadow-xs flex-shrink-0">
