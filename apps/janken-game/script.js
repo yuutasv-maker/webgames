@@ -99,9 +99,9 @@ if (typeof module !== 'undefined' && module.exports) {
 } else {
     // ブラウザ環境
     document.addEventListener('DOMContentLoaded', () => {
-        // ユーザー要望により「3回クリアでOK」に変更
+        // ユーザー要望により焦らずじっくり考えられるよう1問あたりの制限時間を5.0秒へ延長
         const TARGET_CLEARS = 3;
-        const ROUND_TIME_SEC = 3.0;
+        const ROUND_TIME_SEC = 5.0;
         const MAX_LIVES = 3;
 
         // DOM要素
