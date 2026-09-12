@@ -793,38 +793,30 @@ if (typeof module !== 'undefined' && module.exports) {
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
 
-            // P1側の待機インジケータ（上側エリア・180度反転して描画）
-            ctx.save();
-            ctx.translate(120, 52);
-            ctx.rotate(Math.PI);
-            ctx.font = '10px "DotGothic16", monospace';
-            ctx.fillStyle = '#38bdf8';
-            ctx.fillText('▼ P1 TAP AREA (KEY: A) ▼', 0, 0);
-            ctx.restore();
-
-            // P2側の待機インジケータ（下側エリア・通常）
-            ctx.save();
-            ctx.translate(120, 328);
-            ctx.font = '10px "DotGothic16", monospace';
-            ctx.fillStyle = '#f87171';
-            ctx.fillText('▲ P2 TAP AREA (KEY: L) ▲', 0, 0);
-            ctx.restore();
-
-            // READY中
+            // READY中（フランクフルトの上部余白に黒帯プレートで鮮明に表示）
             if (gameState === 'READY') {
+                ctx.fillStyle = '#0f172a';
+                ctx.fillRect(24, 134, 192, 26);
+                ctx.strokeStyle = '#38bdf8';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(24, 134, 192, 26);
+
                 ctx.fillStyle = '#ffffff';
-                ctx.font = '900 14px "DotGothic16", monospace';
-                ctx.shadowColor = '#000';
-                ctx.shadowBlur = 4;
-                ctx.fillText(`ROUND ${currentRoundNumber} READY...`, 120, 190);
-                ctx.shadowBlur = 0;
+                ctx.font = '900 13px "DotGothic16", monospace';
+                ctx.fillText(`ROUND ${currentRoundNumber} READY...`, 120, 147);
             }
 
-            // WAITING中
+            // WAITING中（フランクフルトの上部余白に黒帯プレートで鮮明に表示）
             if (gameState === 'WAITING') {
+                ctx.fillStyle = '#0f172a';
+                ctx.fillRect(16, 134, 208, 26);
+                ctx.strokeStyle = '#fcd34d';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(16, 134, 208, 26);
+
                 ctx.fillStyle = '#fcd34d';
-                ctx.font = '11px "DotGothic16", monospace';
-                ctx.fillText('…ジュージュー… (合図を待て！)', 120, 190);
+                ctx.font = '900 12px "DotGothic16", monospace';
+                ctx.fillText('…ジュージュー… (合図を待て！)', 120, 147);
             }
 
             // SIGNAL中（巨大な「！」）
