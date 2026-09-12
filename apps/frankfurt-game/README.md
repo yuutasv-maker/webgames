@@ -19,8 +19,24 @@
 * **サウンド**: Web Audio API（外部ファイル不使用の完全プログラム生成：ノイズ鉄板音、矩形波合図SE、アルペジオ奪取音）
 * **連携**: `CouponManager`（共通クーポン基盤）による日次獲得判定とクーポン画面連携
 
+## 👥 2人対戦モード（Versus Mode: versus.html）
+
+1台のスマートフォンまたはPCを机に置き、対面でリアルタイムに早取り勝負ができるモードです。
+
+* **画面構成**: 画面上下2分割（上側P1は奥の相手向けに180度反転表示、下側P2は手前向け）
+* **操作**: 
+  * スマホ/タブレット: 画面上半分タップ（P1）/ 画面下半分タップ（P2）※マルチタッチ対応
+  * PC: `A` / `W` キー（P1）、`L` / `Enter` / `↓` キー（P2）
+* **ルール**: **3本先取（First to 3）**
+* **お手つき**: 合図前のタップは火傷となり、**相手に1本献上**
+* **鍔迫り合い（DRAW）**: 5ms未満の同時タップは引き分けで再勝負
+
 ## 🧪 テスト実行
 
 ```bash
-node GoGoUmi_paradise_LP/games/apps/frankfurt-game/script.test.js
+# ソロモードロジックテスト
+node webgames/apps/frankfurt-game/script.test.js
+
+# 2人対戦モードロジックテスト
+node webgames/apps/frankfurt-game/versus.test.js
 ```
