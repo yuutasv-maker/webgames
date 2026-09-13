@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>脳バグ！後出しじゃんけん【2人対戦】｜GoGoUmi paradise</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%2250%%22 y=%2250%%22 style=%22dominant-baseline:central;text-anchor:middle;font-size:90px;%22>✌️</text></svg>">
+    <link rel="stylesheet" href="../../common/coupon.css">
+    <link rel="stylesheet" href="versus.css?v=1">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Zen+Maru+Gothic:wght@700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-wrapper">
+        <!-- ヘッダー -->
+        <header class="game-header">
+            <a href="index.html" class="back-link">◀ ソロ挑戦へ戻る</a>
+            <h1>脳バグ！じゃんけん VS 2人対戦 ✌️</h1>
+        </header>
+
+        <!-- メイン対戦コンテナ -->
+        <div class="versus-container">
+            <!-- P1 エリア (180度反転・奥側プレイヤー) -->
+            <div class="player-section-p1">
+                <div class="player-info-bar p1-bar">
+                    <span class="player-label">🌊 P1 (奥側 / Key: A, S, D)</span>
+                    <div id="p1-score" class="score-stars"></div>
+                </div>
+                <div class="hand-controls p1-controls">
+                    <button class="hand-btn" data-hand="rock" aria-label="グー">
+                        <span class="hand-icon">✊</span>
+                        <span class="hand-key">Key: A</span>
+                    </button>
+                    <button class="hand-btn" data-hand="scissors" aria-label="チョキ">
+                        <span class="hand-icon">✌️</span>
+                        <span class="hand-key">Key: S</span>
+                    </button>
+                    <button class="hand-btn" data-hand="paper" aria-label="パー">
+                        <span class="hand-icon">🖐️</span>
+                        <span class="hand-key">Key: D</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 中央共通出題ステージ -->
+            <div class="center-stage">
+                <div id="round-title" class="round-badge">ROUND 1</div>
+                <div id="opponent-hand" class="opponent-hand">❓</div>
+                <div id="instruction-badge" class="instruction-badge">
+                    <span id="instruction-text">READY...</span>
+                </div>
+                <div class="timer-bar-container">
+                    <div id="timer-progress" class="timer-progress"></div>
+                </div>
+
+                <!-- ポップアップ結果演出 -->
+                <div id="feedback-overlay" class="feedback-overlay hidden">P1 正解！</div>
+            </div>
+
+            <!-- P2 エリア (手前側プレイヤー) -->
+            <div class="player-section-p2">
+                <div class="hand-controls p2-controls">
+                    <button class="hand-btn" data-hand="rock" aria-label="グー">
+                        <span class="hand-icon">✊</span>
+                        <span class="hand-key">Key: J</span>
+                    </button>
+                    <button class="hand-btn" data-hand="scissors" aria-label="チョキ">
+                        <span class="hand-icon">✌️</span>
+                        <span class="hand-key">Key: K</span>
+                    </button>
+                    <button class="hand-btn" data-hand="paper" aria-label="パー">
+                        <span class="hand-icon">🖐️</span>
+                        <span class="hand-key">Key: L</span>
+                    </button>
+                </div>
+                <div class="player-info-bar p2-bar">
+                    <span class="player-label">🔥 P2 (手前 / Key: J, K, L)</span>
+                    <div id="p2-score" class="score-stars"></div>
+                </div>
+            </div>
+
+            <!-- スタート前オーバーレイ -->
+            <div id="start-screen" class="overlay-screen">
+                <div class="modal-content">
+                    <h2 class="modal-title">👥 ふたりで対戦！<br>脳バグ後出しじゃんけん</h2>
+                    <p class="modal-desc">スマホを机の真ん中に置こう！<br>相手より先に正解の手をタップ！</p>
+
+                    <div class="rule-box">
+                        <div>⚡ <strong>中央の親の手と指示（勝て・負けろ・あいこ）</strong>を瞬時に判断！</div>
+                        <div>🎯 <strong>先に正解を押した人に1ポイント</strong>！</div>
+                        <div>⚠️ <strong>間違った手（誤答）は相手に1点献上</strong>！</div>
+                        <div>🏆 先に<strong>3問先取</strong>した方の勝ち！</div>
+                    </div>
+
+                    <button id="start-btn" class="action-btn">▶ 対戦スタート (START)</button>
+                    <div class="modal-footer-nav">
+                        <a href="index.html" class="portal-link">👤 ひとりで遊ぶ（CPU戦）へ</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 試合決着モーダル -->
+            <div id="result-modal" class="modal hidden">
+                <div class="modal-content">
+                    <h2 id="result-winner-title" class="modal-title">🏆 PLAYER 1 の勝利！</h2>
+                    <p id="result-winner-desc" class="modal-desc">P1の神速判断！ 脳バグを制した！</p>
+
+                    <div id="result-final-score" class="final-score-box">P1: 3 勝 - P2: 1 勝</div>
+
+                    <button id="retry-btn" class="action-btn retry-btn">🔄 もう一度対戦する</button>
+                    <button id="share-btn" class="share-btn">𝕏 対戦結果をポスト</button>
+
+                    <div class="modal-footer-nav">
+                        <a href="index.html" class="portal-link">👤 ひとりで挑戦へ戻る</a>
+                        &nbsp;|&nbsp;
+                        <a href="../../portal.html" class="portal-link">🎮 ゲーム一覧へ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- スクリプト -->
+    <script src="versus.js?v=1"></script>
+</body>
+</html>
