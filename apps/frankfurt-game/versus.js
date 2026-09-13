@@ -25,8 +25,8 @@ const VersusLogic = {
         return Math.max(0, Math.round(tapTime - signalTime));
     },
 
-    // ラウンド勝敗判定
-    evaluateRound: function({ p1Time, p2Time, p1Foul, p2Foul }) {
+    // ラウンド勝敗判定（警告・イエローカード制）
+    evaluateRound: function({ p1Time, p2Time, p1Foul, p2Foul, p1Warnings = 0, p2Warnings = 0 }) {
         // お手つき（FOUL）判定
         if (p1Foul && p2Foul) {
             return {
@@ -34,26 +34,60 @@ const VersusLogic = {
                 reason: 'both_foul',
                 message: 'ふたりとも火傷！ 仕切り直し！',
                 p1Point: 0,
-                p2Point: 0
+                p2Point: 0,
+                p1AddWarning: 1,
+                p2AddWarning: 1
             };
         }
         if (p1Foul) {
-            return {
-                winner: 'p2',
-                reason: 'p1_foul',
-                message: 'P1お手つき！ P2に1本！',
-                p1Point: 0,
-                p2Point: 1
-            };
+            if (p1Warnings === 0) {
+                // 1回目はポイント変動なしで警告＆仕切り直し
+                return {
+                    winner: 'none',
+                    reason: 'p1_warning',
+                    message: 'P1お手つき！ 警告⚠️ 仕切り直し！',
+                    p1Point: 0,
+                    p2Point: 0,
+                    p1AddWarning: 1,
+                    p2AddWarning: 0
+                };
+            } else {
+                // 2回目のお手つきで相手に1本献上
+                return {
+                    winner: 'p2',
+                    reason: 'p1_foul_penalty',
+                    message: 'P1 2度目のお手つき！ P2に1本！',
+                    p1Point: 0,
+                    p2Point: 1,
+                    p1AddWarning: -p1Warnings,
+                    p2AddWarning: 0
+                };
+            }
         }
         if (p2Foul) {
-            return {
-                winner: 'p1',
-                reason: 'p2_foul',
-                message: 'P2お手つき！ P1に1本！',
-                p1Point: 1,
-                p2Point: 0
-            };
+            if (p2Warnings === 0) {
+                // 1回目はポイント変動なしで警告＆仕切り直し
+                return {
+                    winner: 'none',
+                    reason: 'p2_warning',
+                    message: 'P2お手つき！ 警告⚠️ 仕切り直し！',
+                    p1Point: 0,
+                    p2Point: 0,
+                    p1AddWarning: 0,
+                    p2AddWarning: 1
+                };
+            } else {
+                // 2回目のお手つきで相手に1本献上
+                return {
+                    winner: 'p1',
+                    reason: 'p2_foul_penalty',
+                    message: 'P2 2度目のお手つき！ P1に1本！',
+                    p1Point: 1,
+                    p2Point: 0,
+                    p1AddWarning: 0,
+                    p2AddWarning: -p2Warnings
+                };
+            }
         }
 
         // 正常タップ判定
@@ -95,6 +129,14 @@ const VersusLogic = {
         return {
             p1: scores.p1 + (roundResult.p1Point || 0),
             p2: scores.p2 + (roundResult.p2Point || 0)
+        };
+    },
+
+    // 警告更新
+    updateWarnings: function(warnings, roundResult) {
+        return {
+            p1: Math.max(0, warnings.p1 + (roundResult.p1AddWarning || 0)),
+            p2: Math.max(0, warnings.p2 + (roundResult.p2AddWarning || 0))
         };
     },
 
@@ -287,6 +329,7 @@ if (typeof module !== 'undefined' && module.exports) {
         let gameState = 'IDLE'; // IDLE, READY, WAITING, SIGNAL, ROUND_RESULT, GAME_OVER
         let currentRoundNumber = 1;
         let scores = { p1: 0, p2: 0 };
+        let warnings = { p1: 0, p2: 0 };
         let signalTimestamp = 0;
         let waitingTimerId = null;
         let roundTimeoutTimerId = null;
@@ -302,8 +345,8 @@ if (typeof module !== 'undefined' && module.exports) {
         // アニメーション用状態
         let currentFrankfurtY = 190; // 中央Y
         let targetFrankfurtY = 190;
-        let p1HandY = 40;            // 上側 (P1)
-        let p2HandY = 340;           // 下側 (P2)
+        let p1HandY = 65;            // 上側 (P1)
+        let p2HandY = 315;           // 下側 (P2)
         let p1Burned = false;
         let p2Burned = false;
         let sparks = [];
@@ -366,13 +409,15 @@ if (typeof module !== 'undefined' && module.exports) {
                 </span>`;
             };
 
-            let p1Html = '';
+            const p1WarnHtml = warnings.p1 > 0 ? '<span class="warn-badge" style="background:#eab308; color:#000; font-size:10px; font-weight:900; padding:1px 4px; border-radius:3px; margin-right:4px;">⚠️警告</span>' : '';
+            let p1Html = p1WarnHtml;
             for (let i = 0; i < VersusLogic.CONFIG.maxPoints; i++) {
                 p1Html += createFrankSvg(i < scores.p1, true);
             }
             p1ScoreBox.innerHTML = p1Html;
 
-            let p2Html = '';
+            const p2WarnHtml = warnings.p2 > 0 ? '<span class="warn-badge" style="background:#eab308; color:#000; font-size:10px; font-weight:900; padding:1px 4px; border-radius:3px; margin-right:4px;">⚠️警告</span>' : '';
+            let p2Html = p2WarnHtml;
             for (let i = 0; i < VersusLogic.CONFIG.maxPoints; i++) {
                 p2Html += createFrankSvg(i < scores.p2, false);
             }
@@ -383,6 +428,7 @@ if (typeof module !== 'undefined' && module.exports) {
         function startMatch() {
             Sound.init();
             scores = { p1: 0, p2: 0 };
+            warnings = { p1: 0, p2: 0 };
             currentRoundNumber = 1;
             startScreen.classList.add('hidden');
             resultModal.classList.add('hidden');
@@ -474,7 +520,9 @@ if (typeof module !== 'undefined' && module.exports) {
                     p1Time: 9999,
                     p2Time: 9999,
                     p1Foul: p1Foul,
-                    p2Foul: p2Foul
+                    p2Foul: p2Foul,
+                    p1Warnings: warnings.p1,
+                    p2Warnings: warnings.p2
                 });
                 finishRound(evalResult);
                 return;
@@ -502,7 +550,9 @@ if (typeof module !== 'undefined' && module.exports) {
                             p1Time: p1Reaction,
                             p2Time: p2Reaction,
                             p1Foul: false,
-                            p2Foul: false
+                            p2Foul: false,
+                            p1Warnings: warnings.p1,
+                            p2Warnings: warnings.p2
                         });
 
                         finishRound(evalResult);
@@ -532,6 +582,7 @@ if (typeof module !== 'undefined' && module.exports) {
                 roundResultColor = '#facc15';
             }
 
+            warnings = VersusLogic.updateWarnings(warnings, evalResult);
             scores = VersusLogic.updateScore(scores, evalResult);
             updateScoreUI();
 
@@ -541,7 +592,10 @@ if (typeof module !== 'undefined' && module.exports) {
                 if (matchWinner) {
                     showGameOver(matchWinner);
                 } else {
-                    currentRoundNumber++;
+                    // 仕切り直し以外ならラウンド番号を進める
+                    if (evalResult.winner !== 'none') {
+                        currentRoundNumber++;
+                    }
                     startRound();
                 }
             }, VersusLogic.CONFIG.roundResultDurationMs);
@@ -615,7 +669,7 @@ if (typeof module !== 'undefined' && module.exports) {
         // 外部連携・テスト用ヘルパー
         window.__frankfurtVersus = {
             handlePlayerAction,
-            getState: () => ({ gameState, scores, currentRoundNumber })
+            getState: () => ({ gameState, scores, warnings, currentRoundNumber })
         };
 
         startBtn.addEventListener('click', startMatch);

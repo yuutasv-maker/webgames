@@ -57,26 +57,37 @@ assert.strictEqual(drawRound.p2Point, 0, 'ポイントなし');
 assert.strictEqual(drawRound.reason, 'simultaneous');
 console.log('  ✔ 同着判定 passed\n');
 
-// 6. ラウンド判定の検証 (お手つき)
-console.log('Test 6: evaluateRound お手つき(FOUL)の検証');
-const p1Foul = VersusLogic.evaluateRound({ p1Time: 9999, p2Time: 300, p1Foul: true, p2Foul: false });
-assert.strictEqual(p1Foul.winner, 'p2', 'P1お手つき時はP2が勝利');
-assert.strictEqual(p1Foul.p1Point, 0);
-assert.strictEqual(p1Foul.p2Point, 1, '相手に1ポイント献上');
-assert.strictEqual(p1Foul.reason, 'p1_foul');
+// 6. ラウンド判定の検証 (お手つき・警告システム)
+console.log('Test 6: evaluateRound お手つき(FOUL・警告制)の検証');
+// 1回目のお手つき: 警告のみで得点変動なし（仕切り直し）
+const p1FirstFoul = VersusLogic.evaluateRound({ p1Time: 9999, p2Time: 300, p1Foul: true, p2Foul: false, p1Warnings: 0, p2Warnings: 0 });
+assert.strictEqual(p1FirstFoul.winner, 'none', '1回目のお手つきは勝敗なし（仕切り直し）');
+assert.strictEqual(p1FirstFoul.p1Point, 0, 'P1は0ポイント');
+assert.strictEqual(p1FirstFoul.p2Point, 0, 'P2へのポイント献上なし');
+assert.strictEqual(p1FirstFoul.p1AddWarning, 1, 'P1に警告+1');
+assert.strictEqual(p1FirstFoul.reason, 'p1_warning');
 
-const p2Foul = VersusLogic.evaluateRound({ p1Time: 250, p2Time: 9999, p1Foul: false, p2Foul: true });
-assert.strictEqual(p2Foul.winner, 'p1', 'P2お手つき時はP1が勝利');
-assert.strictEqual(p2Foul.p1Point, 1, '相手に1ポイント献上');
-assert.strictEqual(p2Foul.p2Point, 0);
-assert.strictEqual(p2Foul.reason, 'p2_foul');
+const p2FirstFoul = VersusLogic.evaluateRound({ p1Time: 250, p2Time: 9999, p1Foul: false, p2Foul: true, p1Warnings: 0, p2Warnings: 0 });
+assert.strictEqual(p2FirstFoul.winner, 'none', '1回目のお手つきは勝敗なし（仕切り直し）');
+assert.strictEqual(p2FirstFoul.p1Point, 0);
+assert.strictEqual(p2FirstFoul.p2Point, 0);
+assert.strictEqual(p2FirstFoul.p2AddWarning, 1, 'P2に警告+1');
+assert.strictEqual(p2FirstFoul.reason, 'p2_warning');
 
-const bothFoul = VersusLogic.evaluateRound({ p1Time: 9999, p2Time: 9999, p1Foul: true, p2Foul: true });
+// 2回目のお手つき: 警告保持中に再ファウルで相手に1本
+const p1SecondFoul = VersusLogic.evaluateRound({ p1Time: 9999, p2Time: 300, p1Foul: true, p2Foul: false, p1Warnings: 1, p2Warnings: 0 });
+assert.strictEqual(p1SecondFoul.winner, 'p2', '警告保持中の再お手つきで相手が勝利');
+assert.strictEqual(p1SecondFoul.p1Point, 0);
+assert.strictEqual(p1SecondFoul.p2Point, 1, '相手に1ポイント献上');
+assert.strictEqual(p1SecondFoul.p1AddWarning, -1, '警告は消化リセット');
+assert.strictEqual(p1SecondFoul.reason, 'p1_foul_penalty');
+
+const bothFoul = VersusLogic.evaluateRound({ p1Time: 9999, p2Time: 9999, p1Foul: true, p2Foul: true, p1Warnings: 0, p2Warnings: 0 });
 assert.strictEqual(bothFoul.winner, 'draw', '両者お手つき時は引き分け');
 assert.strictEqual(bothFoul.p1Point, 0);
 assert.strictEqual(bothFoul.p2Point, 0);
 assert.strictEqual(bothFoul.reason, 'both_foul');
-console.log('  ✔ お手つき判定 passed\n');
+console.log('  ✔ お手つき警告判定 passed\n');
 
 // 7. スコア更新とマッチ勝者判定の検証
 console.log('Test 7: updateScore および checkMatchWinner の検証');
@@ -95,6 +106,15 @@ assert.strictEqual(VersusLogic.checkMatchWinner(scores), 'p1', '3本先取でP1�
 
 const p2Scores = { p1: 2, p2: 3 };
 assert.strictEqual(VersusLogic.checkMatchWinner(p2Scores), 'p2', 'P2が3本ならP2がマッチ勝者');
-console.log('  ✔ スコア＆マッチ終了判定 passed\n');
+// 8. 警告更新の検証
+console.log('Test 8: updateWarnings の検証');
+let warnings = { p1: 0, p2: 0 };
+warnings = VersusLogic.updateWarnings(warnings, p1FirstFoul);
+assert.strictEqual(warnings.p1, 1, 'P1の警告が1に加算');
+assert.strictEqual(warnings.p2, 0);
+
+warnings = VersusLogic.updateWarnings(warnings, p1SecondFoul);
+assert.strictEqual(warnings.p1, 0, '2回目ファウル後に警告リセット');
+console.log('  ✔ updateWarnings passed\n');
 
 console.log('🎉 All VersusLogic unit tests passed successfully!');
